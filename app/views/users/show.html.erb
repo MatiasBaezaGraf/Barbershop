@@ -1,0 +1,20 @@
+<p>
+  <strong>First name:</strong>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @user.last_name %>
+</p>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<p>
+  <strong>Phone nomber:</strong>
+  <%= @user.phone_number %>
+</p>
+
+<div class="uplogout"><%= link_to "Edit account", edit_user_registration_path, method: :get, class: "logout" %></div>
+<%= link_to 'Back', :back %>

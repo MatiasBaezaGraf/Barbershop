@@ -1,0 +1,44 @@
+<%= form_with(model: barber) do |form| %>
+  <% if barber.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(barber.errors.count, "error") %> prohibited this barber from being saved:</h2>
+
+      <ul>
+        <% barber.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <div class="field">
+      <%= form.collection_check_boxes(:service_ids, Service.all, :id, :name, {}, {multiple: true}) do |ds| %>
+              <%= ds.label(class:"container") do %>
+                &nbsp;&nbsp;&nbsp;<%= ds.check_box %>
+                <%= ds.object.name %>
+                <span class="chekmark"></span>
+              <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

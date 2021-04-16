@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= link_to "Barbers", barbers_path %></div>
+    <%= link_to "Services", services_path %></div>
+    <%= link_to "Turns", turns_path %></div>
+    <%= link_to "Users", users_index_path %></div>
+    <title>Barbershop11</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if current_user %>
+        <div class="container">
+        
+          <div class="upname"><%= current_user.first_name %></div>
+          <div class="uplogout"><%= link_to "Log out►", destroy_user_session_path, method: :delete, class: "logout" %></div>
+          <div class="uplogout"><%= link_to "Show profile", current_user, method: :get, class: "logout" %></div>
+          
+        </div>
+    <% else %>
+        <div class="container">
+        
+          <div class="upname"> GUEST </div>
+          <div class="uplogout"><%= link_to "Log in►", new_user_session_path, class: "loginb" %>
+            <%= link_to "Sign up►", new_user_registration_path, class: "loginb" %>
+          </div>
+
+        </div>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>

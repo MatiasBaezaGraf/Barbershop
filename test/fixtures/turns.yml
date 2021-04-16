@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time: 2021-04-16 10:55:19
+  barber: one
+
+two:
+  time: 2021-04-16 10:55:19
+  barber: two

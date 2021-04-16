@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @turn.time %>
+</p>
+
+<p>
+  <strong>Barber:</strong>
+  <%= @turn.barber_id %>
+</p>
+
+<%= link_to 'Edit', edit_turn_path(@turn) %> |
+<%= link_to 'Back', turns_path %>

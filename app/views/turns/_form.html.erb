@@ -1,0 +1,39 @@
+<%= form_with(model: turn) do |form| %>
+  <% if turn.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(turn.errors.count, "error") %> prohibited this turn from being saved:</h2>
+
+      <ul>
+        <% turn.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :time %>
+    <%= form.datetime_select :time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :barber_id %>
+    <%= form.text_field :barber_id %>
+  </div>
+
+  <div class="field">
+    <div class="field">
+      <%= form.collection_check_boxes(:service_ids, Service.all, :id, :name, {}, {multiple: true}) do |ds| %>
+              <%= ds.label(class:"container") do %>
+                &nbsp;&nbsp;&nbsp;<%= ds.check_box %>
+                <%= ds.object.name %>
+                <span class="chekmark"></span>
+              <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
