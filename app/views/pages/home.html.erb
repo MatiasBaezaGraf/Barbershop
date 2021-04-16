@@ -1,0 +1,21 @@
+<div class = "head">
+    <h1 class = "titles">Home</h2>
+    
+    <title>Barbershop11</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</div>
+
+<div class = "navbar">
+    <%= link_to "T", barbers_path, class: "unfoldable-but" %>
+    <%= link_to "Barbers", barbers_path, class: "main-but" %>
+    <%= link_to "Services", services_path, class: "main-but" %>
+    <%= link_to "Turns", turns_path, class: "main-but" %>
+    <% if user_signed_in? and current_user.id == 1%>
+        <%= link_to "Users", users_index_path, class: "main-but"%>
+    <% end %>
+</div>

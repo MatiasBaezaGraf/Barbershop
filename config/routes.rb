@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :turns
   resources :services
   resources :barbers
-  root to: "barbers#index"
+  root to: 'pages#home'
   delete "/users/:id" => "users#destroy", as: :user
   match '/users/:id',     to: 'users#show',       via: 'get'
   resources :users, :only =>[:show]
