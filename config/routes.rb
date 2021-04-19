@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   delete "/users/:id" => "users#destroy", as: :user
   match '/users/:id',     to: 'users#show',       via: 'get'
+  get '/stylists' => 'pages#stylists'
+  get '/home' => 'pages#home'
   resources :users, :only =>[:show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,42 @@
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+<div class = "navbar">
+    <%= link_to "Atrás", home_path, class: "but-back" %>
+</div>
+
+<div class = "head">
+    <br>
+    <h1> NUESTROS BARBEROS </h1>
+    <br>
+</div> 
+
+<div class = "main-body">
+    <br>
+    <div class = col-5>
+        <h2>BARBERO1</h2>
+        <p>Descripción y foto</p>
+             
+        <br>
+        <br>
+    </div>
+
+    <div class = col-6>
+        <h2>BARBERO2</h2>
+        <p>Descripción y foto</p> 
+        <br>
+        <br>
+    </div>
+
+    <div class = col-7>
+        <h2>BARBERO3</h2>
+        <p>Descripción y foto</p> 
+        <br>
+        <br>
+    </div>
+
+    <br>
+</div>

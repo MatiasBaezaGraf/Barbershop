@@ -25,31 +25,72 @@
     text-align: center;
  }
 
- .navbar{
-     width: 100%;
-     background-color: rgb(143, 86, 0);
-     padding-top: 25px;
-     padding-bottom: 25px;
+ .secondary-head{
+     background-color: greenyellow;
      text-align: center;
  }
 
- .main-but{
-     transition-duration: 0.4s;
-     background-color: red;
-     padding: 20px;
-     color: blanchedalmond;
-     text-decoration: none;
+ .main-body{
+    background-color: greenyellow;
+    text-align: center;
+    width: 100%;
+}
+
+ .navbar{
+    width: 100%;
+    background-color: rgb(143, 86, 0);
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+    position: -webkit-sticky;
+	position: sticky;
+	top: 0;
  }
 
- .main-but:visited{
-    color: blanchedalmond;
- }
-
- .main-but:hover{
-    color: black;
+ [class*="but-"] {
+    transition-duration: 0.4s;
+    padding: 20px;
+    text-decoration: none;
   }
 
-  .unfoldable-but{
+/* BUTTONS */
+
+.but-reservation{
+    background-color: red;
+    color: blanchedalmond;
+}
+.but-reservation:visited{
+    color: blanchedalmond;
+}
+.but-reservation:hover{
+    color: black;
+}
+
+.but-barber{
+    background-color: lime;
+    color: blanchedalmond;
+    margin-right: 30%;
+}
+.but-barber:visited{
+    color: blanchedalmond;
+}
+.but-barber:hover{
+    color: black;
+}
+
+.but-back{
+    margin-right: 75%;
+    background-color: purple;
+    color: blanchedalmond;
+}
+.but-back:visited{
+    color: blanchedalmond;
+}
+.but-back:hover{
+    color: black;
+}
+
+.unfoldable-but{
     transition-duration: 0.4s;
     background-color: red;
     color: blanchedalmond;
@@ -59,3 +100,19 @@
     padding-left: 2%;
     padding-right: 2%;
 }
+
+[class*="col-"] {
+    width: 100%;
+  }
+
+@media only screen and (min-width: 768px) {
+    .col-1 {float: left; width: 25%; background-color: hotpink;}
+    .col-2 {float: left; width: 25%; background-color: indigo;}
+    .col-3 {float: left; width: 25%; background-color: lightcoral;}
+    .col-4 {float: left; width: 25%; background-color: lightgreen;}
+    .col-5 {float: left; width: 33%; background-color: blue;}
+    .col-6 {float: left; width: 34%; background-color: red;}
+    .col-7 {float: left; width: 33%; background-color: yellow;}
+    
+}
+
