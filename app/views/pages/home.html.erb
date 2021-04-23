@@ -8,6 +8,7 @@
 
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
+
     <div id = "sidebar">
         <button class="but-cross" onclick="closeNav()">X</button>
         <br>
@@ -25,21 +26,25 @@
         <br>
         <a class ="but-sidebar" href="#section2">Nosotros</a>
         <br>
+        <a id = "mode" class="but-sidebar" onclick="darkMode()">Modo oscuro</a>
+        <br>
         <%= link_to "Reservar Turno", new_turn_path, class: "but-sidebar-r" %>
     </div>
+
     <div id = "panel">
         <div class = "head">
-            <button class="but-cross" onclick="darkMode()">DARK</button>
-            <h1 class = "titles">
-                <%if current_user%>
-                    ¡Bienvenido <%=current_user.first_name%>!
-                <%else%>
-                    Home
-                <%end%>
-            </h1>
 
-            <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
-            <h3 class = "secondary-contact">TEL. 0343 15-467-5058</h3>
+     
+
+          <h1 class = "titles">
+            <%if current_user%>
+              ¡Bienvenido <%=current_user.first_name%>!
+            <%else%>
+              Home
+            <%end%>
+          </h1>
+          <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
+          <h3 class = "secondary-contact">TEL. 0343 15-467-5058</h3>
         </div>
 
         <div class = "navbar">
@@ -113,7 +118,7 @@
             </div>
         </div>
 
-        <div id = "div1" class = "divisor" style="background-color:blanchedalmond; float:left; width:100%; text-align: center;">
+        <div id = "div1" class = "divisor" style="background-color:rgb(224, 207, 181); float:left; width:100%; text-align: center;">
             <br>
             <%= link_to "Reservar Turno", new_turn_path, class: "but-reservation" %>
             <br>
@@ -122,7 +127,7 @@
             <br>
         </div>
 
-        <div id="section2" class = "divisor" style="background-color:rgb(224, 207, 181); float:left; width:100%">
+        <div id="section2" class = "divisor" style="background-color:blanchedalmond; float:left; width:100%">
             <br>
             <br>
         </div>
@@ -183,7 +188,7 @@
             </div>
         </div>
 
-        <div class = "divisor" style="background-color:rgb(224, 207, 181); float:left; width:100%">
+        <div id = "div3" class = "divisor" style="background-color:blanchedalmond; float:left; width:100%">
             <br>
             <br>
             <br>
@@ -252,6 +257,15 @@ function closeNav() {
 }
 
 function darkMode() {
+
+  document.getElementById("sidebar").style.backgroundColor = 'rgb(12, 12, 12)';
+
+   var cols = document.getElementsByClassName('but-cross');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black';
+  }
+  document.getElementById("panel").style.backgroundColor = '#212121';
+
   var cols = document.getElementsByClassName('navbar');
   for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = 'black';
@@ -261,20 +275,179 @@ function darkMode() {
     cols[i].style.backgroundColor = '#141414';
     cols[i].style.color = 'blanchedalmond';
   }
-  var cols = document.getElementsByClassName('main-body-2');
+  var cols = document.getElementsByClassName('main-body-1');
   for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = '#141414';
+    cols[i].style.color = 'blanchedalmond';
   }
   var cols = document.getElementsByClassName('image-container');
   for(i = 0; i < cols.length; i++) {
-    cols[i].style.backgroundColor = 'red';
+    cols[i].style.backgroundColor = 'black';
+    cols[i].style.border = '2px solid #171717';
   }
   document.getElementById("div1").style.backgroundColor = '#141414';
+
+  var cols = document.getElementsByClassName('col-1');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#141414';
+  }
+  var cols = document.getElementsByClassName('col-2');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#141414';
+  }
+  var cols = document.getElementsByClassName('col-3');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#141414';
+  }
+  var cols = document.getElementsByClassName('col-4');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#141414';
+  }
+  var cols = document.getElementsByClassName('secondary-head-2');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.color = 'blanchedalmond';
+  }
+  var cols = document.getElementsByClassName('main-body-2');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.color = 'blanchedalmond';
+  }
+
+  document.getElementById("section2").style.backgroundColor = '#212121';
+
+  var cols = document.getElementsByClassName('col-5');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+  }
+  var cols = document.getElementsByClassName('col-6');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+  }
+  var cols = document.getElementsByClassName('col-7');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+  }
+
+  document.getElementById("div3").style.backgroundColor = '#212121';
+
+  var cols = document.getElementsByClassName('tail-head');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.color = 'white';
+  }
+
+  var cols = document.getElementsByClassName('tail-tail');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black';
+    cols[i].style.color = 'white';
+  }
+  
+  var x = document.getElementById("mode");
+  if (x.innerHTML === "Modo oscuro") {
+    x.innerHTML = "Modo claro";
+  } else {
+    x.innerHTML = "Modo oscuro";
+  }
+
+  document.getElementById( "mode" ).setAttribute( "onclick", "javascript: lightMode();" );
 }
-function defaultMode() {
-    document.body.style.marginLeft = "0";
-    document.getElementById("sidebar").style.width = "0";
+
+function lightMode() {
+
+  document.getElementById("sidebar").style.backgroundColor = 'rgb(39, 23, 0)';
+
+   var cols = document.getElementsByClassName('but-cross');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#111';
+  }
+  document.getElementById("panel").style.backgroundColor = '#blanchedalmond';
+
+  var cols = document.getElementsByClassName('navbar');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'rgb(70, 42, 0)';
+  }
+  var cols = document.getElementsByClassName('secondary-head-1');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'rgb(224, 207, 181)';
+    cols[i].style.color = 'rgb(34, 20, 0)';
+  }
+  var cols = document.getElementsByClassName('main-body-1');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'rgb(224, 207, 181)';
+    cols[i].style.color = 'rgb(34, 20, 0)';
+  }
+  var cols = document.getElementsByClassName('image-container');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'rgb(20, 12, 0)';
+    cols[i].style.border = '0px solid #171717';
+  }
+  document.getElementById("div1").style.backgroundColor = 'rgb(224, 207, 181)';
+
+  var cols = document.getElementsByClassName('col-1');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'rgb(224, 207, 181)';
+  }
+  var cols = document.getElementsByClassName('col-2');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'rgb(224, 207, 181)';
+  }
+  var cols = document.getElementsByClassName('col-3');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'rgb(224, 207, 181)';
+  }
+  var cols = document.getElementsByClassName('col-4');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'rgb(224, 207, 181)';
+  }
+  var cols = document.getElementsByClassName('secondary-head-2');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'blanchedalmond';
+    cols[i].style.color = 'rgb(34, 20, 0)';
+  }
+  var cols = document.getElementsByClassName('main-body-2');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'blanchedalmond';
+    cols[i].style.color = 'rgb(34, 20, 0)';
+  }
+
+  document.getElementById("section2").style.backgroundColor = 'blanchedalmond';
+
+  var cols = document.getElementsByClassName('col-5');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'blanchedalmond';
+  }
+  var cols = document.getElementsByClassName('col-6');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'blanchedalmond';
+  }
+  var cols = document.getElementsByClassName('col-7');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'blanchedalmond';
+  }
+
+  document.getElementById("div3").style.backgroundColor = 'blanchedalmond';
+
+  var cols = document.getElementsByClassName('tail-head');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'blanchedalmond';
+    cols[i].style.color = 'rgb(20, 12, 0)';
+  }
+
+  var cols = document.getElementsByClassName('tail-tail');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'rgb(20, 12, 0)';
+    cols[i].style.color = 'blanchedalmond';
+  }
+  var x = document.getElementById("mode");
+  if (x.innerHTML === "Modo claro") {
+    x.innerHTML = "Modo oscuro";
+  } else {
+    x.innerHTML = "Modo claro";
+  }
+    document.getElementById( "mode" ).setAttribute( "onclick", "javascript: darkMode();" );
 }
+
 </script>
 
 
