@@ -1,0 +1,9 @@
+<% @turn = Turn.where(:id => params[:id]).first %>
+<%= @turn.id %>
+
+<h1>Editing Turn</h1>
+
+<%= render 'step_form', turn: @turn %>
+
+<%= link_to 'Show', @turn %> |
+<%= link_to 'Back', turns_path %>

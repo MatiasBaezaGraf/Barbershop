@@ -13,106 +13,388 @@
  *= require_tree .
  *= require_self
  */
+ 
+ .html,body{
+    scroll-behavior: smooth;
+    transition: margin-left .5s;
+    
+ }
+
+ #panel{
+    float:left;
+    width: 100%;
+    overflow: hidden;
+    z-index: 0;
+ }
+ #sidebar{
+    text-align: left;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+ }
+ #sidebar .but-cross {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+
+ .titles{
+    font-family: 'Lobster', cursive;
+    font-size: 330%;
+ }
+ .titles-secondary{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 220%;
+ }
+ .titles-third{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 150%;
+    letter-spacing: 2px;
+ }
+ .titles-contact{
+    font-family: 'Satisfy', cursive;
+    font-size: 200%;
+ }
+ .paragraph{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 150%;
+    padding-left: 10px;
+    padding-right: 10px; 
+ }
+
+ .secondary-contact{
+    font-family: 'Josefin Sans', sans-serif;
+ }
+
+ 
+
+ .divisor, .head, .navbar, .secondary-head-1, .main-body-1, .secondary-head-2, .main-body-2, .tail{
+    transition: 0.5s; 
+ }
 
  .head{
     width: 100%;
     margin: 0;
-    padding-top: 200px;
-    padding-bottom: 200px;
-    background-color: rgb(61, 46, 0);
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-color: rgb(20, 12, 0);
     color: blanchedalmond;
     align-items: center;
     text-align: center;
  }
 
- .secondary-head{
-     background-color: greenyellow;
+ [class*="main-body-"] {
+    background-color:blanchedalmond;
+    text-align: center;
+    width: 100%;
+ }
+ 
+ [class*="secondary-head-"] {
+     background-color: blanchedalmond;
+     color:rgb(34, 20, 0);
      text-align: center;
  }
 
- .main-body{
-    background-color: greenyellow;
+.main-body-2{
+    background-color:rgb(224, 207, 181);
     text-align: center;
     width: 100%;
+}
+.secondary-head-2{
+    background-color: rgb(224, 207, 181);
+}
+.body-login{
+    text-align: center;
+    background-color: blanchedalmond;
+    color: rgb(34, 20, 0);
+}
+.body-login-bottom{
+    height: 100%;
+    background-color: blanchedalmond;
+    position: absolute;
+    bottom: 0px;
+}
+.input{
+    width: 75%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: none;
+    border-bottom: 1px solid rgb(161, 161, 161);
+    background-color:  blanchedalmond;
+    font-family: 'Oswald', sans-serif;
+    font-style:normal;
+    font-size: 110%;
+}
+.input:focus{
+    outline: none;
+    border-bottom: 2px solid rgb(34, 20, 0);
+    background-color: rgb(255, 226, 183);
+}
+
+.error{
+	background-color: rgb(172, 0, 0);
+	color: lightgray;
+    width: 50%;
+    margin-left: 20%;
+    padding:3px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 25px;
+    font-family: 'Roboto Mono', monospace;
 }
 
  .navbar{
     width: 100%;
-    background-color: rgb(143, 86, 0);
-    padding-top: 25px;
-    padding-bottom: 25px;
+    background-color: rgb(70, 42, 0);
+    padding-top: 20px;
+    padding-bottom: 20px;
     text-align: center;
-    position: -webkit-sticky;
-	position: sticky;
-	top: 0;
+ }
+ .navbar2{
+    width: 100%;
+    background-color: rgb(70, 42, 0);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: left;
+ }
+ .navbar3{
+    width: 100%;
+    background-color: rgb(34, 20, 0);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: left;
+ }
+
+ .tail{
+    width: 100%;
+    text-align: center;
+ }
+ .tail-head{
+    background-color: rgb(224, 207, 181);
+    color: rgb(20, 12, 0); 
+ }
+ .tail-tail{
+    background-color: rgb(20, 12, 0);
+    color:rgb(224, 207, 181); 
+ }
+
+ .tail-login{
+    width: 100%;
+    background-color: rgb(34, 20, 0);
+    color: blanchedalmond;
+    text-align: center;
+ }
+
+ .note{
+    font-family: 'Roboto Mono', monospace;
+ }
+
+ .alignment{
+    background-image: url('/assets/RiverPlateStadium.jpg')   
  }
 
  [class*="but-"] {
-    transition-duration: 0.4s;
-    padding: 20px;
+    transition-duration: 0.2s;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 1%;
+    padding-right: 1%;
     text-decoration: none;
+    border-width: 1000px;
+    border-color: white;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 125%;
   }
 
 /* BUTTONS */
 
+.but-cross{
+    background-color:#111;
+    color: rgb(63, 63, 63);
+    border: 2px solid #111; 
+}
+.but-cross:visited{
+    color: rgb(63, 63, 63);
+}
+.but-cross:hover{
+    color: rgb(104, 104, 104);
+    background-color: #111;
+    border-width: 2px;
+    border-color: #111;
+}
+
+.but-sidebar{
+    /*margin-right: 70%;*/
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+.but-cross:hover{
+    color: cornsilk;
+}
+
+.but-sidebar-r{
+    margin-right: 40%;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    background-color: blanchedalmond;
+    color: black;
+    display: block;
+    transition: 0.3s;
+}
+.but-cross:hover{
+    color: cornsilk;
+}
+
+
 .but-reservation{
-    background-color: red;
-    color: blanchedalmond;
+    background-color:blanchedalmond;
+    color: black;
+    border: 2px solid black; 
 }
 .but-reservation:visited{
-    color: blanchedalmond;
+    color: black;
 }
 .but-reservation:hover{
-    color: black;
+    color: blanchedalmond;
+    background-color: black;
+    border-width: 2px;
+    border-color: white;
 }
 
-.but-barber{
-    background-color: lime;
-    color: blanchedalmond;
+.but-menu{
+    background-color:rgb(20, 12, 0);
+    color: white;
+    border: 2px solid rgb(49, 30, 0); 
     margin-right: 30%;
+    padding-left: 4%;
+    padding-right: 4%;
 }
-.but-barber:visited{
-    color: blanchedalmond;
+.but-menu:visited{
+    color: white;
 }
-.but-barber:hover{
-    color: black;
-}
+
 
 .but-back{
-    margin-right: 75%;
-    background-color: purple;
-    color: blanchedalmond;
+    margin-right: 0%;
+    background-color: blanchedalmond;
+    color: rgb(49, 30, 0);
+    border: 2px solid black;
+    border-left: 0px solid black;
 }
 .but-back:visited{
-    color: blanchedalmond;
+    background-color: blanchedalmond;
+    color: rgb(49, 30, 0);
+    border-right: 2px solid #fff1cb;
+    border: 2px solid black;
+    border-left: 0px solid black;
 }
 .but-back:hover{
-    color: black;
+    color: blanchedalmond;
+    background-color: rgb(49, 30, 0);
+    border: 2px solid #fff1cb;
+    border-left: 0px solid #fff1cb;
 }
 
-.unfoldable-but{
-    transition-duration: 0.4s;
-    background-color: red;
-    color: blanchedalmond;
-    text-decoration: none;
-    float: left;
-    margin-left: 2%;
-    padding-left: 2%;
-    padding-right: 2%;
+.but-nav{
+    color: white;
+    display: none;
+    letter-spacing: 1px;
+    /*margin-right: 30%;*/
+}
+.but-nav:hover{
+    border-bottom: 2px solid white;
+}
+
+.but-login{
+    background-color:rgb(49, 30, 0);
+    color: white;
+    border: 2px solid rgb(49, 30, 0);
+    padding-left: 15%;
+    padding-right: 15%;
+    font-size: 150%; 
+}
+.but-login:visited{
+    color: white;
+}
+.but-login:hover{
+    color: white;
+    background-color: rgb(90, 56, 0);
+    border-width: 2px;
+    border-color: rgb(90, 56, 0);
+}
+
+
+.imagen{
+    max-width: 97.5%;
+}
+.image-container{
+    margin-left: 2.4%;
+    color:blanchedalmond;
+    background-color: rgb(20, 12, 0);
+    width: 95%;
 }
 
 [class*="col-"] {
     width: 100%;
   }
 
+.col-1{
+    background-color:  blanchedalmond;
+    text-align: center;
+}
+.col-2{
+    background-color: blanchedalmond;
+    text-align: center;
+}
+.col-3{
+    background-color:  blanchedalmond;
+    text-align: center;
+}
+.col-4{
+    background-color:blanchedalmond;
+    text-align: center;
+}
+
+
+
 @media only screen and (min-width: 768px) {
-    .col-1 {float: left; width: 25%; background-color: hotpink;}
-    .col-2 {float: left; width: 25%; background-color: indigo;}
-    .col-3 {float: left; width: 25%; background-color: lightcoral;}
-    .col-4 {float: left; width: 25%; background-color: lightgreen;}
-    .col-5 {float: left; width: 33%; background-color: blue;}
-    .col-6 {float: left; width: 34%; background-color: red;}
-    .col-7 {float: left; width: 33%; background-color: yellow;}
-    
+    .navbar{position: sticky; position: -webkit-sticky; top: 0;}
+    .navbar2{position: sticky; position: -webkit-sticky; top: 0;}
+    .navbar3{position: sticky; position: -webkit-sticky; top: 0;}
+    .head{padding-top: 5%; padding-bottom: 5%;}
+    .main-body-2{background-color:rgb(20, 12, 0);}
+    .body-login{margin-left: 30%; margin-right: 30%; border-right:15px solid rgb(34, 20, 0); border-left:15px solid rgb(34, 20, 0)}
+    .tail-login{padding-top: 5%; padding-bottom: 5%;}
+    .image-container{margin-left: 2.2%; background-color: rgb(20, 12, 0);}
+    .but-menu{display: none;}
+    .but-reservation{padding : 10px}
+    .but-nav{padding:0; margin-right: 3%; display: inline;}
+    .but-back{padding: 10px; margin-right: 0%;}
+    .but-login{padding-left: 8%; padding-right: 8%; padding-top: 6px; padding-bottom: 6px;}
+    .col-1 {float: left; width: 25%; background-color:  blanchedalmond}
+    .col-2 {float: left; width: 25%; background-color:blanchedalmond}
+    .col-3 {float: left; width: 25%; background-color:  blanchedalmond}
+    .col-4 {float: left; width: 25%; background-color:blanchedalmond}
+    .col-5 {float: left; width: 33%; background-color:  rgb(224, 207, 181);}
+    .col-6 {float: left; width: 34%; background-color:  rgb(224, 207, 181);}
+    .col-7 {float: left; width: 33%; background-color:  rgb(224, 207, 181);}
+    .col-8 {float: left; width: 100%; background-color: black;} 
+    .col-9 {float: left; width: 25%; background-color: black;}
+    .col-10 {float: right; width: 25%; background-color: black;}
 }
 

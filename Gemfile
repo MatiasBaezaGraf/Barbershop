@@ -55,3 +55,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
 gem 'cancancan'
+
+#TimeSplitter automatically generates accessors for date, time, hour, and min on your datetime or time attributes
+gem 'time_splitter'

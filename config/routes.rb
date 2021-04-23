@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   match '/users/:id',     to: 'users#show',       via: 'get'
   get '/stylists' => 'pages#stylists'
   get '/home' => 'pages#home'
+  get '/select' => 'pages#select'
+  get '/edit2' => 'turns#edit2'
   resources :users, :only =>[:show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_16_140642) do
+ActiveRecord::Schema.define(version: 2021_04_23_133710) do
 
   create_table "barbers", force: :cascade do |t|
     t.string "first_name"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2021_04_16_140642) do
     t.integer "barber_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "edit"
+    t.integer "p"
     t.index ["barber_id"], name: "index_turns_on_barber_id"
   end
 

@@ -1,0 +1,6 @@
+layout head:
+<%= javascript_include_tag "rails-ujs" %>
+
+
+config/initializers/assets
+Rails.application.config.assets.precompile += %w( rails-ujs.js )

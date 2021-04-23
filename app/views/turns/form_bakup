@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :time %>
-    <%= form.date_field :time, as: :string, input_html: { class: 'datepicker' } %>
+    <%= form.date_select :time %>
   </div>
 
   <div class="field">
-      <%= form.label :barber_id %>
-      <%= form.select(:barber_id, Barber.where(:id => params[:barber_id]).collect {|p| [ p.first_name, p.id ]}, :selected => p)%>
+    <%= form.label :barber_id %>
+    <%= form.collection_select(:barber_id, Barber.all, :id, :first_name) %>
   </div>
 
   <div class="field">
@@ -32,12 +32,6 @@
       <% end %>
     </div>
   </div>
-
-  <div class="field">
-      <%= form.label :edit %>
-      <%= form.number_field :edit, :value => 1 %>
-  </div>
-
 
   <div class="actions">
     <%= form.submit %>

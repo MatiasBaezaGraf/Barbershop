@@ -4,39 +4,101 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-<div class = "navbar">
-    <%= link_to "Atrás", home_path, class: "but-back" %>
-</div>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
+    <div class = "navbar2">
+        <%= link_to "Atras ⮌", home_path, class: "but-back" %>
+    </div>
 
-<div class = "head">
-    <br>
-    <h1> NUESTROS BARBEROS </h1>
-    <br>
-</div> 
+    <div class = "secondary-head">
+        <br>
+        <h1 class = "titles"> Nuestros Barberos </h1>
+        <br>
+    </div> 
+    <div class = "main-body">
+        
+        <div class = col-5>
+            <div class = image-container>
+                <br>
+                <h2 class = "titles-secondary">Erwin Fritzler</h2>
+                <br>
+                <%= image_tag ("Erwin.jpeg"), class:"imagen" %>
+                <p>Descripción y foto</p>
+                <%= link_to "Reservar turno", new_turn_path(:barber_id => 2), class: "but-reservation" %>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+            <br>
+        </div>
 
-<div class = "main-body">
-    <br>
-    <div class = col-5>
-        <h2>BARBERO1</h2>
-        <p>Descripción y foto</p>
-             
+        <div class = col-6>
+            <div class = image-container>
+                <br>
+                <h2 class = "titles-secondary">Kevin Coto</h2>
+                <br>
+                <%= image_tag ("Kevin.jpeg"), class:"imagen" %>
+                <p>Descripción y foto</p>
+                <%= link_to "Reservar turno", new_turn_path(:barber_id => 3), class: "but-reservation" %> 
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+            <br>
+        </div>
+
+        <div class = col-7>
+            <div class = image-container>
+                <br>
+                <h2 class = "titles-secondary">Barbero 3</h2>
+                <br>
+                <%= image_tag ("BARBERO3.png"), class:"imagen" %>
+                <p>Descripción y foto</p>
+                <%= link_to "Reservar turno", new_turn_path(:barber_id => 4), class: "but-reservation" %> 
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color:rgb(34, 20, 0); float:left; width:100%">
+        <br>
+        <br>
+        <br>
         <br>
         <br>
     </div>
 
-    <div class = col-6>
-        <h2>BARBERO2</h2>
-        <p>Descripción y foto</p> 
+    <div class = "tail">
+        <div class = "tail-head">
+            <br>
+            <br>
+            <h2 class = "titles-contact">Informacion de contacto</h2>
+            <br>
+        </div>
+
+        <div class = "tail-tail">
+            <br>
+            <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
+            <h3 class = "secondary-contact">0343 15-467-5058</h3>
+            <h3 class = "secondary-contact">ayelenpeter@hotmail.com.ar</h3>
+            <br>
+            <h3 class = "secondary-contact">2021</h3>
+            <br>
+        </div>
+    </div>
+
+    <div style="background-color:blanchedalmond; float:left; width:100%">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <br>
         <br>
     </div>
+</body>
 
-    <div class = col-7>
-        <h2>BARBERO3</h2>
-        <p>Descripción y foto</p> 
-        <br>
-        <br>
-    </div>
-
-    <br>
-</div>

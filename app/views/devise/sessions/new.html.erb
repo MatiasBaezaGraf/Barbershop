@@ -1,26 +1,78 @@
-<h2>Log in</h2>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" textalign="center">
+
+  <div class = "navbar3">
+        <%= link_to "Atras ⮌", home_path, class: "but-back" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+  <div class = 'alignment'>
+    <div class = 'body-login'>
+      <br>
+      <h2 class = "titles-secondary">Hola, ¿Como estás?</h2>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <br>
+
+      <h3 class = "paragraph">Ingresá tus datos</h3>
+
+      <br>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, placeholder: "Email", class: 'input' %>
+        </div>
+
+        <br>
+
+        <div class="field">
+          <%= f.password_field :password, autocomplete: "current-password", required: true, placeholder: "Contraseña", class: 'input' %>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="actions">
+          <%= f.submit "INGRESAR", class: 'but-login' %>
+        </div>
+
+        <br>
+        <br>
+        <h3 class = "paragraph">Si no tenes cuenta, podes crearte una completamente gratis</h3>
+        <br>
+        <br>
+        <%= link_to " ⮞ Crear cuenta", new_user_registration_path, class: "but-login" %>
+        <br>
+        <br>
+        <br>
+        <br>
+      <% end %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+</body>
 
-<%= render "devise/shared/links" %>
+
+<div class = "tail">
+        <div class = "tail-tail">
+            <br>
+            <br>
+            <h2 class = "titles-contact">Informacion de contacto</h2>
+            <br>
+        </div>
+
+        <div class = "tail-head">
+            <br>
+            <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
+            <h3 class = "secondary-contact">0343 15-467-5058</h3>
+            <h3 class = "secondary-contact">ayelenpeter@hotmail.com.ar</h3>
+            <br>
+        </div>
+    </div>

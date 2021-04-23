@@ -1,0 +1,26 @@
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
+    <div class = "navbar">
+        <%= link_to "Atrás", home_path, class: "but-back" %>
+    </div>
+
+    <div class = "head">
+        <br>
+        <h1> Elegir servicio y dia </h1>
+        <br>
+    </div>
+
+    <div class = "main-body">
+        <br>
+        <div class = col-8>
+            <h2>Servicios</h2>
+        </div>
+        <br>
+    </div>
+
+</body>

@@ -1,53 +1,280 @@
-<div class = "head">
-    <h1 class = "titles">Home</h2>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'application','data-turbolinks-track': 'reload' %>
+
+
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
+    <div id = "sidebar">
+        <button class="but-cross" onclick="closeNav()">X</button>
+        <br>
+        <%if current_user%>
+            <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, class: "but-sidebar" %>
+            <br>
+            <%= link_to "Mi Perfil", current_user, method: :get, class: "but-sidebar" %>  
+        <%else%>
+            <%= link_to "Iniciar Sesion", new_user_session_path, class: "but-sidebar" %>
+        <%end%>
+        <br>
+        <a class ="but-sidebar" href="#section1">Servicios</a>  
+        <br>
+        <a class ="but-sidebar" href="#section2">Barberos</a>
+        <br>
+        <a class ="but-sidebar" href="#section2">Nosotros</a>
+        <br>
+        <%= link_to "Reservar Turno", new_turn_path, class: "but-sidebar-r" %>
+    </div>
+    <div id = "panel">
+        <div class = "head">
+            <button class="but-cross" onclick="darkMode()">DARK</button>
+            <h1 class = "titles">
+                <%if current_user%>
+                    ¡Bienvenido <%=current_user.first_name%>!
+                <%else%>
+                    Home
+                <%end%>
+            </h1>
+
+            <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
+            <h3 class = "secondary-contact">TEL. 0343 15-467-5058</h3>
+        </div>
+
+        <div class = "navbar">
+            <button class="but-menu" onclick="openNav()">≡ Menu</button>
+            <%if current_user%>
+                <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, class: "but-nav" %>
+                <%= link_to "Mi Perfil", current_user, method: :get, class: "but-nav" %>  
+            <%else%>
+                <%= link_to "Iniciar Sesion", new_user_session_path, class: "but-nav" %>
+            <%end%>
+            <a class ="but-nav" href="#section2">Barberos</a>
+            <a class ="but-nav" href="#section1">Servicios</a>   
+            <a class ="but-nav" href="#section2">Nosotros</a>
+            <%= link_to "Reservar Turno", new_turn_path, class: "but-reservation" %>
+        </div>
+
+        <div id = section1 class = "secondary-head-1">
+            <br>
+            <h1 class ="titles"> Nuestros Servicios </h1>
+            <br>
+        </div>
+
+        <div class = "main-body-1">
+            
+            <div class = col-1>
+                <br>
+                <div class = image-container>
+                    <br>
+                    <h2 class = "titles-third">Corte de Pelo</h2>     
+                    <br>
+                    <%= image_tag ("SERVICIO1.jpeg"), class:"imagen" %>
+                </div>
+                <br>
+                <br>
+            </div>
+
+            <div class = col-2>
+                <br>
+                <div class = image-container>
+                    <br>
+                    <h2 class = "titles-third">Corte de Barba</h2>
+                    <br>
+                    <%= image_tag ("SERVICIO2.jpeg"), class:"imagen" %>
+                </div>
+                <br>
+                <br>
+            </div>
+
+            <div class = col-3>
+                <br>
+                <div class = image-container>
+                    <br>
+                    <h2 class = "titles-third">Tintura</h2>
+                    <br>
+                    <%= image_tag ("SERVICIO3.jpeg"), class:"imagen" %>
+                </div>
+                <br>
+                <br>
+            </div>
+
+            <div class = col-4>
+                <br>
+                <div class = image-container>
+                    <br>
+                    <h2 class = "titles-third">Servicio4</h2>
+                    <br>
+                    <%= image_tag ("SERVICIO4.jpeg"), class:"imagen" %>
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+
+        <div id = "div1" class = "divisor" style="background-color:blanchedalmond; float:left; width:100%; text-align: center;">
+            <br>
+            <%= link_to "Reservar Turno", new_turn_path, class: "but-reservation" %>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+
+        <div id="section2" class = "divisor" style="background-color:rgb(224, 207, 181); float:left; width:100%">
+            <br>
+            <br>
+        </div>
+
+        <div class = "secondary-head-2">
+            <br>
+            <br>
+            <h1 class = "titles"> Nuestros Barberos </h1>
+            <br>
+        </div> 
+
+        <div class = "main-body-2">
+            <div class = col-5>
+                <div class = image-container>
+                    <br>
+                    <h2 class = "titles-secondary">Erwin Fritzler</h2>
+                    <br>
+                    <%= image_tag ("Erwin.jpeg"), class:"imagen" %>
+                    <p>Descripción y foto</p>
+                    <%= link_to "Reservar turno", new_turn_path(:barber_id => 2), class: "but-reservation" %>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                <br>
+            </div>
+
+            <div class = col-6>
+                <div class = image-container>
+                    <br>
+                    <h2 class = "titles-secondary">Kevin Coto</h2>
+                    <br>
+                    <%= image_tag ("Kevin.jpeg"), class:"imagen" %>
+                    <p>Descripción y foto</p>
+                    <%= link_to "Reservar turno", new_turn_path(:barber_id => 3), class: "but-reservation" %> 
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                <br>
+            </div>
+
+            <div class = col-7>
+                <div class = image-container>
+                    <br>
+                    <h2 class = "titles-secondary">Barbero 3</h2>
+                    <br>
+                    <%= image_tag ("BARBERO3.png"), class:"imagen" %>
+                    <p>Descripción y foto</p>
+                    <%= link_to "Reservar turno", new_turn_path(:barber_id => 4), class: "but-reservation" %> 
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        <div class = "divisor" style="background-color:rgb(224, 207, 181); float:left; width:100%">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
     
-    <title>Barbershop11</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+        <div class = "tail">
+            <div class = "tail-head">
+                <br>
+                <br>
+                <h2 class = "titles-contact">Informacion de contacto</h2>
+                <br>
+            </div>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-</div>
-
-<div class = "navbar">
-    <%= link_to "Barberos", stylists_path, class: "but-barber" %>
-    <%= link_to "Reservar Turno", new_turn_path, class: "but-reservation" %>
-    <% if user_signed_in? and current_user.id == 1%>
-        <%= link_to "Users", users_index_path, class: "main-but"%>
-    <% end %>
-</div>
-
-<div class = "secondary-head">
-    <br>
-    <h1> NUESTROS SERVICIOS </h1>
-    <br>
-</div>
-
-<div class = "main-body">
-    <br>
-    <div class = col-1>
-        <h2>CORTE DE PELO</h2>     
-        <br>
-        <br>
+            <div class = "tail-tail">
+                <br>
+                <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
+                <h3 class = "secondary-contact">0343 15-467-5058</h3>
+                <h3 class = "secondary-contact">ayelenpeter@hotmail.com.ar</h3>
+                <br>
+                <h3 class = "secondary-contact">2021</h3>
+                <br>
+            </div>
+        </div>
     </div>
+</body>
 
-    <div class = col-2>
-        <h2>CORTE DE BARBA</h2>
-        <br>
-        <br>
-    </div>
 
-    <div class = col-3>
-        <h2>TINTURA</h2>
-        <br>
-        <br>
-    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
 
-    <div class = col-4>
-        <h2>SERVICIO4</h2>
-        <br>
-        <br>
-    </div>
-    <br>
-</div>
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+</script>
+
+<script>
+function openNav() {
+    document.getElementById("sidebar").style.width = "75%";
+}
+
+function closeNav() {
+    document.body.style.marginLeft = "0";
+    document.getElementById("sidebar").style.width = "0";
+}
+
+function darkMode() {
+  var cols = document.getElementsByClassName('navbar');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black';
+  }
+  var cols = document.getElementsByClassName('secondary-head-1');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#141414';
+    cols[i].style.color = 'blanchedalmond';
+  }
+  var cols = document.getElementsByClassName('main-body-2');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#141414';
+  }
+  var cols = document.getElementsByClassName('image-container');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'red';
+  }
+  document.getElementById("div1").style.backgroundColor = '#141414';
+}
+function defaultMode() {
+    document.body.style.marginLeft = "0";
+    document.getElementById("sidebar").style.width = "0";
+}
+</script>
+
+
