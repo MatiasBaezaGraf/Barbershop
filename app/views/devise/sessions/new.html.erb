@@ -76,3 +76,38 @@
             <br>
         </div>
     </div>
+
+<script>
+
+if(localStorage.getItem('theme') == 'dark'){
+  document.body.style.background = "black";
+  var cols = document.getElementsByClassName('navbar3');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black';
+  }
+  var cols = document.getElementsByClassName('input');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.color = 'white';
+    cols[i].style.borderColor = 'blanchedalmond';
+  }
+  
+  var cols = document.getElementsByClassName('body-login');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.borderColor = "black" 
+    cols[i].style.color = 'white'; 
+  }
+  var cols = document.getElementsByClassName('tail-tail');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black'; 
+    cols[i].style.color = 'white'; 
+  }
+  var cols = document.getElementsByClassName('tail-head');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.color = 'white';  
+  }
+}
+  
+</script>

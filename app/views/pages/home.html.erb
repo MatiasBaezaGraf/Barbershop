@@ -15,7 +15,7 @@
         <%if current_user%>
             <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, class: "but-sidebar" %>
             <br>
-            <%= link_to "Mi Perfil", current_user, method: :get, class: "but-sidebar" %>  
+            <%= link_to "Editar Datos", edit_user_registration_path, method: :get, class: "but-sidebar" %>  
         <%else%>
             <%= link_to "Iniciar Sesion", new_user_session_path, class: "but-sidebar" %>
         <%end%>
@@ -48,13 +48,14 @@
         </div>
 
         <div class = "navbar">
-            <button class="but-menu" onclick="openNav()">≡ Menu</button>
+            <button class="but-menu" onclick="openNav()">≡ &nbsp;Menu</button>
             <%if current_user%>
                 <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, class: "but-nav" %>
-                <%= link_to "Mi Perfil", current_user, method: :get, class: "but-nav" %>  
+                <%= link_to "Editar Datos", edit_user_registration_path, method: :get, class: "but-nav" %>  
             <%else%>
                 <%= link_to "Iniciar Sesion", new_user_session_path, class: "but-nav" %>
             <%end%>
+            <a id = "mode-desk" class="but-nav" onclick="darkMode()">Modo oscuro</a>
             <a class ="but-nav" href="#section2">Barberos</a>
             <a class ="but-nav" href="#section1">Servicios</a>   
             <a class ="but-nav" href="#section2">Nosotros</a>
@@ -255,8 +256,19 @@ function closeNav() {
     document.body.style.marginLeft = "0";
     document.getElementById("sidebar").style.width = "0";
 }
+</script>
+
+<script>
+
+if(localStorage.getItem('theme') == 'dark'){
+  darkMode();
+}
 
 function darkMode() {
+
+  localStorage.setItem('theme', 'dark')
+
+  //HOME PAGE
 
   document.getElementById("sidebar").style.backgroundColor = 'rgb(12, 12, 12)';
 
@@ -350,10 +362,31 @@ function darkMode() {
     x.innerHTML = "Modo oscuro";
   }
 
+  var x = document.getElementById("mode-desk");
+  if (x.innerHTML === "Modo oscuro") {
+    x.innerHTML = "Modo claro";
+  } else {
+    x.innerHTML = "Modo oscuro";
+  }
+
+  //LOGIN
+
+  var cols = document.getElementsByClassName('navbar3');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black';
+  }
+  var cols = document.getElementsByClassName('body-login');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black';
+  }
+  
   document.getElementById( "mode" ).setAttribute( "onclick", "javascript: lightMode();" );
+  document.getElementById( "mode-desk" ).setAttribute( "onclick", "javascript: lightMode();" );
 }
 
 function lightMode() {
+
+  localStorage.setItem('theme', 'light')
 
   document.getElementById("sidebar").style.backgroundColor = 'rgb(39, 23, 0)';
 
@@ -445,9 +478,17 @@ function lightMode() {
   } else {
     x.innerHTML = "Modo claro";
   }
+  var x = document.getElementById("mode-desk");
+  if (x.innerHTML === "Modo claro") {
+    x.innerHTML = "Modo oscuro";
+  } else {
+    x.innerHTML = "Modo claro";
+  }
     document.getElementById( "mode" ).setAttribute( "onclick", "javascript: darkMode();" );
+    document.getElementById( "mode-desk" ).setAttribute( "onclick", "javascript: darkMode();" );
 }
 
 </script>
+
 
 

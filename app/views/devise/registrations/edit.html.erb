@@ -1,68 +1,154 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <div class="field">
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name"%>
-  </div>
- 
-  <br>
-  <br>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" textalign="center">
 
-  <div class="field">
-    <%= f.text_field :last_name, autocomplete: "last_name" %>
+  <div class = "navbar3">
+        <%= link_to "Atras ⮌", :back, class: "but-back" %>
   </div>
 
-  <br>
-  <br>
+  <div class = 'alignment'>
+    <div class = 'body-login'>
+      <br>
+      <h2 class = "titles-secondary">Modifica tu cuenta</h2>
+      <br>
+      <h3 class = "paragraph">Ingresá tus nuevos datos</h3>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="field">
+          <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "Nombre", class: 'input'%>
+        </div>
+      
+        <br>
+        <br>
+
+        <div class="field">
+          <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Apellido", class: 'input' %>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="field">
+          <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: 'input' %>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="field">
+          <%= f.number_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "Numero de telefono", class: 'input' %>
+        </div>
+
+        <br>
+        <br>
+
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="field">
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "Nueva contraseña (En caso de modificar)", class: 'input' %>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="field">
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirmar contraseña", class: 'input' %>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="field">
+          <h3 class = "paragraph">Ingresar constraseña actual para confirmar cambios<h3>
+          <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Contraseña actual", class: 'input' %>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="actions">
+          <%= f.submit "Actualizar", class: 'but-login' %>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="actions">
+          <%= link_to "⚠  Eliminar cuenta  ⚠" , registration_path(resource_name), data: { confirm: "¿Estás seguro que querés eliminar tu cuenta?" }, method: :delete, class: 'but-delete' %>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+      <% end %>
+      
+    </div>
   </div>
+</body>
 
-  <br>
-  <br>
+<div class = "tail" >
+        <div class = "tail-tail">
+            <br>
+            <br>
+            <h2 class = "titles-contact">Informacion de contacto</h2>
+            <br>
+        </div>
 
-  <div class="field">
-    <%= f.number_field :phone_number, autofocus: true, autocomplete: "phone_number" %>
-  </div>
+        <div class = "tail-head">
+            <br>
+            <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
+            <h3 class = "secondary-contact">0343 15-467-5058</h3>
+            <h3 class = "secondary-contact">ayelenpeter@hotmail.com.ar</h3>
+            <br>
+        </div>
+    </div>
 
-  <br>
-  <br>
 
+<script>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+if(localStorage.getItem('theme') == 'dark'){
+  document.body.style.background = "black";
+  var cols = document.getElementsByClassName('navbar3');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black';
+  }
+  var cols = document.getElementsByClassName('input');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.color = 'white';
+    cols[i].style.borderColor = 'blanchedalmond';
+  }
+  
+  var cols = document.getElementsByClassName('body-login');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.borderColor = "black" 
+    cols[i].style.color = 'white'; 
+  }
+  var cols = document.getElementsByClassName('tail-tail');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black'; 
+    cols[i].style.color = 'white'; 
+  }
+  var cols = document.getElementsByClassName('tail-head');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.color = 'white';  
+  }
+}
+  
+</script>

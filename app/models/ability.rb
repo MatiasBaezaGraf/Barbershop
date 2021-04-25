@@ -9,6 +9,7 @@ class Ability
           if (user.id == 1) || (user.id == 2)
               can :manage, :all
           else
+              can :show, User
               can :index, Barber
               can :index, Turn
               can :index, Service  
