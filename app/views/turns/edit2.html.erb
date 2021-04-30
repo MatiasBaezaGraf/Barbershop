@@ -1,9 +1,95 @@
-<% @turn = Turn.where(:id => params[:id]).first %>
-<%= @turn.id %>
 
-<h1>Editing Turn</h1>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
 
-<%= render 'step_form', turn: @turn %>
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-<%= link_to 'Show', @turn %> |
-<%= link_to 'Back', turns_path %>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" textalign="center">
+
+  <div class = "navbar3">
+        <%= link_to "Atras ⮌", home_path, class: "but-back" %>
+  </div>
+
+  <div class = 'alignment'>
+    <div class = 'body-login'>
+
+    <br>
+    
+    <h2 class = "titles-secondary">Editar Turno</h2>
+
+    <br>
+
+    <% @turn = Turn.where(:id => params[:id]).first %>
+
+    <%= render 'step_form', turn: @turn %>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    </div>
+  </div>
+
+    <div class = "tail">
+        <div class = "tail-tail">
+            <br>
+            <br>
+            <h2 class = "titles-contact">Informacion de contacto</h2>
+            <br>
+        </div>
+
+        <div class = "tail-head">
+            <br>
+            <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
+            <h3 class = "secondary-contact">0343 15-467-5058</h3>
+            <h3 class = "secondary-contact">ayelenpeter@hotmail.com.ar</h3>
+            <br>
+        </div>
+    </div>
+</body>
+
+<script>
+
+if(localStorage.getItem('theme') == 'dark'){
+  document.body.style.background = "#212121";
+  var cols = document.getElementsByClassName('navbar3');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black';
+  }
+  var cols = document.getElementsByClassName('input');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.color = 'white';
+    cols[i].style.borderColor = 'blanchedalmond';
+  }
+
+  var cols = document.getElementsByClassName('paragraph-f');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#111111';
+    cols[i].style.color = 'white';
+  }
+  
+  var cols = document.getElementsByClassName('body-login');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.borderColor = "black" 
+    cols[i].style.color = 'white'; 
+  }
+  var cols = document.getElementsByClassName('tail-tail');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black'; 
+    cols[i].style.color = 'white'; 
+  }
+  var cols = document.getElementsByClassName('tail-head');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.color = 'white';  
+  }
+}
+  
+</script>
+
+

@@ -1,7 +1,7 @@
 <%= form_with(model: service) do |form| %>
   <% if service.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h2>
+      <h2><%= pluralize(service.errors.count, "error") %> Impidió que se guarde el servicio:</h2>
 
       <ul>
         <% service.errors.each do |error| %>
@@ -12,16 +12,20 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, placeholder: "Nombre", class: "input" %>
   </div>
+
+  <br>
+  <br>
 
   <div class="field">
-    <%= form.label :duration %>
-    <%= form.number_field :duration %>
+    <%= form.number_field :duration, placeholder: "Duración (en minutos)", class: "input" %>
   </div>
 
+  <br>
+  <br>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "INGRESAR", class: 'but-login' %>
   </div>
 <% end %>

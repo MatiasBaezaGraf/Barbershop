@@ -13,24 +13,64 @@
 
   <div class = 'alignment'>
     <div class = 'body-login'>
+      <br>
+      <h2 class = "titles-secondary">Modificar usuario</h2>
+      <br>
 
-    <br>
-    
-    <h2 class = "titles-secondary">Crear servicio</h2>
+      <%= form_for(@user) do |f| %>
 
-    <br>
+        <div class="field">
+          <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "Nombre", class: 'input', required: true%>
+        </div>
+      
+        <br>
+        <br>
 
-    <%= render 'form', service: @service %>
+        <div class="field">
+          <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Apellido", class: 'input', required: true %>
+        </div>
 
-    <br>
-    <br>
-    <br>
-    <br>
+        <br>
+        <br>
 
+        <div class="field">
+          <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: 'input', required: true %>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="field">
+          <%= f.number_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "Numero de telefono", class: 'input', required: true %>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="field">
+          <h3 class = "paragraph">Privilegios de administrador</h3>
+          <%= f.select(:admin, @admin, {},{ :class => 'admin_select' })%>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="actions">
+          <%= f.submit "Actualizar", class: 'but-login' %>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+      <% end %>
+      
     </div>
   </div>
+</body>
 
-    <div class = "tail">
+<div class = "tail" >
         <div class = "tail-tail">
             <br>
             <br>
@@ -46,12 +86,12 @@
             <br>
         </div>
     </div>
-</body>
+
 
 <script>
 
 if(localStorage.getItem('theme') == 'dark'){
-  document.body.style.background = "#212121";
+  document.body.style.background = "black";
   var cols = document.getElementsByClassName('navbar3');
     for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = 'black';
@@ -61,12 +101,6 @@ if(localStorage.getItem('theme') == 'dark'){
     cols[i].style.backgroundColor = '#212121';
     cols[i].style.color = 'white';
     cols[i].style.borderColor = 'blanchedalmond';
-  }
-
-  var cols = document.getElementsByClassName('paragraph-f');
-    for(i = 0; i < cols.length; i++) {
-    cols[i].style.backgroundColor = '#111111';
-    cols[i].style.color = 'white';
   }
   
   var cols = document.getElementsByClassName('body-login');
@@ -88,4 +122,3 @@ if(localStorage.getItem('theme') == 'dark'){
 }
   
 </script>
-

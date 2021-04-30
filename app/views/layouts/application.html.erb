@@ -45,31 +45,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= link_to "Barbers", barbers_path %>
-    <%= link_to "Services", services_path %>
-    <%= link_to "Turns", turns_path %>
-    <%= link_to "Users", users_index_path %>
   </head>
 
   <body>
-    <% if current_user %>
-        <div>
-        
-          <%= current_user.first_name %>
-          <%= link_to "Log out►", destroy_user_session_path, method: :delete, class: "logout" %>
-          <%= link_to "Show profile", current_user, method: :get %>
-          
-        </div>
-    <% else %>
-        <div>
-        
-          GUEST
-          <%= link_to "Log in►", new_user_session_path, class: "loginb" %>
-          <%= link_to "Sign up►", new_user_registration_path, class: "loginb" %>
-          
-
-        </div>
-    <% end %>
+  
     <%= yield %>
 
   </body>

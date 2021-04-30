@@ -8,7 +8,7 @@
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" textalign="center">
 
   <div class = "navbar3">
-        <%= link_to "Atras ⮌", :back, class: "but-back" %>
+        <%= link_to "Atras ⮌", home_path, class: "but-back" %>
   </div>
 
   <div class = 'alignment'>
@@ -19,31 +19,30 @@
       <h3 class = "paragraph">Ingresá tus nuevos datos</h3>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="field">
-          <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "Nombre", class: 'input'%>
+          <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "Nombre", class: 'input', required: true%>
         </div>
       
         <br>
         <br>
 
         <div class="field">
-          <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Apellido", class: 'input' %>
+          <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Apellido", class: 'input', required: true %>
         </div>
 
         <br>
         <br>
 
         <div class="field">
-          <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: 'input' %>
+          <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: 'input', required: true %>
         </div>
 
         <br>
         <br>
 
         <div class="field">
-          <%= f.number_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "Numero de telefono", class: 'input' %>
+          <%= f.number_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "Numero de telefono", class: 'input', required: true %>
         </div>
 
         <br>
@@ -69,8 +68,8 @@
         <br>
 
         <div class="field">
-          <h3 class = "paragraph">Ingresar constraseña actual para confirmar cambios<h3>
-          <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Contraseña actual", class: 'input' %>
+          <h3 class = "error">Ingresar constraseña actual para confirmar cambios<h3>
+          <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Contraseña actual", class: 'input', required: true %>
         </div>
 
         <br>

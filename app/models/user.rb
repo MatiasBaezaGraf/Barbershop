@@ -4,6 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-         validates :first_name, presence: true
-         
+
+  def crack(user)
+    if user.admin == 1
+      "Si"
+    else
+      "No"
+    end
+  end
 end

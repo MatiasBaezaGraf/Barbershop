@@ -72,12 +72,39 @@
     padding-left: 10px;
     padding-right: 10px; 
  }
+ .paragraph-f{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 100%;
+    font-weight: bold;
+    color: black;
+    padding-left: 15%;
+    padding-right: 10px;
+    text-align: left; 
+    background-color: rgb(212, 190, 157);
+ }
+ .paragraph-s{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 100%;
+    font-weight: bold;
+    color: black;
+    text-align: left; 
+    background-color: rgb(212, 190, 157);
+ }
 
  .secondary-contact{
     font-family: 'Josefin Sans', sans-serif;
  }
 
- 
+.error{
+    font-family: 'Roboto Mono', monospace;
+    background-color: rgb(177, 0, 0);
+    color: white;
+    padding-right: 15%;
+    padding-left: 15%;
+    border-radius: 20px;
+    max-width: 50%;
+    margin-left: 9.5%;
+}
 
  
 
@@ -86,10 +113,15 @@
     margin: 0;
     padding-top: 100px;
     padding-bottom: 100px;
-    background-color: rgb(20, 12, 0);;
+    background-color: rgb(20, 12, 0);
     color: blanchedalmond;
     align-items: center;
     text-align: center;
+ }
+ .dark{
+    background-color: rgb(20, 12, 0);;
+    width: 100%;
+    text-align: right;
  }
 
  .main-body-1 {
@@ -175,7 +207,11 @@
  }
  .tail-tail{
     background-color: rgb(20, 12, 0);
-    color:blanchedalmond; 
+    color:blanchedalmond;
+ }
+ .tail-tail-index{
+    background-color: rgb(20, 12, 0);
+    color:blanchedalmond;
  }
 
  .tail-login{
@@ -184,6 +220,7 @@
     color: blanchedalmond;
     text-align: center;
  }
+ 
 
  .note{
     font-family: 'Roboto Mono', monospace;
@@ -192,8 +229,72 @@
  .alignment{
     background-image: url('/assets/RiverPlateStadium.jpg')   
  }
+ 
 
- [class*="but-"] {
+.index{
+	margin-right: auto;
+	margin-left: auto;
+	text-align: left;
+	width: 100%;
+	border-collapse: collapse;
+	padding-left: 20px;
+	background-color: #474747;
+	color: #bfbfbf;
+    font-family: 'Roboto Mono', monospace;
+}
+.index th{
+	/*background-color: rgb(34, 20, 0);*/
+	border:none;
+	text-align: left;
+	color: white;
+    padding-top: 4%;
+    padding-bottom: 4%; 
+}
+.index td{
+    color: white; 
+    padding-top: 4%;
+    padding-bottom: 4%; 
+}
+.index tr:nth-child(even) {background-color: #545454;}
+
+.dropdown {
+    float: right;
+}
+
+.dropdown-container {
+    display: none;
+    background-color: rgb(20, 12, 0);
+    color: white;
+    padding-left: 8px;
+    transition: 0.5s;
+  }
+
+.dropdown-content {
+    padding-left: 5%;
+    display: none;
+    right: 0;
+    position: absolute;
+    background-color: rgb(39, 23, 0);
+    width: 75%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .but-drop {
+    background-color: #5c2a02;
+  }
+
+.dropdown-title{
+    font-size: 125%;
+}
+
+/* BUTTONS */
+
+[class*="but-"] {
     transition-duration: 0.2s;
     padding-top: 3%;
     padding-bottom: 3%;
@@ -206,7 +307,41 @@
     font-size: 125%;
   }
 
-/* BUTTONS */
+.but-drop {
+    background-color: #421e00;
+    color: white;
+    margin-top: 2%;
+    padding: 11px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+  
+
+[class*="but-dark"]{
+    visibility: hidden;
+    display: none;
+    border: none;
+    background-color: rgb(20, 12, 0);
+    color: rgb(122, 122, 122);
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 1%;
+    padding-right: 1%;
+    transition: 0s;
+    float: right;
+    cursor:pointer;
+}
+
+.but-dark-l{
+    float: left;
+}
+.but-dark:hover{
+    background-color: rgb(34, 34, 34);
+}
+.but-dark-l:hover{
+    background-color: rgb(34, 34, 34);
+}
 
 .but-cross{
     background-color:#111;
@@ -229,8 +364,9 @@
     display: block;
     transition: 0.3s;
 }
-.but-cross:hover{
-    color: cornsilk;
+.but-sidebar:hover{
+    /*margin-right: 70%;*/
+    color:white;
 }
 
 .but-sidebar-r{
@@ -243,18 +379,18 @@
     display: block;
     transition: 0.3s;
 }
-.but-cross:hover{
-    color: cornsilk;
+.but-sidebar-r:hover{
+    /*margin-right: 70%;*/
+    background-color: rgb(255, 218, 162);
 }
+
 
 
 .but-reservation{
     background-color:white;
     color: black;
-    border: 2px solid black; 
-}
-.but-reservation:visited{
-    color: black;
+    border: 2px solid black;
+    margin-right: 2.5%; 
 }
 .but-reservation:hover{
     color: white;
@@ -263,11 +399,19 @@
     border-color: white;
 }
 
+.but-reservation-x{
+    background-color:white;
+    color: black;
+    border: 2px solid black;
+    margin-right: 2%;
+    visibility: hidden; 
+}
+
 .but-menu{
     background-color:rgb(20, 12, 0);
     color: white;
     border: 2px solid rgb(49, 30, 0); 
-    margin-right: 30%;
+    margin-right: 25%;
     padding-left: 4%;
     padding-right: 4%;
 }
@@ -291,7 +435,6 @@
     color: white;
     display: none;
     letter-spacing: 1px;
-    /*margin-right: 30%;*/
 }
 .but-nav:hover{
     border-bottom: 2px solid white;
@@ -312,6 +455,8 @@
     border-color: black;
 }
 
+[class*="but-delete-"]
+
 .but-delete{
     background-color: rgb(139, 0, 0);
     color: white;
@@ -325,6 +470,79 @@
     background-color: white;
     color: rgb(139, 0, 0);
     border: 2px solid rgb(139, 0, 0);
+}
+
+[class*="but-delete-"]{
+    font-family: 'Roboto Mono', monospace;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 100%;
+}
+.but-delete-u{
+    background-color: rgb(139, 0, 0);
+    border: 2px solid rgb(139, 0, 0);
+}
+.but-delete-u:hover{
+    background-color: white;
+    color: rgb(139, 0, 0);
+}
+
+.but-delete-b{
+    background-color: rgb(10, 0, 104);
+    border: 2px solid rgb(10, 0, 104);
+}
+.but-delete-b:hover{
+    background-color: white;
+    color: rgb(10, 0, 104);
+}
+
+.but-delete-n{
+    background-color: rgb(0, 97, 0);
+    border: 2px solid rgb(0, 97, 0);
+}
+.but-delete-n:hover{
+    background-color: white;
+    color: rgb(0, 97, 0);
+}
+.but-delete-s{
+    background-color: rgb(240, 184, 0);
+    border: 2px solid rgb(240, 184, 0);
+}
+.but-delete-s:hover{
+    background-color: white;
+    color: rgb(240, 184, 0);
+}
+.dropdown-btn{
+    /*margin-right: 70%;*/
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    font-family: 'Bebas Neue', cursive;
+    cursor: pointer;
+}
+.dropdown-btn:hover{
+    color:white;
+}
+
+.vital-mobile{
+    display: none;
+    background-color: yellow;
+}
+.vital-mobile:hover{
+    background-color: red
+}
+
+.admin_select{
+    background-color: rgb(128, 128, 128);
+    padding: 2%;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
 }
 
 
@@ -377,10 +595,15 @@
     .tail-login{padding-top: 5%; padding-bottom: 5%;}
     .image-container{margin-left: 2.2%; background-color: rgb(20, 12, 0);}
     .but-menu{display: none;}
-    .but-reservation{padding : 10px}
-    .but-nav{padding:0; margin-right: 3%; display: inline;}
+    .but-reservation{padding : 10px; margin-right: 1.5%;}
+    .but-nav{padding:0; margin-right: 1.5%; display: inline;}
     .but-back{padding: 10px; margin-right: 0%;}
     .but-login{padding-left: 8%; padding-right: 8%; padding-top: 6px; padding-bottom: 6px;}
+    .but-dark-l{visibility:visible; display: inline;}
+    .but-dark {display: inline; }
+    .index th{padding-top: 15px; padding-bottom: 15px;}
+    .index td{padding-top: 15px; padding-bottom: 15px;}
+    .dropdown{display: none;}
     .col-1 {float: left; width: 25%; background-color:  rgb(224, 207, 181)}
     .col-2 {float: left; width: 25%; background-color:rgb(224, 207, 181)}
     .col-3 {float: left; width: 25%; background-color:  rgb(224, 207, 181)}
@@ -391,5 +614,15 @@
     .col-8 {float: left; width: 100%; background-color: black;} 
     .col-9 {float: left; width: 25%; background-color: black;}
     .col-10 {float: right; width: 25%; background-color: black;}
+}
+
+@media only screen and (max-width: 768px){
+    .vital-no{
+        display: none;
+    }
+    .vital-mobile{
+        margin-top: 25%;
+        display:block;
+    }
 }
 

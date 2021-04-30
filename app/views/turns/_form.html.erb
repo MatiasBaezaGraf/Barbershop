@@ -1,45 +1,67 @@
-<%= form_with(model: turn) do |form| %>
-  <% if turn.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(turn.errors.count, "error") %> prohibited this turn from being saved:</h2>
 
-      <ul>
-        <% turn.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :time %>
-    <%= form.date_field :time, as: :string, input_html: { class: 'datepicker' } %>
-  </div>
+      <%= form_with(model: turn) do |form| %>
+        <% if turn.errors.any? %>
+          <div class="error">
+            <h2><%= pluralize(turn.errors.count, "error") %> Impidió que se guarde el turno:</h2>
 
-  <div class="field">
-      <%= form.label :barber_id %>
-      <%= form.select(:barber_id, Barber.where(:id => params[:barber_id]).collect {|p| [ p.first_name, p.id ]}, :selected => p)%>
-  </div>
-
-  <div class="field">
-    <div class="field">
-      <%= form.collection_check_boxes(:service_ids, Service.all, :id, :name, {}, {multiple: true}) do |ds| %>
-              <%= ds.label(class:"container") do %>
-                &nbsp;&nbsp;&nbsp;<%= ds.check_box %>
-                <%= ds.object.name %>
-                <span class="chekmark"></span>
+            <ul>
+              <% turn.errors.each do |error| %>
+                <li><%= error.full_message %></li>
               <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <h3 class = "paragraph">Fecha</h3>
+          <%= form.date_field :time, as: :string, input_html: { class: 'datepicker' } %>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="field" style="display: none;">
+            <h3 class = "paragraph">Barbero</h3>
+            <%= form.select(:barber_id, Barber.where(:id => params[:barber_id]).collect {|p| [ p.first_name, p.id ]}, :selected => p)%>
+        </div>
+
+        <div class="field">
+          <h3 class = "paragraph">Servicios</h3>
+          <div class="paragraph-f">
+            <br>
+            <%= form.collection_check_boxes(:service_ids, Service.all, :id, :name, {}, {multiple: true}) do |ds| %>
+                    <%= ds.label(class:"container") do %>
+                      &nbsp;&nbsp;&nbsp;<%= ds.check_box %>
+                      <%= ds.object.name %>
+                      <span class="chekmark"></span>
+                      <br>
+                      <br>
+                    <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="field" >
+            <% if current_user.admin == 1 %>
+              <h3 class = "paragraph">Cliente</h3>
+              <%= form.text_field :client, class: "input" %>
+            <% else %>
+              <a style="display: none;"><%= form.text_field :client, value:(current_user.first_name + " " + current_user.last_name), class: "input"  %></a>
+            <% end %>
+        </div>
+
+        <div class="field" style="display: none;">
+          <%= form.label :edit %>
+          <%= form.number_field :edit, :value => 1 %>
+        </div>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="actions">
+          <%= form.submit "INGRESAR", class: 'but-login' %>
+        </div>
       <% end %>
-    </div>
-  </div>
-
-  <div class="field">
-      <%= form.label :edit %>
-      <%= form.number_field :edit, :value => 1 %>
-  </div>
-
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    

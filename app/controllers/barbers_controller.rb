@@ -20,7 +20,7 @@ class BarbersController < ApplicationController
 
   # GET /barbers/1/edit
   def edit
-    @services = @turn.services
+    @services = @barber.services
   end
 
   # POST /barbers or /barbers.json

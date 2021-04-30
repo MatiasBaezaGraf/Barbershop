@@ -11,34 +11,50 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
-  </div>
+  <br>
+  <br>
 
   <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
+    <%= form.text_field :first_name, placeholder: "Nombre", class: "input" %>
   </div>
 
+  <br>
+  <br>
+
   <div class="field">
-    <div class="field">
-      <%= form.collection_check_boxes(:service_ids, Service.all, :id, :name, {}, {multiple: true}) do |ds| %>
-              <%= ds.label(class:"container") do %>
-                &nbsp;&nbsp;&nbsp;<%= ds.check_box %>
-                <%= ds.object.name %>
-                <span class="chekmark"></span>
-              <% end %>
-      <% end %>
+    <%= form.text_field :last_name, placeholder: "Nombre", class: "input" %>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="field">
+    <h3 class = "paragraph">Servicios</h3>
+      <div class="paragraph-f">
+      <br>
+        <%= form.collection_check_boxes(:service_ids, Service.all, :id, :name, {}, {multiple: true}) do |ds| %>
+                <%= ds.label(class:"container") do %>
+                  &nbsp;&nbsp;&nbsp;<%= ds.check_box %>
+                  <%= ds.object.name %>
+                  <span class="chekmark"></span>
+                  <br>
+                  <br>
+                <% end %>
+        <% end %>
     </div>
   </div>
 
+  <br>
+
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, placeholder: "Descripción", class: "input" %>
   </div>
 
+  <br>
+  <br>
+  <br>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "INGRESAR", class: 'but-login' %>
   </div>
 <% end %>

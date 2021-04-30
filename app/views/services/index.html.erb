@@ -1,29 +1,100 @@
-<p id="notice"><%= notice %></p>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
 
-<h1>Services</h1>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'application','data-turbolinks-track': 'reload' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Duration</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" height="100%" >
+  <div class = "navbar2">
+    <%= link_to "Atras ⮌", home_path, class: "but-back" %>
+  </div>
 
-  <tbody>
-    <% @services.each do |service| %>
-      <tr>
-        <td><%= service.name %></td>
-        <td><%= service.duration %></td>
-        <td><%= link_to 'Show', service %></td>
-        <td><%= link_to 'Edit', edit_service_path(service) %></td>
-        <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class = "secondary-head-1">
+    <br>
+    <h1 class = "titles">Servicios</h1>
+    <br>
+  </div>
 
-<br>
+  <div class = "main-body-1">
+    <table class = "index">
+      <thead>
+        <tr id = "cabecera">
+          <th class = "vital">Name</th>
+          <th class = "vital">Duration</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
 
-<%= link_to 'New Service', new_service_path %>
+      <tbody>
+        <% @services.each do |service| %>
+          <tr>
+            <td class = "vital"><%= service.name %></td>
+            <td class = "vital"><%= service.duration %></td>
+            <td class = "vital"><%= link_to 'Editar', edit_service_path(service), class: "but-delete-b" %></td>
+            <td class = "vital"><%= link_to 'Eliminar', service, method: :delete, data: { confirm: 'Are you sure?' }, class: "but-delete-u" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class = "tail">
+            <div class = "tail-head">
+                <br>
+                <br>
+                <br>
+                <%= link_to 'Cargar Servicio', new_service_path, class: "but-delete-n" %>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+
+            <div class = "tail-tail">
+                <br>
+                <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
+                <h3 class = "secondary-contact">0343 15-467-5058</h3>
+                <h3 class = "secondary-contact">ayelenpeter@hotmail.com.ar</h3>
+                <br>
+                <h3 class = "secondary-contact">2021</h3>
+                <br>
+            </div>
+  </div>
+</body>
+
+<script>
+
+  fondo()
+
+  function fondo() {
+    document.body.style.background="rgb(20, 12, 0)"
+    document.getElementById("cabecera").style.backgroundColor = "rgb(34, 20, 0)";
+  }
+
+  if(localStorage.getItem('theme') == 'dark'){
+    document.body.style.background = "black";
+    
+    document.getElementById("cabecera").style.backgroundColor = '#212121';
+
+    var cols = document.getElementsByClassName('secondary-head-1');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = '#141414';
+      cols[i].style.color = 'blanchedalmond';
+    }
+    var cols = document.getElementsByClassName('navbar2');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = 'black';  
+    }
+    var cols = document.getElementsByClassName('tail-head');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = '#212121';
+      cols[i].style.color = 'white';  
+    }
+    var cols = document.getElementsByClassName('tail-tail');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = 'black'; 
+      cols[i].style.color = 'white'; 
+    }
+  }
+</script>

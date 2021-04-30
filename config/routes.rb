@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   get '/home' => 'pages#home'
   get '/select' => 'pages#select'
   get '/edit2' => 'turns#edit2'
-  resources :users, :only =>[:show]
+  resources :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

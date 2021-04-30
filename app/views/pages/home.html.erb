@@ -13,11 +13,32 @@
         <button class="but-cross" onclick="closeNav()">X</button>
         <br>
         <%if current_user%>
-            <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, class: "but-sidebar" %>
+          <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, class: "but-sidebar-r" %>
+          
+          <%if current_user.admin == 1 %>
             <br>
-            <%= link_to "Editar Datos", edit_user_registration_path, method: :get, class: "but-sidebar" %>  
+            <a id = "adminx" class="dropdown-btn" onclick="openAdmin()">Administracion ▼</a>
+            <div class="dropdown-container">
+              <%= link_to "Gestionar usuarios", users_index_path, class: "but-sidebar"  %>
+              <br>
+              <%= link_to "Gestionar barberos", barbers_path, class: "but-sidebar" %>
+              <br>
+              <%= link_to "Gestionar servicios", services_path, class: "but-sidebar" %>
+              <br>
+              <%= link_to "Gestionar turnos", turns_path, class: "but-sidebar" %>
+            </div>
+            <br>
+            <%= link_to "Crear Turno", new_turn_path, class: "but-sidebar-r" %>
+          <%else%>
+            <br>
+            <%= link_to "Reservar Turno", new_turn_path, class: "but-sidebar-r" %>
+          <%end%>
+          <br>
+          <%= link_to "Editar Datos", edit_user_registration_path, method: :get, class: "but-sidebar" %>  
         <%else%>
-            <%= link_to "Iniciar Sesion", new_user_session_path, class: "but-sidebar" %>
+          <%= link_to "Iniciar Sesion", new_user_session_path, class: "but-sidebar-r" %>
+          <br>
+          <%= link_to "Reservar Turno", new_turn_path, class: "but-sidebar-r" %>
         <%end%>
         <br>
         <a class ="but-sidebar" href="#section1">Servicios</a>  
@@ -26,15 +47,15 @@
         <br>
         <a class ="but-sidebar" href="#section2">Nosotros</a>
         <br>
-        <a id = "mode" class="but-sidebar" onclick="darkMode()">Modo oscuro</a>
+        <a id = "mode" class="but-sidebar" onclick="darkMode()">Modo oscuro ☀</a>
         <br>
-        <%= link_to "Reservar Turno", new_turn_path, class: "but-sidebar-r" %>
+        <br>
+        <br>
     </div>
 
     <div id = "panel">
+        
         <div class = "head">
-
-     
 
           <h1 class = "titles">
             <%if current_user%>
@@ -49,17 +70,17 @@
 
         <div class = "navbar">
             <button class="but-menu" onclick="openNav()">≡ &nbsp;Menu</button>
+            <button class="but-dark-l" onclick="openNavDesk()">❯ &nbsp;Menu</button>
             <%if current_user%>
-                <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, class: "but-nav" %>
-                <%= link_to "Editar Datos", edit_user_registration_path, method: :get, class: "but-nav" %>  
+              <%= link_to "Editar Datos", edit_user_registration_path, method: :get, class: "but-nav" %>  
             <%else%>
-                <%= link_to "Iniciar Sesion", new_user_session_path, class: "but-nav" %>
+              <%= link_to "Iniciar Sesion", new_user_session_path, class: "but-nav" %>
             <%end%>
-            <a id = "mode-desk" class="but-nav" onclick="darkMode()">Modo oscuro</a>
             <a class ="but-nav" href="#section2">Barberos</a>
+            <%= link_to "Reservar Turno", new_turn_path, class: "but-reservation" %>
             <a class ="but-nav" href="#section1">Servicios</a>   
             <a class ="but-nav" href="#section2">Nosotros</a>
-            <%= link_to "Reservar Turno", new_turn_path, class: "but-reservation" %>
+            <button id = "mode-desk" class="but-dark" onclick="darkMode()">❯ &nbsp;Menu</button>
         </div>
 
         <div id = section1 class = "secondary-head-1">
@@ -245,6 +266,22 @@ $(document).ready(function(){
     } // End if
   });
 });
+
+//* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
 </script>
 
 <script>
@@ -252,10 +289,24 @@ function openNav() {
     document.getElementById("sidebar").style.width = "75%";
 }
 
+function openNavDesk() {
+    document.getElementById("sidebar").style.width = "25%";
+}
+
 function closeNav() {
     document.body.style.marginLeft = "0";
     document.getElementById("sidebar").style.width = "0";
 }
+
+function openAdmin() {
+  var x = document.getElementById("adminx");
+  if (x.innerHTML === "Administracion ▼") {
+    x.innerHTML = "Administracion ▲";
+  } else {
+    x.innerHTML = "Administracion ▼";
+  }
+}
+
 </script>
 
 <script>
@@ -354,20 +405,32 @@ function darkMode() {
     cols[i].style.backgroundColor = 'black';
     cols[i].style.color = 'white';
   }
+
+  var cols = document.getElementsByClassName('dropdown-container');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#343434';
+  }
   
-  var x = document.getElementById("mode");
-  if (x.innerHTML === "Modo oscuro") {
-    x.innerHTML = "Modo claro";
-  } else {
-    x.innerHTML = "Modo oscuro";
+  var cols = document.getElementsByClassName('but-dark-l');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#d9d9d9';
+    cols[i].style.color = 'black';
   }
 
-  var x = document.getElementById("mode-desk");
-  if (x.innerHTML === "Modo oscuro") {
-    x.innerHTML = "Modo claro";
+  var x = document.getElementById("mode");
+  if (x.innerHTML === "Modo oscuro ☀") {
+    x.innerHTML = "Modo claro ☀";
   } else {
-    x.innerHTML = "Modo oscuro";
+    x.innerHTML = "Modo oscuro ☀";
   }
+
+ var x = document.getElementById("mode-desk");
+  if (x.innerHTML === "Modo oscuro ☀") {
+    x.innerHTML = "Modo claro ☀";
+  } else {
+    x.innerHTML = "Modo oscuro ☀";
+  }
+  
 
   //LOGIN
 
@@ -472,21 +535,37 @@ function lightMode() {
     cols[i].style.backgroundColor = 'rgb(20, 12, 0)';
     cols[i].style.color = 'blanchedalmond';
   }
+
+  var cols = document.getElementsByClassName('dropdown-container');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'rgb(20, 12, 0)';
+  }
+
+  var cols = document.getElementsByClassName('but-dark-l');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'rgb(20, 12, 0)';
+    cols[i].style.color = 'rgb(122, 122, 122)';
+  }
+
   var x = document.getElementById("mode");
-  if (x.innerHTML === "Modo claro") {
-    x.innerHTML = "Modo oscuro";
+  if (x.innerHTML === "Modo claro ☀") {
+    x.innerHTML = "Modo oscuro ☀";
   } else {
-    x.innerHTML = "Modo claro";
+    x.innerHTML = "Modo claro ☀";
   }
+  
   var x = document.getElementById("mode-desk");
-  if (x.innerHTML === "Modo claro") {
-    x.innerHTML = "Modo oscuro";
+  if (x.innerHTML === "Modo claro ☀") {
+    x.innerHTML = "Modo oscuro ☀";
   } else {
-    x.innerHTML = "Modo claro";
+    x.innerHTML = "Modo claro ☀";
   }
+  
     document.getElementById( "mode" ).setAttribute( "onclick", "javascript: darkMode();" );
     document.getElementById( "mode-desk" ).setAttribute( "onclick", "javascript: darkMode();" );
 }
+
+
 
 </script>
 

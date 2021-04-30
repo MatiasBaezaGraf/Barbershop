@@ -36,6 +36,10 @@ class TurnsController < ApplicationController
     @services = @turn.services
   end
 
+  def edit2
+  end
+  
+
   # POST /turns or /turns.json
   def create
     @turn = Turn.new(turn_params)
@@ -99,6 +103,6 @@ class TurnsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def turn_params
-      params.require(:turn).permit(:time, :edit, :p, :barber_id, service_ids:[])
+      params.require(:turn).permit(:time, :client, :edit, :p, :barber_id, service_ids:[])
     end
 end

@@ -1,36 +1,121 @@
-<p id="notice"><%= notice %></p>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
 
-<h1>Turns</h1>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'application','data-turbolinks-track': 'reload' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Time</th>
-      <th>Barber</th>
-      <th>Duracion de turno</th>
-      <th>Edit</th>
-      <th>P</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" height="100%" >
+  <div class = "navbar2">
+    <%= link_to "Atras ⮌", home_path, class: "but-back" %>
+  </div>
 
-  <tbody>
-    <% @turns.each do |turn| %>
-      <tr>
-        <td><%= turn.time %></td>
-        <td><%= turn.barber_id %></td>
-        <td><%= turn.count_hours %></td>
-        <td><%= turn.edit %></td>
-        <td><%= turn.p %></td>
-        <td><%= link_to 'Show', turn %></td>
-        <td><%= link_to 'Edit', edit_turn_path(turn) %></td>
-        <td><%= link_to 'Destroy', turn, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <div class = "secondary-head-1">
+    <br>
+    <h1 class = "titles">Turnos</h1>
+    <br>
+  </div>
+
+<div class = "main-body-1">
+  <table class = "index">
+    <thead>
+      <tr id = "cabecera">
+        <th class = "vital">Horario</th>
+        <th class = "vital">Cliente</th>
+        <th class = "vital">Barbero</th>
+        <th class = "vital">Duracion de turno</th>
+        <th class = "vital-no">Edit</th>
+        <th class = "vital-no">P</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @turns.each do |turn| %>
+        <tr>
+          <td class = "vital"><%= turn.time %></td>
+          <td class = "vital"><%= turn.client %></td>
+          <td class = "vital"><%= turn.barber.first_name %></td>
+          <td class = "vital"><%= turn.count_hours %> minutos</td>
+          <td class = "vital-no"><%= turn.edit %></td>
+          <td class = "vital-no"><%= turn.p %></td>
+          <td class = "dropdown">
+            <button class="but-drop">Mas▼</button>
+            <div class="dropdown-content">
+              <br>
+              <h5 class = "dropdown-item"><%= turn.edit %></h5>
+              <h5 class = "dropdown-item"><%= turn.p %></h5>
+              <h5 class = "dropdown-delete"><%= link_to 'Editar turno', edit_turn_path(turn), class: "but-delete-b" %></h5>
+              <h5 class = "dropdown-delete"><%= link_to "Eliminar turno", turn, method: :delete, data: { confirm: "Are you sure"}, class: "but-delete-u" %></h5>
+              <h5 class = "dropdown-delete"><%= link_to 'Mostrar', turn, class: "but-delete-s" %></h5>
+            </div>
+          </td>
+          <td class = "vital-no"><%= link_to 'Mostrar', turn, class: "but-delete-s" %></td>
+          <td class = "vital-no"><%= link_to 'Editar', edit_turn_path(turn), class: "but-delete-u" %></td>
+          <td class = "vital-no"><%= link_to 'Eliminar', turn, method: :delete, data: { confirm: 'Are you sure?' }, class: "but-delete-b" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<%= link_to 'New Turn', new_turn_path %>
+<div class = "tail">
+            <div class = "tail-head">
+                <br>
+                <br>
+                <br>
+                <%= link_to 'Cargar turno', new_turn_path, class: "but-delete-n" %>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+
+            <div class = "tail-tail">
+                <br>
+                <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
+                <h3 class = "secondary-contact">0343 15-467-5058</h3>
+                <h3 class = "secondary-contact">ayelenpeter@hotmail.com.ar</h3>
+                <br>
+                <h3 class = "secondary-contact">2021</h3>
+                <br>
+            </div>
+  </div>
+</body>
+
+<script>
+
+  fondo()
+
+  function fondo() {
+    document.body.style.background="rgb(20, 12, 0)"
+    document.getElementById("cabecera").style.backgroundColor = "rgb(34, 20, 0)";
+  }
+
+  if(localStorage.getItem('theme') == 'dark'){
+    document.body.style.background = "black";
+    
+    document.getElementById("cabecera").style.backgroundColor = '#212121';
+
+    var cols = document.getElementsByClassName('secondary-head-1');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = '#141414';
+      cols[i].style.color = 'blanchedalmond';
+    }
+    var cols = document.getElementsByClassName('navbar2');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = 'black';  
+    }
+    var cols = document.getElementsByClassName('tail-head');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = '#212121';
+      cols[i].style.color = 'white';  
+    }
+    var cols = document.getElementsByClassName('tail-tail');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = 'black'; 
+      cols[i].style.color = 'white'; 
+    }
+  }
+</script>
 

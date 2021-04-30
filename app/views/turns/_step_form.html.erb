@@ -1,45 +1,26 @@
-<%= form_with(model: turn) do |form| %>
-  <% if turn.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(turn.errors.count, "error") %> prohibited this turn from being saved:</h2>
+  <%= form_with(model: turn) do |form| %>
+    <% if turn.errors.any? %>
+      <div id="error">
+        <h2><%= pluralize(turn.errors.count, "error") %> prohibited this turn from being saved:</h2>
 
-      <ul>
-        <% turn.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <ul>
+          <% turn.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <div class="field">
-    <% form.label :time %>
-    <% form.date_field :time, as: :string, input_html: { class: 'datepicker' } %>
-  </div>
-
-  <div class="field">
-      <% form.label :barber_id %>
-      <% form.select(:barber_id, Barber.where(:id => params[:barber_id]).collect {|p| [ p.first_name, p.id ]}, :selected => p)%>
-  </div>
-
-  <div class="field">
     <div class="field">
-      <% form.collection_check_boxes(:service_ids, Service.all, :id, :name, {}, {multiple: true}) do |ds| %>
-              <% ds.label(class:"container") do %>
-                &nbsp;&nbsp;&nbsp;<%= ds.check_box %>
-                <% ds.object.name %>
-                <span class="chekmark"></span>
-              <% end %>
-      <% end %>
-    </div>
-  </div>
-
-  <h2> Elija la hora a la que desee su turno </h2>
-    <div class="field">
-        <%= form.label :time %>
+        <h3 class = "paragraph">Elija su horario</h3>
         <%= form.time_field :time, as: :string, input_html: { class: 'timepicker' } %>
     </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <br>
+    <br>
+    <br>
+
+    <div class="actions">
+      <%= form.submit "INGRESAR", class: 'but-login' %>
+    </div>
 <% end %>
