@@ -6,6 +6,7 @@ class Turn < ApplicationRecord
 
   def count_hours
     count = 0
+    time = []
 
     for t in Turn.all
         if t.id == self.id
@@ -15,7 +16,25 @@ class Turn < ApplicationRecord
         end
     end
 
-    count
-end
+    time = reformat(count)
+  end
+
+  def reformat(count)
+    time = []
+    hour = 0
+    min = 0
+    loop do
+      if count >= 60
+        hour = hour + 1
+        min = min - 60
+        count = count - 60
+      else
+        min = count
+        break
+      end
+    end
+    time = [hour, min]
+    time
+  end
 
 end

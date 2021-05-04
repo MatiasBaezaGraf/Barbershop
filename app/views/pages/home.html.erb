@@ -45,7 +45,7 @@
         <br>
         <a class ="but-sidebar" href="#section2">Barberos</a>
         <br>
-        <a class ="but-sidebar" href="#section2">Nosotros</a>
+        <a class ="but-sidebar" href="#div3">Nosotros</a>
         <br>
         <a id = "mode" class="but-sidebar" onclick="darkMode()">Modo oscuro ☀</a>
         <br>
@@ -79,7 +79,7 @@
             <a class ="but-nav" href="#section2">Barberos</a>
             <%= link_to "Reservar Turno", new_turn_path, class: "but-reservation" %>
             <a class ="but-nav" href="#section1">Servicios</a>   
-            <a class ="but-nav" href="#section2">Nosotros</a>
+            <a class ="but-nav" href="#div3">Nosotros</a>
             <button id = "mode-desk" class="but-dark" onclick="darkMode()">❯ &nbsp;Menu</button>
         </div>
 
@@ -199,7 +199,7 @@
                     <br>
                     <h2 class = "titles-secondary">Barbero 3</h2>
                     <br>
-                    <%= image_tag ("BARBERO3.png"), class:"imagen" %>
+                    <%= image_tag ("BARBERO3.jpg"), class:"imagen" %>
                     <p>Descripción y foto</p>
                     <%= link_to "Reservar turno", new_turn_path(:barber_id => 4), class: "but-reservation" %> 
                     <br>
@@ -207,6 +207,7 @@
                     <br>
                     <br>
                 </div>
+                <br>
             </div>
         </div>
 
@@ -214,14 +215,36 @@
             <br>
             <br>
             <br>
-            <br>
+        </div>
+
+        <div class = "secondary-head-1">
+            <h1 id = "x" style = "color:rgb(224, 207, 181)"> x </h1>
+            <h1 class = "titles"> Nosotros </h1>
             <br>
         </div>
+
+        <div class = "main-body-1">
+          <div class = "col-14">
+            <div class = image-container>
+              <%= image_tag ("NOSOTROS.jpeg"), class:"imagen-we" %>
+            </div>
+          </div>
+
+          <div class = "col-15">
+            <p class = "we">
+              Talking of Hamilton, he's set to spend at least another week stuck on 99 career pole positions. He'll have another opportunity to hit the century mark next weekend in Spain, but for now, it is all about championship gains and keeping his nose in front of his arch rival, Max Verstappen.
+              He nailed his first lap in Q3 to grab provisional pole by just 0.007s from his team mate, and as the wind picked up, those two couldn't improve on their second runs, meaning P1 belonged to Bottas.
+              After his worst start to a season since joining Mercedes in 2017, it was a much needed confidence boost - but can he translate pole into a race win?
+              Qualifying was billed as an epic showdown between Max Verstappen and Lewis Hamilton over one lap, and with so little to choose between their cars it seemed set to be decided on driver skill.
+              But overlook Valtteri Bottas at your peril, the Finn was very quick here last season and yesterday, he was right back to his best form.
+            </p>
+          </div>
+        </div> 
     
         <div class = "tail">
             <div class = "tail-head">
                 <br>
-                <br>
+                <h1 id = "y" style = "color:blanchedalmond"> x </h1>
                 <h2 class = "titles-contact">Informacion de contacto</h2>
                 <br>
             </div>
@@ -391,8 +414,26 @@ function darkMode() {
   for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = '#212121';
   }
+  var cols = document.getElementsByClassName('col-14');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#141414';
+  }
+  var cols = document.getElementsByClassName('col-15');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#141414';
+  }
 
   document.getElementById("div3").style.backgroundColor = '#212121';
+
+  document.getElementById("x").style.color = '#141414';
+
+  document.getElementById("y").style.color = '#212121';
+
+  var cols = document.getElementsByClassName('we');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#141414';
+    cols[i].style.color = 'white';
+  }
 
   var cols = document.getElementsByClassName('tail-head');
   for(i = 0; i < cols.length; i++) {
@@ -523,6 +564,24 @@ function lightMode() {
   }
 
   document.getElementById("div3").style.backgroundColor = 'blanchedalmond';
+
+  document.getElementById("x").style.color = 'rgb(224, 207, 181)';
+
+  document.getElementById("y").style.color = 'blanchedalmond';
+
+  var cols = document.getElementsByClassName('we');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'blanchedalmond';
+    cols[i].style.color = 'black';
+  }
+  var cols = document.getElementsByClassName('col-14');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'blanchedalmond';
+  }
+  var cols = document.getElementsByClassName('col-15');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'blanchedalmond';
+  }
 
   var cols = document.getElementsByClassName('tail-head');
   for(i = 0; i < cols.length; i++) {

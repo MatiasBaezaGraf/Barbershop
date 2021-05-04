@@ -6,36 +6,105 @@ class Barber < ApplicationRecord
 
     def busy(barber_id, day)
         busy = []
-        for t in Turn.all
+        turns = Turn.where(:barber_id => barber_id).order(time: :asc)
+        for t in turns
             count = []
             puts ("id: #{t.barber_id} , #{barber_id}")
             puts ("Time: #{t.time.strftime("%Y-%m-%d")} , #{day.to_date}")
-            if t.barber_id == barber_id and t.time.strftime("%Y-%m-%d") == day.to_date
-                
-                i = t.time
-                e = t.time + t.count_hours
-                count = [i, e]
+            puts "Count: #{t.count_hours}"
+            if t.barber_id == barber_id and t.time.strftime("%Y-%m-%d").to_date == day.to_date
+                puts "horasssssss: #{t.count_hours[0]}, #{t.count_hours[1]}"
+                i = [t.time.hour, t.time.min]
+                e = [t.time.hour + t.count_hours[0], t.time.min + t.count_hours[1]]
+                count.push(i)
+                count.push(e)
+                puts("count: #{t.time.hour}, #{e}")
             end
-            busy.push(count)
+            if count.blank?
+                busy.push(count)
+            else
+                busy = reformat(count)
+            end
         end
 
         busy
         
     end
 
-    def free(day)
-        free = []
-        inicio = "16:00"
-        barber = Barber.where(:id => self.id)
-        puts ("Self id: #{self.id}")
-        busy = busy(self.id, day)
-        for b in busy
-            if b.blank?
-                puts ("blank")
+    def reformat(count)
+        time = []
+        puts("Reformat: #{count}")
+        e = count[1]
+        hour = 0
+
+        loop do
+            if e[1] >= 60
+                e = [(e[0]+1), (e[1]-60)]
             else
-                puts ("hola #{b[0]}")
+                break
             end
         end
+        time = [count[0], e]
+        time
+      end
+
+    def free(day)
+        free = []
+        inicio = [16, 00]
+        cierre = [20, 00]
+        barber = Barber.where(:id => self.id)
+        busy = busy(self.id, day)
+        if busy[0].blank?
+            puts "nil"
+        else
+            puts ("Busy: #{busy[0][0][0]}")
+        end
+        puts "length: #{busy}"
+        if busy.blank? 
+            free.push(inicio, cierre)
+        else
+            count = 0
+            for b in busy
+                if b.blank? or b[0][1] < inicio[0]
+                    break
+                else
+                    puts ("#{b[0][0]}, #{inicio[0]}")
+                    if b[0][0] >= inicio[0] and count == 0
+                        count = count + 1
+                        free.push([inicio, [b[0][0], b[0][1]]])
+                        
+
+                    elsif b[0][0]>busy[count-1][1][0]
+                        free.push([[busy[count-1][1][0], busy[count-1][1][1]], [b[0][0], b[0][1]]])
+                        count = count + 1
+
+                    elsif b[0][0]==busy[count-1][1][0] and b[0][1]>busy[count-1][1][1] and count != busy.length-1
+                        free.push([[busy[count-1][1][0], busy[count-1][1][1]], [b[0][0], b[0][1]]])
+                        count = count + 1
+
+                    elsif b[0][0]>busy[count-1][1][0] and count != busy.length-1
+                        free.push([[busy[count-1][1][0], busy[count-1][1][1]], [b[0][0], b[0][1]]])
+                        count = count + 1
+
+                    elsif b[0][0]==busy[count-1][1][0] and b[0][1]>busy[count-1][1][1] and count == busy.length-1
+                        free.push([[busy[count-1][1][0], busy[count-1][1][1]], [b[0][0], b[0][1]]])
+                        free.push([[b[1][0], b[1][1]], cierre])
+                        count = count + 1
+
+                    elsif b[0][0]==busy[count-1][1][0] and b[0][1]==busy[count-1][1][1] and count == busy.length-1
+                        free.push([[b[1][0], b[1][1]], cierre])
+                        count = count + 1
+
+                    elsif b[0][0]>busy[count-1][1][0] and count == busy.length-1
+                        free.push([[busy[count-1][1][0], busy[count-1][1][1]], [b[0][0], b[0][1]]])
+                        free.push([[b[1][0]], b[1][1]], cierre)
+                        count = count + 1
+
+                    end
+                end
+            end
+        end
+        free
     end
     
     

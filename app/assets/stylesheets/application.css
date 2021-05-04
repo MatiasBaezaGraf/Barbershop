@@ -90,6 +90,10 @@
     text-align: left; 
     background-color: rgb(212, 190, 157);
  }
+ .we{
+    font-family: 'Roboto Mono', monospace;
+    color: black;
+ }
 
  .secondary-contact{
     font-family: 'Josefin Sans', sans-serif;
@@ -363,6 +367,7 @@
     color: #818181;
     display: block;
     transition: 0.3s;
+    cursor: pointer;
 }
 .but-sidebar:hover{
     /*margin-right: 70%;*/
@@ -549,6 +554,11 @@
 .imagen{
     max-width: 97.5%;
 }
+.imagen-we{
+    padding-top: 4px;
+    max-width: 97%;
+    max-height: 350px;
+}
 .warning{
     width: 20%;
 }
@@ -557,6 +567,10 @@
     color:blanchedalmond;
     background-color: rgb(20, 12, 0);
     width: 95%;
+}
+
+#y{
+    display: none;
 }
 
 [class*="col-"] {
@@ -604,16 +618,20 @@
     .index th{padding-top: 15px; padding-bottom: 15px;}
     .index td{padding-top: 15px; padding-bottom: 15px;}
     .dropdown{display: none;}
+    .we{font-size: 1.25vw;}
+    #y{display: inline;}
     .col-1 {float: left; width: 25%; background-color:  rgb(224, 207, 181)}
     .col-2 {float: left; width: 25%; background-color:rgb(224, 207, 181)}
     .col-3 {float: left; width: 25%; background-color:  rgb(224, 207, 181)}
     .col-4 {float: left; width: 25%; background-color:rgb(224, 207, 181)}
-    .col-5 {float: left; width: 33%; background-color:  blanchedalmond;}
-    .col-6 {float: left; width: 34%; background-color:  blanchedalmond;}
-    .col-7 {float: left; width: 33%; background-color:  blanchedalmond;}
+    .col-5 {float: left; width: 33.3%; background-color:  blanchedalmond;}
+    .col-6 {float: left; width: 33.3%; background-color:  blanchedalmond;}
+    .col-7 {float: left; width: 33.3%; background-color:  blanchedalmond;}
     .col-8 {float: left; width: 100%; background-color: black;} 
     .col-9 {float: left; width: 25%; background-color: black;}
     .col-10 {float: right; width: 25%; background-color: black;}
+    .col-14 {float: left; width: 50%; background-color: rgb(224, 207, 181); height: 370px;}
+    .col-15 {float: left; width: 50%; background-color: rgb(224, 207, 181); height: 370px;}
 }
 
 @media only screen and (max-width: 768px){
