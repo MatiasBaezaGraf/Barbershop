@@ -1,0 +1,26 @@
+<%= form_with(model: turn) do |form| %>
+    <% if turn.errors.any? %>
+      <div id="error">
+        <h2><%= pluralize(turn.errors.count, "error") %> prohibited this turn from being saved:</h2>
+
+        <ul>
+          <% turn.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+        <h3 class = "paragraph">Elija su Barbero</h3>
+        <%= form.collection_select(:barber_id, @barbers, :id, :first_name)%>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="actions">
+      <%= form.submit "INGRESAR", class: 'but-login' %>
+    </div>
+<% end %>

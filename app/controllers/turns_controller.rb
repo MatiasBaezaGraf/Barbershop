@@ -31,6 +31,10 @@ class TurnsController < ApplicationController
     @services = Service.all
   end
 
+  def edit0
+    @barbers = Barber.all
+  end
+
   # GET /turns/1/edit
   def edit
     @services = @turn.services
