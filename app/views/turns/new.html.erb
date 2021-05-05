@@ -20,8 +20,11 @@
     <h2 class = "titles-secondary">Personalizá tu turno</h2>
 
     <br>
-
-    <%= render 'form', turn: @turn %>
+    <% if params[:barber_id].blank? %>
+      <%= render 'first_form', turn: @turn %>
+    <% else %>
+      <%= render 'form', turn: @turn %>
+    <% end %>
 
     <br>
     <br>
@@ -62,6 +65,12 @@ if(localStorage.getItem('theme') == 'dark'){
     cols[i].style.backgroundColor = '#212121';
     cols[i].style.color = 'white';
     cols[i].style.borderColor = 'blanchedalmond';
+  }
+
+  var cols = document.getElementsByClassName('admin_select');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#818181';
+    cols[i].style.color = 'black';
   }
 
   var cols = document.getElementsByClassName('paragraph-f');

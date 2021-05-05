@@ -15,23 +15,18 @@
 
         <div class="field">
           <h3 class = "paragraph">Fecha</h3>
-          <%= form.date_field :time, min: Date.today, max: Date.today + 1.month, as: :string, input_html: { class: 'datepicker' } %>
+          <%= form.date_field :time, min: Date.today + 1.day, max: Date.today + 1.month, as: :string, input_html: { class: 'datepicker' } %>
+        </div> 
+
+        <br>
+        <br>
+
+        
+        <div class="field" style="display: none;">
+          <h3 class = "paragraph">Barbero</h3>
+          <%= form.select(:barber_id, Barber.where(:id => params[:barber_id]).collect {|p| [ p.first_name, p.id ]}, :selected => p)%>
         </div>
-
-        <br>
-        <br>
-
-        <% if params[:one].present? %>
-          <div class="field" style="display: none;">
-              <h3 class = "paragraph">Barbero</h3>
-              <%= form.select(:barber_id, Barber.where(:id => params[:barber_id]).collect {|p| [ p.first_name, p.id ]}, :selected => p)%>
-          </div>
-        <%else%>
-          <div class="field">
-              <h3 class = "paragraph">Barbero</h3>
-              <%= form.collection_select(:barber_id, Barber.all, :id, :first_name)%>
-          </div>
-        <%end%>
+        
 
         <div class="field">
           <h3 class = "paragraph">Servicios</h3>

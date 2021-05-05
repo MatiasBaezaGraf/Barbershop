@@ -50,7 +50,11 @@ class TurnsController < ApplicationController
 
     respond_to do |format|
       if @turn.save
-        format.html { redirect_to edit2_url(:id => @turn), notice: "Turn was successfully created." }
+        if @turn.edit.blank?
+          format.html { redirect_to edit0_url(:id => @turn), notice: "Turn was successfully created." }
+        else
+          format.html { redirect_to edit2_url(:id => @turn), notice: "Turn was successfully created." }
+        end
         format.json { render :show, status: :created, location: @turn }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -16,13 +16,13 @@
 
     <br>
     
-    <h2 class = "titles-secondary">Editar Turno</h2>
+    <h2 class = "titles-secondary">Personalizar Turno</h2>
 
     <br>
 
-    <%= @turn.edit = 1 %>
+    <% @turn.edit = 1 %>
 
-    <%= render 'first_form', turn: @turn %>
+    <%= render 'form', turn: @turn %>
 
     <br>
     <br>

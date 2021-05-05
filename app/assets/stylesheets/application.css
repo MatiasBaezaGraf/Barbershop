@@ -12,7 +12,9 @@
  *
  *= require_tree .
  *= require_self
- */
+*/ 
+
+ @import "../../../node_modules/daterangepicker/daterangepicker.css";
  
  .html,body{
     scroll-behavior: smooth;
@@ -544,7 +546,8 @@
 }
 
 .admin_select{
-    background-color: rgb(128, 128, 128);
+    background-color: rgb(43, 26, 0);
+    color: white;
     padding: 2%;
     font-family: 'Roboto Mono', monospace;
     font-weight: bold;
@@ -618,7 +621,7 @@
     .index th{padding-top: 15px; padding-bottom: 15px;}
     .index td{padding-top: 15px; padding-bottom: 15px;}
     .dropdown{display: none;}
-    .we{font-size: 1.25vw;}
+    .we{font-size: 1.225vw;}
     #y{display: inline;}
     .col-1 {float: left; width: 25%; background-color:  rgb(224, 207, 181)}
     .col-2 {float: left; width: 25%; background-color:rgb(224, 207, 181)}

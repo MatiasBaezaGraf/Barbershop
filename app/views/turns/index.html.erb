@@ -33,7 +33,7 @@
     <tbody>
       <% @turns.each do |turn| %>
         <tr>
-          <td class = "vital"><%= turn.time %></td>
+          <td class = "vital"><%= turn.time.strftime("%a %d/%m %H:%M") %></td>
           <td class = "vital"><%= turn.client %></td>
           <td class = "vital"><%= turn.barber.first_name %></td>
           <td class = "vital"><%= turn.count_hours %> minutos</td>

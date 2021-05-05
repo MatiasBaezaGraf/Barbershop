@@ -58,3 +58,5 @@ gem 'cancancan'
 
 #TimeSplitter automatically generates accessors for date, time, hour, and min on your datetime or time attributes
 gem 'time_splitter'
+
+

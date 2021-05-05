@@ -17,13 +17,13 @@
 
     <br>
     
-    <h2 class = "titles-secondary">Editar Turno</h2>
+    <h2 class = "titles-secondary">Personalizar Turno</h2>
 
     <br>
 
     <% @turn = Turn.where(:id => params[:id]).first %>
 
-    <%= render 'step_form', turn: @turn %>
+    <%= render 'last_form', turn: @turn %>
 
     <br>
     <br>

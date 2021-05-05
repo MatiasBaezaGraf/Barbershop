@@ -13,7 +13,7 @@
 
     <div class="field">
         <h3 class = "paragraph">Elija su Barbero</h3>
-        <%= form.collection_select(:barber_id, @barbers, :id, :first_name)%>
+        <%= form.collection_select(:barber_id, Barber.all, :id, :first_name, {},{ :class => 'admin_select' })%>
     </div>
 
     <br>

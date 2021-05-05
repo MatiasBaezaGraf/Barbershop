@@ -86,6 +86,7 @@
         <div id = section1 class = "secondary-head-1">
             <br>
             <h1 class ="titles"> Nuestros Servicios </h1>
+            <input name="dates"/>
             <br>
         </div>
 
@@ -265,6 +266,12 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+$( document ).ready(function() {
+  $('input[name="dates"]').datepicker({
+            beforeShowDay: $.datepicker.noWeekends
+        });
+});
+
 $(document).ready(function(){
   // Add smooth scrolling to all links
   $("a").on('click', function(event) {
