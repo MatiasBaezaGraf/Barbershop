@@ -16,7 +16,7 @@ The following instruction are better explained in:
 
 IMPORTANT: If you are in Mac OS X, you'll need to have Homebrew installed as a prerequisite.
 
-If you are in Windows, go directly to 
+**I repeat: If you are in Windows, go directly to step 5!** 
 
 * 1)Install GnuPG:
 ```
