@@ -298,6 +298,46 @@
     font-size: 125%;
 }
 
+.radio-toolbar input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+  }
+
+.radio-toolbar label {
+    display: inline-block;
+    background-color: #ddd;
+    padding: 2vw;
+    font-family: sans-serif, Arial;
+    font-size: 16px;
+    border: 2px solid #444;
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+    background-color:#bfb;
+    border-color: #4c4;
+}
+
+.radio-toolbar input[type="radio"]:focus + label {
+    border: 2px dashed #444;
+}
+
+.radio-toolbar label:hover {
+    background-color: #dfd;
+  }
+
+.calendar{
+    width: 100.1%;
+    background-color: #241000;
+    font-family: 'Roboto Mono', monospace;
+    border:none;
+}
+.calendar tr:nth-child(even) {background-color: #472000;}
+.calendar th{
+    padding: 10px;
+    background-color: #ffffff;
+}
+
 /* BUTTONS */
 
 [class*="but-"] {
@@ -623,6 +663,7 @@
     .dropdown{display: none;}
     .we{font-size: 1.225vw;}
     #y{display: inline;}
+    .radio-toolbar label{padding: 0.65vw}
     .col-1 {float: left; width: 25%; background-color:  rgb(224, 207, 181)}
     .col-2 {float: left; width: 25%; background-color:rgb(224, 207, 181)}
     .col-3 {float: left; width: 25%; background-color:  rgb(224, 207, 181)}

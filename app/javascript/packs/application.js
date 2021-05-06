@@ -7,20 +7,23 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import "jquery"
-import "daterangepicker"
 
-var moment = require('moment')
+global.$ = require("jquery")
 
-var jQuery = require('jquery')
-
-global.$ = global.jQuery = jQuery;
-window.$ = window.jQuery = jQuery;
-
-global.moment = moment;
-window.moment = moment;
+require("jquery") // Don't really need to require this...
+require("jquery-ui")
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+$(function(){
+    // Plain jquery
+    $('#fadeMe').fadeOut(5000);
+
+    // jquery-ui
+    const availableCities = ['Baltimore', 'New York'];
+    $('#cityField').autocomplete( { source: availableCities } );
+    $('#calendarField').datepicker( { dateFormat: 'yy-mm-dd' } );
+})
 

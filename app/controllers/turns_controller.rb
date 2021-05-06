@@ -32,15 +32,18 @@ class TurnsController < ApplicationController
   end
 
   def edit0
+    @days = Turn.selectable_dates
     @barbers = Barber.all
   end
 
   # GET /turns/1/edit
   def edit
+    @days = Turn.selectable_dates
     @services = @turn.services
   end
 
   def edit2
+    @times = Turn.selectable_times(params[:id])
   end
   
 

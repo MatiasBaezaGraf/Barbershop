@@ -13,10 +13,114 @@
           </div>
         <% end %>
 
-        <div class="field">
-          <h3 class = "paragraph">Fecha</h3>
-          <%= form.date_field :time, min: Date.today + 1.day, max: Date.today + 1.month, as: :string, input_html: { class: 'datepicker' } %>
-        </div> 
+        <h3 class = "paragraph">Fecha</h3>
+      
+        <table class = "calendar">
+          <thead>
+            <tr>
+              <th>D</th>
+              <th>L</th>
+              <th>M</th>
+              <th>X</th>
+              <th>J</th>
+              <th>V</th>
+              <th>S</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            
+            <tr>
+
+              <% totalcont = 0%>
+              <% cont = Date.today.strftime("%u").to_i%>
+
+              <% case cont %>
+              <% when 1%>
+                <td colspan = '2' ></td>
+              <% when 2%>
+                <td colspan = '3' ></td>
+              <% when 3%>
+                <td colspan = '4' ></td>
+              <% when 4%>
+                <td colspan = '5' ></td>
+              <% when 5%>
+                <td colspan = '6' ></td>
+              <% when 6%>
+                <td colspan = '7' ></td>
+              <% when 7%>
+                <td colspan = '1' ></td>
+              <% else %>
+
+              <% end %>
+
+              <% @days.each do |moment| %>
+              <td>
+                <%totalcont = totalcont + 1%>
+                <div class="radio-toolbar">
+                    <%= form.radio_button :time, moment%> 
+                    <%= form.label :time, moment.strftime("%d"), :value => moment %>
+                </div>
+              </td>
+
+                <% if moment.strftime("%a") == "Sat" %>
+                  <%break%>
+                <% end %>
+                
+              <% end %>
+            </tr>
+
+            <tr>
+
+              <% secondrowcont = 0 %>
+
+              <% @days.each do |moment| %>
+                <%if totalcont <= secondrowcont%>
+                  <td>
+                    <div class="radio-toolbar">
+                        <%= form.radio_button :time, moment%> 
+                        <%= form.label :time, moment.strftime("%d"), :value => moment %>
+                    </div>
+                  </td>
+
+                  <% if moment.strftime("%a") == "Sat" %>
+                    <%break%>
+                  <% end %>
+                <% end %>
+
+                <% secondrowcont = secondrowcont + 1 %>
+
+              <% end %>
+            </tr>
+
+            <% totalcont = totalcont + secondrowcont %>
+
+            <tr>
+
+              <% thirdrowcont = 1 %>
+
+              <% @days.each do |moment| %>
+                <%if totalcont <= thirdrowcont%>
+                  <td>
+                    <div class="radio-toolbar">
+                        <%= form.radio_button :time, moment%> 
+                        <%= form.label :time, moment.strftime("%d"), :value => moment %>
+                    </div>
+                  </td>
+
+                  <% if moment.strftime("%a") == "Sat" %>
+                    <%break%>
+                  <% end %>
+                <% end %>
+
+                <% thirdrowcont = thirdrowcont + 1 %>
+
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+
+        
 
         <br>
         <br>

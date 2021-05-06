@@ -11,9 +11,14 @@
       </div>
     <% end %>
 
-    <div class="field">
-        <h3 class = "paragraph">Elija su horario</h3>
-        <%= form.time_field :time, as: :string, input_html: { class: 'timepicker' } %>
+    
+
+    <div class="radio-toolbar">
+      <h3 class = "paragraph">Elija su horario</h3>
+        <% @times.each do |moment| %>
+          <%= form.radio_button :time, moment, as: :string %> 
+          <%= form.label :time, moment.strftime("%H %M"), :value => moment %>
+        <% end %>
     </div>
 
     <br>

@@ -2,10 +2,9 @@
 <%= csrf_meta_tags %>
 <%= csp_meta_tag %>
 
+<%= stylesheet_link_tag '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/le-frog/jquery-ui.min.css' %>
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= javascript_pack_tag 'application','data-turbolinks-track': 'reload' %>
-
-
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
 
@@ -56,7 +55,6 @@
     <div id = "panel">
         
         <div class = "head">
-
           <h1 class = "titles">
             <%if current_user%>
               ¡Bienvenido <%=current_user.first_name%>!
@@ -86,7 +84,6 @@
         <div id = section1 class = "secondary-head-1">
             <br>
             <h1 class ="titles"> Nuestros Servicios </h1>
-            <input name="dates"/>
             <br>
         </div>
 
@@ -266,11 +263,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$( document ).ready(function() {
-  $('input[name="dates"]').datepicker({
-            beforeShowDay: $.datepicker.noWeekends
-        });
-});
 
 $(document).ready(function(){
   // Add smooth scrolling to all links
@@ -314,7 +306,10 @@ for (i = 0; i < dropdown.length; i++) {
 }
 </script>
 
+
+
 <script>
+
 function openNav() {
     document.getElementById("sidebar").style.width = "75%";
 }

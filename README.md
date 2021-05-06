@@ -4,7 +4,7 @@
 
 IMPORTANT: This application runs on Ruby 2.7.2
 
-In the following instructions it's explained how to install Ruby and Rails to launch this app in a web server named Puma, which comes bundled with Rails. In Linux/UNIX or Mac OS/X you can use the package management system of your distribution such as RVM, as we are going to explain. **In every step that shows two commands, the first one is for Mas OS and the second one for Debian or Ubuntu. If you are on Windows you can jump directly to step 5**, because you have to use donwloadable installers, which you'll be provided with the links.
+In the following instructions it's explained how to install Ruby and Rails to launch this app in a web server named Puma, which comes bundled with Rails. In Linux/UNIX or Mac OS/X you can use the package management system of your distribution or a third party app such as RVM, as we are going to explain. **In every step that shows two commands, the first one is for Mac OS and the second one for Debian/Ubuntu. If you are on Windows you can jump directly to step 5**, because you have to use donwloadable installers, which you'll be provided with the links.
 
 The following instruction are better explained in:
 
@@ -94,7 +94,7 @@ rails --version
 
 ## 8) Finally, we must install Node.js. 
 
-This is because Rails's asset pipeline compiler requires a Javascript runtime. The Node.js version does not matter. You can use an installer no matter which OS you are running. **In Windows that´s your only choice** and you can donload it [here](https://nodejs.org/en/download/). In Mac OS or Ubuntu/Debian you can use the following commands:
+This is because Rails's asset pipeline compiler requires a Javascript runtime. The Node.js version does not matter. You can use an installer no matter which OS you are running. **In Windows that´s your only choice** and you can download it [here](https://nodejs.org/en/download/). In Mac OS or Ubuntu/Debian you can use the following commands:
 ```
 brew install node
 ```
