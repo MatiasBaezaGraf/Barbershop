@@ -25,6 +25,7 @@ class Barber < ApplicationRecord
                 puts "horasssssss: #{t.count_hours[0]}, #{t.count_hours[1]}"
                 i = i + (t.time.hour).hour
                 i = i + (t.time.min).minutes
+                puts i
                 e = e + (t.time.hour + t.count_hours[0]).hour
                 e = e + (t.time.min + t.count_hours[1]).minutes
                 count.push(i)

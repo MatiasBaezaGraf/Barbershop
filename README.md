@@ -18,7 +18,7 @@ IMPORTANT: If you are in Mac OS X, you'll need to have Homebrew installed as a p
 
 **I repeat: If you are in Windows, go directly to step 5!** 
 
-* 1)Install GnuPG:
+## 1) Install GnuPG:
 ```
 brew install gnupg
 ```
@@ -28,7 +28,7 @@ sudo apt-get update
 sudo apt-get install -y curl gnupg build-essential
 ```
 
-* 2)Install GPG Keys
+## 2) Install GPG Keys
 ```
 gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 ```
@@ -36,7 +36,7 @@ gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703
 sudo gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 ```
 
-* 3)Install RVM
+## 3) Install RVM
 ```
 \curl -sSL https://get.rvm.io | bash
 ```
@@ -47,7 +47,7 @@ sudo usermod -a -G rvm `whoami`
 
 If you've done it successfully you will recieve a Thank You! message in the console.
 
-* 4)After this you have to quit the terminal al reopen it. To check if RVM is conrrectly installed run:
+## 4) After this you have to quit the terminal al reopen it. To check if RVM is conrrectly installed run:
 ```
 rvm list
 ```
@@ -59,7 +59,7 @@ No rvm rubies installed yet. Try 'rvm help install'.
 
 everything's alright!
 
-* 5)Install Ruby 2.7.2
+## 5) Install Ruby 2.7.2
 
 In Windows download the [Ruby Installer](https://rubyinstaller.org/downloads/). If not, use the following commands:
 ```
@@ -77,13 +77,13 @@ If it shows something like the following, everything's fine
 #ruby-2.7.1 [ x86_64 ]
 ```
 
-* 6)FOR MAC OS: Create Ruby default version
+## 6) FOR MAC OS: Create Ruby default version
 
 ```
 rvm alias create default 2.7.2
 ```
 
-* 7)Now we are going to install Rails:
+## 7) Now we are going to install Rails:
 ```
 gem install rails
 ```
@@ -92,7 +92,9 @@ To check if it installed correctly run
 rails --version
 ```
 
-* 8)Finally, we must install Node.js. This is because Rails's asset pipeline compiler requires a Javascript runtime. The Node.js version does not matter. You can use an installer no matter which OS you are running. **In Windows that´s your only choice** and you can donload it [here](https://nodejs.org/en/download/). In Mac OS or Ubuntu/Debian you can use the following commands:
+## 8) Finally, we must install Node.js. 
+
+This is because Rails's asset pipeline compiler requires a Javascript runtime. The Node.js version does not matter. You can use an installer no matter which OS you are running. **In Windows that´s your only choice** and you can donload it [here](https://nodejs.org/en/download/). In Mac OS or Ubuntu/Debian you can use the following commands:
 ```
 brew install node
 ```
