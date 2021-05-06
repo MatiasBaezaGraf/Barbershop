@@ -60,6 +60,8 @@ No rvm rubies installed yet. Try 'rvm help install'.
 everything's alright!
 
 * 5)Install Ruby 2.7.2
+
+In Windows download the [Ruby Installer](https://rubyinstaller.org/downloads/). If not, use the following commands:
 ```
 rvm install 2.7.2
 ```
@@ -69,7 +71,6 @@ and check
 rvm list
 ```
 
-In Windows download the [Ruby Installer](https://rubyinstaller.org/downloads/).
 
 If it shows something like the following, everything's fine
 ```

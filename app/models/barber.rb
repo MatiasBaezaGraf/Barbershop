@@ -16,17 +16,17 @@ class Barber < ApplicationRecord
         
         for t in turns
             count = []
-            i = DateTime.new
-            e = DateTime.new
+            i = Time.new
+            e = Time.new
             puts ("id: #{t.barber_id} , #{barber_id}")
             puts ("Time: #{t.time.strftime("%Y-%m-%d")} , #{day}")
             puts "Count: #{t.count_hours}"
             if t.barber_id == barber_id and t.time.strftime("%Y-%m-%d").to_date == day.to_date
                 puts "horasssssss: #{t.count_hours[0]}, #{t.count_hours[1]}"
                 i = i + (t.time.hour).hour
-                i = i + (t.time.min).min
+                i = i + (t.time.min).minutes
                 e = e + (t.time.hour + t.count_hours[0]).hour
-                e = e + (t.time.min + t.count_hours[1]).min
+                e = e + (t.time.min + t.count_hours[1]).minutes
                 count.push(i)
                 count.push(e)
                 puts("count: #{t.time.hour}, #{e}")
