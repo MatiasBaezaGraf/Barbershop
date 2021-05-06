@@ -36,14 +36,14 @@
             <td class = "vital"><%= barber.first_name %></td>
             <td class = "vital"><%= barber.last_name %></td>
             <td class = "vital-no"><%= barber.description %></td>
-            <td class = "vital-no"><%= barber.free("2021/04/29") %></td>
+            <td class = "vital-no"><%= barber.free("2021/04/29", barber.id) %></td>
             <td class = "dropdown">
                   <button class="but-drop">Mas▼</button>
                   <div class="dropdown-content">
                     <br>
                     <h4 class = "dropdown-title">Descripción</h4>
                     <h5 class = "dropdown-item"><%= barber.description %></h5>
-                    <h5 class = "dropdown-item"><%= barber.free("2021/04/23") %></h5>
+                    <h5 class = "dropdown-item"><%= barber.free("2021/04/29", barber.id) %></h5>
                     <h5 class = "dropdown-delete"><%= link_to 'Editar barbero', edit_barber_path(barber), class: "but-delete-b" %></h5>
                     <h5 class = "dropdown-delete"><%= link_to "Eliminar barbero", barber, method: :delete, data: { confirm: "Are you sure"}, class: "but-delete-u" %></h5>
                   </div>

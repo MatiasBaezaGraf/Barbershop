@@ -4,13 +4,19 @@ class Barber < ApplicationRecord
     has_many :has_barbers
     has_many :services, through: :has_barbers
 
+    def freeConvert(day, barber_id, time)
+
+        
+    end
+    
+
     def busy(barber_id, day)
         busy = []
         turns = Turn.where(:barber_id => barber_id).order(time: :asc)
         for t in turns
             count = []
             puts ("id: #{t.barber_id} , #{barber_id}")
-            puts ("Time: #{t.time.strftime("%Y-%m-%d")} , #{day.to_date}")
+            puts ("Time: #{t.time.strftime("%Y-%m-%d")} , #{day}")
             puts "Count: #{t.count_hours}"
             if t.barber_id == barber_id and t.time.strftime("%Y-%m-%d").to_date == day.to_date
                 puts "horasssssss: #{t.count_hours[0]}, #{t.count_hours[1]}"
@@ -48,12 +54,14 @@ class Barber < ApplicationRecord
         time
       end
 
-    def free(day)
+    def free(day, barber_id)
         free = []
-        inicio = [16, 00]
-        cierre = [20, 00]
-        barber = Barber.where(:id => self.id)
-        busy = busy(self.id, day)
+        inicioM = [9, 00]
+        cierreM = [12, 30]
+        inicioT = [16, 00]
+        cierreT = [20, 00]
+        barber = Barber.where(:id => barber_id)
+        busy = busy(barber_id, day)
         if busy[0].blank?
             puts "nil"
         else
@@ -65,9 +73,20 @@ class Barber < ApplicationRecord
         else
             count = 0
             for b in busy
-                if b.blank? or b[0][1] < inicio[0]
+                puts("bbbbbbbbb: #{b}, #{b[0]}")
+                if b.blank? or b[0].blank?
                     break
+                elsif b.blank? and count == busy.lenght-1
+                    free.push(inicio, cierre)
                 else
+                    if b[0] >= inicioM[0] and b[0] < cierreM[0]
+                        inicio = inicioM
+                        cierre = cierreM
+                    else
+                        inicio = inicioT
+                        cierre = cierreT
+                    end
+    
                     puts ("#{b[0][0]}, #{inicio[0]}")
                     if b[0][0] >= inicio[0] and count == 0
                         count = count + 1
@@ -106,6 +125,5 @@ class Barber < ApplicationRecord
         end
         free
     end
-    
     
 end
