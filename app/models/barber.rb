@@ -73,8 +73,8 @@ class Barber < ApplicationRecord
         else
             count = 0
             for b in busy
-                puts("bbbbbbbbb: #{b}, #{b[0]}")
                 if b.blank? or b[0].blank?
+                    puts("bbbbbbbbb: #{b[0]}")
                     break
                 elsif b.blank? and count == busy.lenght-1
                     free.push(inicio, cierre)
