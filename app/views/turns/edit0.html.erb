@@ -77,6 +77,22 @@ if(localStorage.getItem('theme') == 'dark'){
     cols[i].style.borderColor = "black" 
     cols[i].style.color = 'white'; 
   }
+  var cols = document.getElementsByClassName('calendar');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.color = 'white';
+  }
+
+  document.getElementById("today").style.color = 'black';
+
+  var cols = document.getElementsByClassName('radio-toolbar');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black';
+    cols[i].style.color = 'white';
+    cols[i].style.borderColor = 'black';
+  }
+  
+  document.getElementById("cabecera").style.backgroundColor = '#212121';
+
   var cols = document.getElementsByClassName('tail-tail');
     for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = 'black'; 

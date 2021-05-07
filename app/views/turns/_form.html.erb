@@ -17,7 +17,7 @@
       
         <table class = "calendar">
           <thead>
-            <tr>
+            <tr id = "cabecera">
               <th>D</th>
               <th>L</th>
               <th>M</th>
@@ -32,95 +32,141 @@
             
             <tr>
 
-              <% totalcont = 0%>
-              <% cont = Date.today.strftime("%u").to_i%>
+              <% totalcont = 0 %> <!-- Cuenta de cuantos días se llevan formateando -->
+              <% count = Date.today.strftime("%u").to_i %> <!-- Número de día de la semana. Lunes 1...Domingo 7 -->
 
-              <% case cont %>
-              <% when 1%>
-                <td colspan = '2' ></td>
-              <% when 2%>
-                <td colspan = '3' ></td>
-              <% when 3%>
-                <td colspan = '4' ></td>
-              <% when 4%>
-                <td colspan = '5' ></td>
-              <% when 5%>
-                <td colspan = '6' ></td>
-              <% when 6%>
-                <td colspan = '7' ></td>
-              <% when 7%>
+              <!-- Cantidad de columnas que se dejan a la izquierda, dependen de que día es. El día presente se cuenta como columna libre -->
+              <% case count   
+               when 1%>
                 <td colspan = '1' ></td>
+              <% when 2%>
+                <td colspan = '2' ></td>
+              <% when 3%>
+                <td colspan = '3' ></td>
+              <% when 4%>
+                <td colspan = '4' ></td>
+              <% when 5%>
+                <td colspan = '5' ></td>
+              <% when 6%>
+                <td colspan = '6' ></td>
+              <% when 7%>
+                <td colspan = '7' ></td>
               <% else %>
-
+                <td colspan = '0' ></td>
               <% end %>
+              
+              <td id = "today"><%= form.label :time, Date.today.strftime("%d") %></td> 
+
 
               <% @days.each do |moment| %>
-              <td>
-                <%totalcont = totalcont + 1%>
-                <div class="radio-toolbar">
-                    <%= form.radio_button :time, moment%> 
-                    <%= form.label :time, moment.strftime("%d"), :value => moment %>
-                </div>
-              </td>
 
-                <% if moment.strftime("%a") == "Sat" %>
-                  <%break%>
+                <% coincidence = 0%>
+
+                <% @weekends.each do |weekend|%>
+                  <% if moment.strftime("%d") == weekend.strftime("%d")%>
+                    <% coincidence = 1 %>
+                  <% end %> 
+                <% end %> 
+
+                <%totalcont = totalcont + 1%> 
+
+                <% if coincidence == 0%>
+                  <td>
+                    <div class="radio-toolbar">
+                        <%= form.radio_button :time, moment%> 
+                        <%= form.label :time, moment.strftime("%d"), :value => moment %>
+                    </div>
+                  </td>
+                <% else %>
+                  <td class = "disabled"><%= form.label :time, moment.strftime("%d") %></td>
                 <% end %>
                 
+                <% if moment.strftime("%a") == "Sat" %> <!-- Si el día anteriormente formateado es sábado, se corta el recorrido de DAYS para empezar con la siguiente semana-->
+                  <%break%>
+                <% end %>
               <% end %>
             </tr>
 
-            <tr>
+            <tr> <!-- NUEVA FILA/SEMANA -->
 
-              <% secondrowcont = 0 %>
+              <% secondrowcont = 0 %> <!-- Lleva la cuenta de los días que se formatean en la segunda semana -->
 
-              <% @days.each do |moment| %>
-                <%if totalcont <= secondrowcont%>
-                  <td>
-                    <div class="radio-toolbar">
-                        <%= form.radio_button :time, moment%> 
-                        <%= form.label :time, moment.strftime("%d"), :value => moment %>
-                    </div>
-                  </td>
+              <% @days.each do |moment| %> <!-- Recorremos DAYS, los días posibles para asignar turnos -->
+                
+                <% coincidence = 0%>
+                
+                <% @weekends.each do |weekend|%>
+                  <% if moment.strftime("%d") == weekend.strftime("%d")%>
+                    <% coincidence = 1 %>
+                  <% end %> 
+                <% end %>
 
-                  <% if moment.strftime("%a") == "Sat" %>
+                <% secondrowcont = secondrowcont + 1 %> <!-- Aumentamos el contador se cumpla o no el IF, para llevar la cuenta de cuantos días
+                                                        se formatean en la segunda semana -->
+                <%if totalcont < secondrowcont%> <!-- Mientras secondrowcont sea menor a totalcont, no formatear días y auemntar el contador.
+                                                  De no ser así, estaríamos formateando días repetidos -->
+                  <% if coincidence == 0%>
+                    <td>
+                      <div class="radio-toolbar">
+                          <%= form.radio_button :time, moment%> 
+                          <%= form.label :time, moment.strftime("%d"), :value => moment %>
+                      </div>
+                    </td>
+                  <% else %>
+                    <td class = "disabled"><%= form.label :time, moment.strftime("%d") %></td>
+                  <% end %>
+
+                  <% if moment.strftime("%a") == "Sat" %> <!-- Si el día formateado es sábado, cortar el ciclo para pasar a la tercera semana -->
                     <%break%>
                   <% end %>
                 <% end %>
 
-                <% secondrowcont = secondrowcont + 1 %>
+                
 
               <% end %>
             </tr>
 
-            <% totalcont = totalcont + secondrowcont %>
+            <% totalcont = totalcont + secondrowcont %> <!-- Actualizamos totalcont para indicar la caontidad de días formateados del total -->
 
             <tr>
 
-              <% thirdrowcont = 1 %>
+              <% thirdrowcont = 0 %> <!-- Arrancamos el contador para la tercera fila o semana -->
 
               <% @days.each do |moment| %>
-                <%if totalcont <= thirdrowcont%>
-                  <td>
-                    <div class="radio-toolbar">
+
+                <% coincidence = 0%>
+
+                <% @weekends.each do |weekend|%>
+                  <% if moment.strftime("%d") == weekend.strftime("%d")%>
+                    <% coincidence = 1 %>
+                  <% end %> 
+                <% end %> 
+
+                <% thirdrowcont = thirdrowcont + 1 %> <!-- Aumentamos el contador se cumpla o no el IF, para llevar la cuenta de cuantos días
+                                                        se formatean en la tercera semana -->
+
+                <%if totalcont <= thirdrowcont%> <!-- Mientras no se hayan terminado de recorrer todos los días ya formateados, no
+                                                formatear ningpun día para no tener repetidos -->
+                  <% if coincidence == 0%>
+                    <td>
+                      <div class="radio-toolbar">
                         <%= form.radio_button :time, moment%> 
                         <%= form.label :time, moment.strftime("%d"), :value => moment %>
-                    </div>
-                  </td>
+                      </div>
+                    </td>
+                  <% else %>
+                    <td class = "disabled"><%= form.label :time, moment.strftime("%d") %></td>
+                  <% end %>
 
-                  <% if moment.strftime("%a") == "Sat" %>
+                  <% if moment.strftime("%a") == "Sat" %> <!-- Si el último día formateado es sábado, acá termina la semana -->
                     <%break%>
                   <% end %>
                 <% end %>
-
-                <% thirdrowcont = thirdrowcont + 1 %>
 
               <% end %>
             </tr>
           </tbody>
         </table>
-
-        
 
         <br>
         <br>

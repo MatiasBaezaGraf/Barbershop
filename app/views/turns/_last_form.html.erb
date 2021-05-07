@@ -12,12 +12,30 @@
     <% end %>
 
     
-
+   
     <div class="radio-toolbar">
       <h3 class = "paragraph">Elija su horario</h3>
+        <% disabledcounter = 0 %>
         <% @times.each do |moment| %>
-          <%= form.radio_button :time, moment, as: :string %> 
-          <%= form.label :time, moment.strftime("%H %M"), :value => moment %>
+          <% busycounter = 0 %>
+          <% @occupied.each do |busy| %>
+            <% if busy[0] == moment%>
+              <% busycounter = 1%>
+              <% disabledcounter = busy[1] %>
+            <% end %>
+          <% end %>
+          <% if busycounter != 0%>
+            <div class = "disabled"> Hola </div>
+            <% puts disabledcounter%>
+          <% else %>
+            <% if disabledcounter > 1%>
+              <div class = "disabled"> Hola </div>
+              <% disabledcounter = disabledcounter - 1%>
+            <%else%>
+              <%= form.radio_button :time, moment, as: :string %> 
+              <%= form.label :time, moment.strftime("%H %M"), :value => moment %>
+            <% end%>
+          <% end%>
         <% end %>
     </div>
 

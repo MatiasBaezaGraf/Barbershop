@@ -16,6 +16,20 @@ class Turn < ApplicationRecord
     days
   end
 
+  def self.weekends_off
+    weekends = []
+    today = Date.today
+    for i in 0..14
+      if i != 0
+        nextday = today + i.day
+        if (nextday.strftime("%u").to_i == 6 || nextday.strftime("%u").to_i == 7)
+          weekends.push(nextday)
+        end
+      end
+    end
+    weekends
+  end
+
   def self.selectable_times(id)
     xi = id
     chosen = nil
@@ -30,11 +44,31 @@ class Turn < ApplicationRecord
     busy = chosen.busy(barber, chosen.time.strftime("%Y-%m-%d"))
     puts ("Busyyyyyyyyyyyyyyyyyyyyyyyy #{busy}")
     now = chosen.time + 8.hours
-    for i in 0..10
-      nextturn = now + (30*i).minutes
+    for i in 0..20
+      nextturn = now + (15*i).minutes
       times.push(nextturn)
     end
     times
+  end
+
+  def self.work_or_free(id)
+    chosen = nil
+    barber = nil
+    for t in Turn.all
+      if id.to_i == t.id.to_i
+        chosen = t
+        barber = t.barber
+      end
+    end
+
+    busy = []
+
+    for t in Turn.all
+      if t.barber == barber
+        busy.push([t.time, t.count_hours/15])
+      end
+    end
+    busy
   end
 
   def count_hours
@@ -49,7 +83,8 @@ class Turn < ApplicationRecord
         end
     end
 
-    t = reformat(count)
+    count
+    #t = reformat(count)
   end
 
   def reformat(count)

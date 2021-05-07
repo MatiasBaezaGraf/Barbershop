@@ -306,37 +306,61 @@
 
 .radio-toolbar label {
     display: inline-block;
-    background-color: #ddd;
-    padding: 2vw;
-    font-family: sans-serif, Arial;
-    font-size: 16px;
-    border: 2px solid #444;
+    background-color: rgb(34, 20, 0);
+    color: white;
+    padding: 1.5vw;
+    width: 70%;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 100%;
+    border: 2px solid rgb(34, 20, 0);
 }
 
 .radio-toolbar input[type="radio"]:checked + label {
-    background-color:#bfb;
-    border-color: #4c4;
+    background-color:rgb(68, 41, 0);;
+    border-color: rgb(126, 126, 126);
 }
 
 .radio-toolbar input[type="radio"]:focus + label {
-    border: 2px dashed #444;
+    border: 2px solid rgb(255, 255, 255);
+    font-weight: bold;
 }
 
 .radio-toolbar label:hover {
-    background-color: #dfd;
+    border: 2px solid rgb(92, 92, 92);
+    color: white;
   }
 
-.calendar{
-    width: 100.1%;
-    background-color: #241000;
+#today{
+    background-color: white;
+    font-size: 100%;
     font-family: 'Roboto Mono', monospace;
-    border:none;
+    font-weight: bold;
+    padding: 1.5vw;
 }
-.calendar tr:nth-child(even) {background-color: #472000;}
+
+.calendar{
+    width: 100vw;
+    background-color: rgb(34, 20, 0);
+    font-family: 'Roboto Mono', monospace;
+    border-collapse: collapse;
+    border: 2px solid rgb(34, 20, 0);
+    
+}
 .calendar th{
-    padding: 10px;
-    background-color: #ffffff;
+    color: white;
+    padding-top: 0.9vw;
+    padding-bottom: 0.9vw;
+    background-color: rgb(22, 13, 0);
 }
+.disabled{
+    background-color: rgb(133, 0, 0);
+    color: white;
+    padding: 1.5vw;
+    width: 70%;
+    display: inline-block;
+    font-family: 'Roboto Mono', monospace;
+}
+
 
 /* BUTTONS */
 
@@ -663,7 +687,10 @@
     .dropdown{display: none;}
     .we{font-size: 1.225vw;}
     #y{display: inline;}
-    .radio-toolbar label{padding: 0.65vw}
+    .calendar{width: 37.4vw;}
+    .radio-toolbar label{padding: 0.65vw; font-size: 1.38vw;}
+    .disabled{padding: 0.65vw; font-size: 1.38vw;}
+    #today{padding: 0.65vw; font-size: 1.38vw;}
     .col-1 {float: left; width: 25%; background-color:  rgb(224, 207, 181)}
     .col-2 {float: left; width: 25%; background-color:rgb(224, 207, 181)}
     .col-3 {float: left; width: 25%; background-color:  rgb(224, 207, 181)}
