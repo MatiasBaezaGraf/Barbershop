@@ -29,6 +29,8 @@ class TurnsController < ApplicationController
   def new
     @turn = Turn.new
     @services = Service.all
+    @days = Turn.selectable_dates
+    @weekends = Turn.weekends_off
   end
 
   def edit0

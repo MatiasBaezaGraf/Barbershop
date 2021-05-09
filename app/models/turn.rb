@@ -19,6 +19,10 @@ class Turn < ApplicationRecord
   def self.weekends_off
     weekends = []
     today = Date.today
+    tomorrow = Date.new(2021,05,12)
+    puts "sssssssssssssssssssssssssssssseekends"
+    weekends.push(tomorrow)
+
     for i in 0..14
       if i != 0
         nextday = today + i.day
@@ -27,6 +31,7 @@ class Turn < ApplicationRecord
         end
       end
     end
+    
     weekends
   end
 

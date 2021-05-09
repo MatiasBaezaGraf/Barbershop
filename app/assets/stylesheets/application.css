@@ -687,7 +687,7 @@
     .dropdown{display: none;}
     .we{font-size: 1.225vw;}
     #y{display: inline;}
-    .calendar{width: 37.4vw;}
+    .calendar{width: 37.4vw; border-collapse: collapse;}
     .radio-toolbar label{padding: 0.65vw; font-size: 1.38vw;}
     .disabled{padding: 0.65vw; font-size: 1.38vw;}
     #today{padding: 0.65vw; font-size: 1.38vw;}
