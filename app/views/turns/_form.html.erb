@@ -160,8 +160,8 @@
             <br>
             <%= form.collection_check_boxes(:service_ids, Service.all, :id, :name, {}, {multiple: true}) do |ds| %>
                     <%= ds.label(class:"container") do %>
-                      &nbsp;&nbsp;&nbsp;<%= ds.check_box %>
-                      <%= ds.object.name %>
+                      &nbsp;&nbsp;&nbsp; 
+                      <p><%= ds.check_box %><%= ds.object.name %>: <%= ds.object.duration %> minutos</p>
                       <span class="chekmark"></span>
                       <br>
                       <br>

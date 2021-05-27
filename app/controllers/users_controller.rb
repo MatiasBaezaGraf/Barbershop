@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @users = User.all
+    if params[:phone_number] && params[:first_name]
+      @users = User.find_everything(params[:phone_number], params[:first_name])
+    else
+      @users = User.all
+    end
   end
 
   def show

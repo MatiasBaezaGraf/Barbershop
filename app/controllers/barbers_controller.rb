@@ -42,8 +42,8 @@ class BarbersController < ApplicationController
   def update
     respond_to do |format|
       if @barber.update(barber_params)
-        format.html { redirect_to @barber, notice: "Barber was successfully updated." }
-        format.json { render :show, status: :ok, location: @barber }
+        format.html { redirect_to barbers_path }
+        format.json { render :index, status: :ok, location: @barber }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @barber.errors, status: :unprocessable_entity }

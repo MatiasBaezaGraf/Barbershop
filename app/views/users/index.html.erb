@@ -13,6 +13,17 @@
   <div class = "secondary-head-1">
     <br>
     <h1 class = "titles">Usuarios</h1>
+    <div class = "filtros">
+      <div class = "filtros-t">
+        <h4 class = "filtros-texto">Filtros</h4>
+      </div>
+      <form action="/users" method="GET">
+        <input class = "input" type="text" name="first_name" placeholder="Nombre" />
+        <input class = "input" type="number" name="phone_number" placeholder="Número de teléfono" />
+        <input class = "but-login" type="submit", value="Buscar Usuarios" />
+      </form>
+    </div>
+    <br>
     <br>
   </div>
 
@@ -52,6 +63,7 @@
                     <h4 class = "dropdown-title">Admin:</h4>
                     <h5 class = "dropdown-item"><%= user.crack(user) %></h5>
                     <br>
+                    <h5 class = "dropdown-delete"><%= link_to 'Editar', edit_user_path(user), class: "but-delete-b" %></h5>
                     <h5 class = "dropdown-delete"><%= link_to "Eliminar usuario", user, method: :delete, data: { confirm: "Are you sure"}, class: "but-delete-u" %></h5>
                   </div>
               </td>
@@ -107,6 +119,10 @@
     for(i = 0; i < cols.length; i++) {
       cols[i].style.backgroundColor = '#141414';
       cols[i].style.color = 'blanchedalmond';
+    }
+    var cols = document.getElementsByClassName('filtros');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = '#242424';
     }
     var cols = document.getElementsByClassName('navbar2');
     for(i = 0; i < cols.length; i++) {

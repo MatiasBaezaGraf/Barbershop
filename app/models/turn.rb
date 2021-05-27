@@ -20,7 +20,6 @@ class Turn < ApplicationRecord
     weekends = []
     today = Date.today
     tomorrow = Date.new(2021,05,12)
-    puts "sssssssssssssssssssssssssssssseekends"
     weekends.push(tomorrow)
 
     for i in 0..14
@@ -46,14 +45,71 @@ class Turn < ApplicationRecord
       end
     end
     times = []
-    busy = chosen.busy(barber, chosen.time.strftime("%Y-%m-%d"))
-    puts ("Busyyyyyyyyyyyyyyyyyyyyyyyy #{busy}")
     now = chosen.time + 8.hours
     for i in 0..20
       nextturn = now + (15*i).minutes
       times.push(nextturn)
     end
     times
+  end
+
+  def self.posibles(busy, times, day)
+    puts "Day: #{day}"
+    libres = times
+    for i in busy
+      index = 0
+      if i[0].strftime("%Y-%M-%d") == day.strftime("%Y-%M-%d")
+        puts i
+        for t in libres
+          print "TTTTTTTTTTTTTTTTTTTTTTT: #{t.strftime("%H:%M")}, #{i[0].strftime("%H:%M")}"
+          print "Libresssssssssss: #{libres[index]}"
+          index = index + 1
+        end
+      end
+    end
+    puts "Times: #{times}"
+  end
+
+  def self.find_by_client(client)
+    turns = []
+    clientup = client.upcase
+
+    Turn.all.each do |t|
+      if t.client.upcase.include? clientup
+        turns.push(t)
+      end
+    end
+    
+    turns
+  end
+  
+  def self.find_by_range(from, to)
+    turns = []
+    
+    if false
+      turns = Turn.all
+    else
+      puts 678
+      Turn.all.each do |t|
+        if t.time >= from && t.time <= to
+          turns.push(t)
+        end
+      end
+    end
+
+    turns
+  end
+
+  def self.find_by_day(selecteday)
+    turns = []
+
+    Turn.all.each do |t|
+      if t.time.strftime("%Y-%m-%d") == selecteday
+        turns.push(t)
+      end
+    end
+
+    turns
   end
 
   def self.work_or_free(id)
@@ -67,6 +123,7 @@ class Turn < ApplicationRecord
     end
 
     busy = []
+    modulecounter = 0
 
     for t in Turn.all
       if t.barber == barber
@@ -108,34 +165,6 @@ class Turn < ApplicationRecord
     end
     t = [hour, min]
     t
-  end
-
-  def busy(barber_id, day)
-    busy = []
-    turns = Turn.where(:barber_id => barber_id).order(time: :asc)
-    
-    for t in turns
-        count = []
-        i = Time.new(2000, 01, 01)
-        e = Time.new(2000, 01, 01)
-        duration = [t.count_hours[0], t.count_hours[1]]
-        if t.barber_id == barber_id and t.time.strftime("%Y-%m-%d").to_date == day.to_date 
-            i = i + (t.time.hour).hour
-            i = i + (t.time.min).minutes
-            e = e + (t.time.hour + duration[0]).hour
-            e = e + (t.time.min + duration[1]).minutes
-            count.push(i)
-            count.push(e)               
-        end
-        if count.blank?
-            break
-        else
-            busy.push(count)
-        end
-    end
-
-    busy
-    
   end
 
 end

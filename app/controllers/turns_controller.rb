@@ -6,19 +6,39 @@ class TurnsController < ApplicationController
 
   # GET /turns or /turns.json
   def index
-    for t in Turn.all
-      if t.p != 1
-        for i in HasTurn.all
-          if i.turn_id == t.id
-            i.destroy
-          end
-        end
+    #for t in Turn.all
+    #  if t.p != 1
+    #    for i in HasTurn.all
+    #      if i.turn_id == t.id
+    #        i.destroy
+    #      end
+    #   end
 
-        t.destroy
+    #   t.destroy
+    #  end
+    #end
+
+    
+    if params[:from] && params[:to]
+      if params[:from].blank? && params[:to].blank?
+        @turns = Turn.all
+      elsif params[:from].blank?
+        redirect_to turns_path, :notice => "La fecha 'Desde' no puede estar en blanco"
+      elsif params[:to].blank?
+        redirect_to turns_path, :notice => "La fecha 'Hasta' no puede estar en blanco"
+      elsif params[:from] >= params[:to]
+        redirect_to turns_path, :notice => "La fecha 'Desde' debe ser anterior a la fecha 'Hasta'"
+      else
+        @turns = Turn.find_by_range(params[:from], params[:to])
       end
+    elsif params[:client]
+      @turns = Turn.find_by_client(params[:client])
+    elsif params[:selecteday]
+      @turns = Turn.find_by_day(params[:selecteday])
+    else
+      @turns = Turn.all
     end
-
-    @turns = Turn.all
+      
   end
 
   # GET /turns/1 or /turns/1.json

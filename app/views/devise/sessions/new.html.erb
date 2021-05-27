@@ -30,7 +30,7 @@
 
         <br>
 
-        <div class="field">
+        <div id="nuevacuenta">
           <%= f.password_field :password, autocomplete: "current-password", required: true, placeholder: "Contraseña", class: 'input' %>
         </div>
 
@@ -39,8 +39,9 @@
         <br>
         <br>
 
-        <div class="actions">
+        <div id="action">
           <%= f.submit "INGRESAR", class: 'but-login' %>
+          <a class ="but-scroll" href="#nuevacuenta">⮯</a> 
         </div>
 
         <br>
@@ -78,6 +79,31 @@
     </div>
 
 <script>
+
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
 
 if(localStorage.getItem('theme') == 'dark'){
   document.body.style.background = "black";
