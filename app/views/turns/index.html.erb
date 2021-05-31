@@ -8,6 +8,10 @@
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" height="100%" >
   <div class = "navbar2">
     <%= link_to "Atras ⮌", home_path, class: "but-back" %>
+    <%= link_to "Barberos", barbers_path, class: "but-resources" %>
+    <button class = "but-resources-selected">Turnos</button>
+    <%= link_to "Usuarios", users_index_path, class: "but-resources" %>
+    <%= link_to "Servicios", services_path, class: "but-resources" %>
   </div>
 
   <div class = "secondary-head-1">
@@ -23,27 +27,31 @@
       <div class = "filtros-col">
         <form action="/turns" method="GET">
           <input class = "input" type="text" name="client" placeholder="Cliente" />  
-          <input class = "but-login" type="submit", value="Buscar por cliente" />
+          <input class = "but-login" type="submit", value="🔍cliente" />
         </form>
       </div>
       <div class = "filtros-col">
         <form action="/turns" method="GET">  
           <input placeholder="Fecha" class="input" type="text" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" name = "selecteday">
-          <input class = "but-login" type="submit", value="Buscar por día" />
+          <input class = "but-login" type="submit", value="🔍día" />
+        </form>
+      </div>
+      <div class = "filtros-col">
+        <form action="/turns" method="GET">  
+          <select class = "input-esp" name="barber_id">  
+            <option disabled selected value> Elegir... </option> 
+              <% Barber.all.each_with_index do | t, index | %>
+              <option value="<%= t.id %>" <% t.id.to_s == @barber_id ? "selected" : "" %>> <%= t.first_name%> </option>
+            <% end -%>
+          </select>
+          <input class = "but-login" type="submit", value="🔍barbero" />
         </form>
       </div>
       <div class = "filtros-col">
         <form action="/turns" method="GET">  
           <input placeholder="Fecha desde" class="input" type="text" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" name = "from">
           <input placeholder="Fecha hasta" class="input" type="text" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" name = "to">
-          <input class = "but-login" type="submit", value="Buscar por rango" />
-        </form>
-      </div>
-      <div class = "filtros-col">
-        <form action="/turns" method="GET">  
-          <input placeholder="Fecha desde" class="input" type="text" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" name = "from">
-          <input placeholder="Fecha hasta" class="input" type="text" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" name = "to">
-          <input class = "but-login" type="submit", value="Buscar por rango" />
+          <input class = "but-login" type="submit", value="🔍rango" />
         </form>
       </div>
       <br>
@@ -64,11 +72,15 @@
         <th colspan="3"></th>
       </tr>
     </thead>
-
+ 
     <tbody>
       <% @turns.reverse_each do |turn| %>
         <tr>
+        <% if turn.time %>
           <td class = "vital"><%= turn.time.strftime("%a %d/%m %H:%M") %></td>
+        <% else %>
+          <td class = "vital"> Indefinido </td>
+        <% end %>
           <td class = "vital"><%= turn.client %></td>
           <td class = "vital-no"><%= turn.barber.first_name %></td>
           <td class = "vital-no"><%= turn.count_hours %> minutos</td>
@@ -139,6 +151,10 @@
     var cols = document.getElementsByClassName('filtros-turno');
     for(i = 0; i < cols.length; i++) {
       cols[i].style.backgroundColor = '#242424';
+    }
+    var cols = document.getElementsByClassName('filtros-col');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = 'rgb(73, 73, 73)';
     }
     var cols = document.getElementsByClassName('navbar2');
     for(i = 0; i < cols.length; i++) {

@@ -6,7 +6,7 @@ class TurnsController < ApplicationController
 
   # GET /turns or /turns.json
   def index
-    #for t in Turn.all
+    # for t in Turn.all
     #  if t.p != 1
     #    for i in HasTurn.all
     #      if i.turn_id == t.id
@@ -16,7 +16,7 @@ class TurnsController < ApplicationController
 
     #   t.destroy
     #  end
-    #end
+    # end
 
     
     if params[:from] && params[:to]
@@ -79,9 +79,9 @@ class TurnsController < ApplicationController
     respond_to do |format|
       if @turn.save
         if @turn.edit.blank?
-          format.html { redirect_to edit0_url(:id => @turn), notice: "Turn was successfully created." }
+          format.html { redirect_to edit0_url(:id => @turn) }
         else
-          format.html { redirect_to edit2_url(:id => @turn), notice: "Turn was successfully created." }
+          format.html { redirect_to edit2_url(:id => @turn) }
         end
         format.json { render :show, status: :created, location: @turn }
       else
@@ -94,7 +94,6 @@ class TurnsController < ApplicationController
   # PATCH/PUT /turns/1 or /turns/1.json
   def update
     respond_to do |format|
-      puts @turn.edit
       if @turn.edit == 1
         @turn.edit = 0
         @turn.p = 1

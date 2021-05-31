@@ -53,21 +53,53 @@ class Turn < ApplicationRecord
     times
   end
 
-  def self.posibles(busy, times, day)
-    puts "Day: #{day}"
+  def self.posibles(busy, times, day, d)
     libres = times
+    toDelete = []
+    inicio = []
+    final = []
+    duration = d/15
+    index = 0
     for i in busy
-      index = 0
-      if i[0].strftime("%Y-%M-%d") == day.strftime("%Y-%M-%d")
-        puts i
-        for t in libres
-          print "TTTTTTTTTTTTTTTTTTTTTTT: #{t.strftime("%H:%M")}, #{i[0].strftime("%H:%M")}"
-          print "Libresssssssssss: #{libres[index]}"
+      if i[0].strftime("%Y-%m-%d") == day.strftime("%Y-%m-%d")
+        index = libres.index(i[0])
+
+        puts "LIBRES: #{inicio[0]}, #{i[0]}"
+
+        
+        inicio.push(libres[libres.index(i[0]) + i[1]])
+        
+
+        for t in (1..i[1]).step(1)
+          toDelete.push(libres[index])
           index = index + 1
         end
       end
     end
-    puts "Times: #{times}"
+    final.push(libres[libres.length - 2])
+    puts "INICIOOOOOOOOOOOO: #{inicio}"
+    puts "FiNALLLLLLLLLLLLLLL: #{final}"
+    for i in inicio
+      modules = libres.index(final[inicio.index(i)]) - libres.index(i) + 1
+
+      if modules >= duration
+        ind = libres.index(final[inicio.index(i)]) - duration + 2
+        for m in 1..duration
+          toDelete.push(libres[ind])
+          ind = ind + 1
+        end
+      else
+        ind = libres.index(i)
+        for m in 1..modules
+          toDelete.push(libres[ind])
+          ind = ind + 1
+        end
+      end
+
+      # for d in toDelete
+      #   libres.delete_if {|element| element == d}
+      # end
+    end
   end
 
   def self.find_by_client(client)
@@ -126,7 +158,7 @@ class Turn < ApplicationRecord
     modulecounter = 0
 
     for t in Turn.all
-      if t.barber == barber
+      if t.barber == barber and t.edit == 0
         busy.push([t.time, t.count_hours/15])
       end
     end
@@ -146,25 +178,7 @@ class Turn < ApplicationRecord
     end
 
     count
-    #t = reformat(count)
-  end
 
-  def reformat(count)
-    t = []
-    hour = 0
-    min = 0
-    loop do
-      if count >= 60
-        hour = hour + 1
-        min = min - 60
-        count = count - 60
-      else
-        min = count
-        break
-      end
-    end
-    t = [hour, min]
-    t
   end
 
 end

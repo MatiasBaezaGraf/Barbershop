@@ -15,82 +15,55 @@
 
         <h3 class = "paragraph">Fecha</h3>
       
-        <table class = "calendar">
-          <thead>
-            <tr id = "cabecera">
-              <th>D</th>
-              <th>L</th>
-              <th>M</th>
-              <th>X</th>
-              <th>J</th>
-              <th>V</th>
-              <th>S</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr> <!-- Primera fila -->
-              <% todayyy = Date.today.strftime("%w").to_i%>
-              <% daycount = 0%>
+        <div class = "calendar-container">
+          <table class = "calendar">
+            <thead>
+              <tr id = "cabecera">
+                <th>D</th>
+                <th>L</th>
+                <th>M</th>
+                <th>X</th>
+                <th>J</th>
+                <th>V</th>
+                <th>S</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr> <!-- Primera fila -->
+                <% todayyy = Date.today.strftime("%w").to_i%>
+                <% daycount = 0%>
 
-              <% case todayyy
-              when 0%>
-                <!-- Colspan 0 no funciona en Chrome -->
-              <% when 1%>
-                <td colspan = '1' ></td>
-              <% when 2%>
-                <td colspan = '2' ></td>
-              <% when 3%>
-                <td colspan = '3' ></td>
-              <% when 4%>
-                <td colspan = '4' ></td>
-              <% when 5%>
-                <td colspan = '5' ></td>
-              <% when 6%>
-                <td colspan = '6' ></td>
-              <% else %>
-                <td colspan = '0' ></td>
-              <% end %>
-
-              <td id = "today"><%= form.label :time, Date.today.strftime("%d") %></td>
-
-              <% @days.each do |moment|%>
-                <% coincidence = 0%>
-                <% if todayyy == 6%>
-                  <%break%>
-                <% end%>
-                <% @weekends.each do |holiday|%>
-                  <% if moment.strftime("%d") == holiday.strftime("%d")%>
-                    <% coincidence = 1 %>
-                  <% end %>
-                <% end %> <!-- Cierre Weekends each do -->
-                <% if coincidence == 0%>
-                  <td>
-                    <div class="radio-toolbar">
-                        <%= form.radio_button :time, moment%> 
-                        <%= form.label :time, moment.strftime("%d"), :value => moment %>
-                    </div>
-                  </td>
+                <% case todayyy
+                when 0%>
+                  <!-- Colspan 0 no funciona en Chrome -->
+                <% when 1%>
+                  <td colspan = '1' ></td>
+                <% when 2%>
+                  <td colspan = '2' ></td>
+                <% when 3%>
+                  <td colspan = '3' ></td>
+                <% when 4%>
+                  <td colspan = '4' ></td>
+                <% when 5%>
+                  <td colspan = '5' ></td>
+                <% when 6%>
+                  <td colspan = '6' ></td>
                 <% else %>
-                  <td class = "disabled"><%= form.label :time, moment.strftime("%d") %></td>
+                  <td colspan = '0' ></td>
                 <% end %>
-                <%daycount = daycount + 1%>
-                <% if moment.strftime("%w").to_i == 6%>
-                  <%break%>
-                <% end%>
-              <% end %> <!-- Cierre Days each do -->
-            </tr> <!-- Cierre primera fila -->
 
-            <tr> <!-- Segunda fila -->
-              <% secondrowcount = 0 %>
+                <td id = "today"><%= form.label :time, Date.today.strftime("%d") %></td>
 
-              <% @days.each do |moment|%>
-                <% coincidence = 0%>
-                <% @weekends.each do |holiday|%>
-                  <% if moment.strftime("%d") == holiday.strftime("%d")%>
-                    <% coincidence = 1 %>
-                  <% end %>
-                <% end %> <!-- Cierre Weekends each do -->
-                <% if secondrowcount >= daycount%>
+                <% @days.each do |moment|%>
+                  <% coincidence = 0%>
+                  <% if todayyy == 6%>
+                    <%break%>
+                  <% end%>
+                  <% @weekends.each do |holiday|%>
+                    <% if moment.strftime("%d") == holiday.strftime("%d")%>
+                      <% coincidence = 1 %>
+                    <% end %>
+                  <% end %> <!-- Cierre Weekends each do -->
                   <% if coincidence == 0%>
                     <td>
                       <div class="radio-toolbar">
@@ -105,42 +78,71 @@
                   <% if moment.strftime("%w").to_i == 6%>
                     <%break%>
                   <% end%>
-                <%end%>
-                <%secondrowcount = secondrowcount + 1%>
-              <% end %> <!-- Cierre Days each do -->
-            </tr> <!-- Cierre segunda fila -->
+                <% end %> <!-- Cierre Days each do -->
+              </tr> <!-- Cierre primera fila -->
 
-            <tr> <!-- Tercera fila -->
-              <% thirdrowcount = -1 %>
+              <tr> <!-- Segunda fila -->
+                <% secondrowcount = 0 %>
 
-              <% @days.each do |moment|%>
-                <% coincidence = 0%>
-                <% @weekends.each do |holiday|%>
-                  <% if moment.strftime("%d") == holiday.strftime("%d")%>
-                    <% coincidence = 1 %>
-                  <% end %>
-                <% end %> <!-- Cierre Weekends each do -->
-                <% if thirdrowcount >= secondrowcount%>
-                  <% if coincidence == 0%>
-                    <td>
-                      <div class="radio-toolbar">
-                          <%= form.radio_button :time, moment%> 
-                          <%= form.label :time, moment.strftime("%d"), :value => moment %>
-                      </div>
-                    </td>
-                  <% else %>
-                    <td class = "disabled"><%= form.label :time, moment.strftime("%d") %></td>
-                  <% end %>
-                  <%daycount = daycount + 1%>
-                  <% if moment.strftime("%w").to_i == 6%>
-                    <%break%>
-                  <% end%>
-                <%end%>
-                <%thirdrowcount = thirdrowcount + 1%>
-              <% end %> <!-- Cierre Days each do -->
-            </tr> <!-- Cierre tercera fila -->
-          </tbody>
-        </table>
+                <% @days.each do |moment|%>
+                  <% coincidence = 0%>
+                  <% @weekends.each do |holiday|%>
+                    <% if moment.strftime("%d") == holiday.strftime("%d")%>
+                      <% coincidence = 1 %>
+                    <% end %>
+                  <% end %> <!-- Cierre Weekends each do -->
+                  <% if secondrowcount >= daycount%>
+                    <% if coincidence == 0%>
+                      <td>
+                        <div class="radio-toolbar">
+                            <%= form.radio_button :time, moment%> 
+                            <%= form.label :time, moment.strftime("%d"), :value => moment %>
+                        </div>
+                      </td>
+                    <% else %>
+                      <td class = "disabled"><%= form.label :time, moment.strftime("%d") %></td>
+                    <% end %>
+                    <%daycount = daycount + 1%>
+                    <% if moment.strftime("%w").to_i == 6%>
+                      <%break%>
+                    <% end%>
+                  <%end%>
+                  <%secondrowcount = secondrowcount + 1%>
+                <% end %> <!-- Cierre Days each do -->
+              </tr> <!-- Cierre segunda fila -->
+
+              <tr> <!-- Tercera fila -->
+                <% thirdrowcount = -1 %>
+
+                <% @days.each do |moment|%>
+                  <% coincidence = 0%>
+                  <% @weekends.each do |holiday|%>
+                    <% if moment.strftime("%d") == holiday.strftime("%d")%>
+                      <% coincidence = 1 %>
+                    <% end %>
+                  <% end %> <!-- Cierre Weekends each do -->
+                  <% if thirdrowcount >= secondrowcount%>
+                    <% if coincidence == 0%>
+                      <td>
+                        <div class="radio-toolbar">
+                            <%= form.radio_button :time, moment%> 
+                            <%= form.label :time, moment.strftime("%d"), :value => moment %>
+                        </div>
+                      </td>
+                    <% else %>
+                      <td class = "disabled"><%= form.label :time, moment.strftime("%d") %></td>
+                    <% end %>
+                    <%daycount = daycount + 1%>
+                    <% if moment.strftime("%w").to_i == 6%>
+                      <%break%>
+                    <% end%>
+                  <%end%>
+                  <%thirdrowcount = thirdrowcount + 1%>
+                <% end %> <!-- Cierre Days each do -->
+              </tr> <!-- Cierre tercera fila -->
+            </tbody>
+          </table>
+        </div>
 
         <% puts @weekends %>
 
@@ -158,7 +160,7 @@
           <h3 class = "paragraph">Servicios</h3>
           <div class="paragraph-f">
             <br>
-            <%= form.collection_check_boxes(:service_ids, Service.all, :id, :name, {}, {multiple: true}) do |ds| %>
+            <%= form.collection_check_boxes(:service_ids, Service.joins(:barbers).where(:barbers => {:id => @turn.barber_id}), :id, :name, {}, {multiple: true}) do |ds| %>
                     <%= ds.label(class:"container") do %>
                       &nbsp;&nbsp;&nbsp; 
                       <p><%= ds.check_box %><%= ds.object.name %>: <%= ds.object.duration %> minutos</p>

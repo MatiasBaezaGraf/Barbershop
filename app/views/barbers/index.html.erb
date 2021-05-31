@@ -8,6 +8,10 @@
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" height="100%" >
   <div class = "navbar2">
     <%= link_to "Atras ⮌", home_path, class: "but-back" %>
+    <button class = "but-resources-selected">Barberos</button>
+    <%= link_to "Turnos", turns_path, class: "but-resources" %>
+    <%= link_to "Usuarios", users_index_path, class: "but-resources" %>
+    <%= link_to "Servicios", services_path, class: "but-resources" %>
   </div>
 
   <div class = "secondary-head-1">
@@ -41,10 +45,12 @@
                     <br>
                     <h4 class = "dropdown-title">Descripción</h4>
                     <h5 class = "dropdown-item"><%= barber.description %></h5>
+                    <h5 class = "dropdown-delete"><%= link_to 'Agenda', barber, class: "but-delete-s" %></h5>
                     <h5 class = "dropdown-delete"><%= link_to 'Editar barbero', edit_barber_path(barber), class: "but-delete-b" %></h5>
                     <h5 class = "dropdown-delete"><%= link_to "Eliminar barbero", barber, method: :delete, data: { confirm: "Are you sure"}, class: "but-delete-u" %></h5>
                   </div>
-              </td>
+              </td> 
+            <td class = "vital-no"><%= link_to 'Agenda', barber, class: "but-delete-s" %></td>
             <td class = "vital-no"><%= link_to 'Editar', edit_barber_path(barber), class: "but-delete-b" %></td>
             <td class = "vital-no"><%= link_to 'Eliminar', barber, method: :delete, data: { confirm: 'Are you sure?' }, class: "but-delete-u" %></td>
           </tr>
@@ -78,7 +84,7 @@
 </body>
 
 <script>
-
+ 
   fondo()
 
   function fondo() {

@@ -163,7 +163,9 @@
     position: absolute;
     bottom: 0px;
 }
-.input{
+
+
+[class*="input"]{
     width: 75%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -174,10 +176,52 @@
     font-style:normal;
     font-size: 110%;
 }
+.input-esp{
+    padding: 11px 20px;
+}
 .input:focus{
     outline: none;
     border-bottom: 2px solid rgb(34, 20, 0);
     background-color: rgb(255, 226, 183);
+}
+
+.schedule{
+    background-color: rgb(216, 198, 172);
+    color: black;
+    padding: 5%;
+    text-align: center;
+}
+.schedule-col{
+    float:left;
+    width: 33.3%;
+}
+[class*="time"]{
+    background-color: rgb(255, 255, 255);
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    width: 90%;
+    /*margin-right: 0.7vw;
+    margin-left: 0.7vw;*/
+    padding: 5%;
+}
+.time-free{
+    background-color: rgb(92, 92, 92);
+    color: rgb(0, 0, 0);
+}
+.time-occupied{
+    background-color: rgb(117, 0, 0);
+    color: rgb(255, 255, 255);
+}
+.time-occupied-head{
+    background-color: rgb(187, 0, 0);
+    color: rgb(255, 255, 255);
+}
+.time-header{
+    background-color: rgb(63, 41, 0);
+    color: blanchedalmond;
+}
+.fill{
+    color: rgb(216, 198, 172);
 }
 
 
@@ -271,17 +315,13 @@
 .filtros-turno{
     background-color: rgb(194, 174, 145);
     padding: 10px;
-    margin: 0.5%;
+    margin: 2%;
 }
 
 .filtros-col{
-    background-color: rgb(247, 122, 60);
+    background-color: rgb(158, 139, 113);
     padding: 10px;
-    max-width:20%;
-    display: inline-flex;
-    position: relative;
-    height: 200px;
-    margin-bottom: 50px;
+    margin-bottom: 8px;
 }
 .filtros-t{
     padding-left: 5%;
@@ -367,6 +407,9 @@
     padding: 1.5vw;
 }
 
+.calendar-container{
+    width: 60%;
+}
 .calendar{
     width: 100vw;
     background-color: rgb(34, 20, 0);
@@ -530,6 +573,28 @@
     background-color: rgb(49, 30, 0);
     border: 2px solid white;
     border-left: 0px solid white;
+}
+
+.but-resources{
+    margin-right: 0%;
+    background-color: rgb(44, 29, 0);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(255, 255, 255);
+    padding-left: 0%;
+    padding-right: 0%;
+}
+.but-resources:hover{
+    margin-right: 0%;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
+}
+.but-resources-selected{
+    margin-right: 0%;
+    background-color: blanchedalmond;
+    color: rgb(44, 29, 0);
+    border: 2px solid blanchedalmond;
+    display: none;
 }
 
 .but-nav{
@@ -722,6 +787,8 @@
     .but-reservation{padding : 10px; margin-right: 1.5%;}
     .but-nav{padding:0; margin-right: 1.5%; display: inline;}
     .but-back{padding: 10px; margin-right: 0%;}
+    .but-resources{padding: 10px; margin-right: 0%;}
+    .but-resources-selected{padding: 10px; margin-right: 0%; display: inline;}
     .but-login{padding-left: 8%; padding-right: 8%; padding-top: 6px; padding-bottom: 6px;}
     .but-scroll{padding-left: 2%; padding-right: 2%; padding-top: 6px; padding-bottom: 6px;}
     .but-dark-l{visibility:visible; display: inline;}
@@ -729,10 +796,12 @@
     .index th{padding-top: 15px; padding-bottom: 15px;}
     .index td{padding-top: 15px; padding-bottom: 15px;}
     .filtros{margin-left: 20%; margin-right: 20%;}
+    .filtros-col{max-width:21%; display: inline-flex; height: 200px; margin-bottom: 50px;}
+    .schedule-col{width:33.3%;}
     .dropdown{display: none;}
     .we{font-size: 1.225vw;}
     #y{display: inline;}
-    .calendar{width: 37.4vw; border-collapse: collapse;}
+    .calendar{width: 166.80%; border-collapse: collapse;}
     .radio-toolbar label{padding: 0.65vw; font-size: 1.38vw;}
     .disabled{padding: 0.65vw; font-size: 1.38vw;}
     #today{padding: 0.65vw; font-size: 1.38vw;}

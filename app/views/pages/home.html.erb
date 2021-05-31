@@ -237,6 +237,17 @@
               But overlook Valtteri Bottas at your peril, the Finn was very quick here last season and yesterday, he was right back to his best form.
             </p>
           </div>
+
+          <div id = "div4" class = "divisor" style="background-color:rgb(224, 207, 181); float:left; width:100%">
+            <br>
+            <br>
+            <%= link_to "Reservar Turno", new_turn_path, class: "but-reservation" %>
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+
         </div> 
     
         <div class = "tail">
@@ -427,6 +438,8 @@ function darkMode() {
 
   document.getElementById("div3").style.backgroundColor = '#212121';
 
+  document.getElementById("div4").style.backgroundColor = '#141414';
+
   document.getElementById("x").style.color = '#141414';
 
   document.getElementById("y").style.color = '#212121';
@@ -566,6 +579,8 @@ function lightMode() {
   }
 
   document.getElementById("div3").style.backgroundColor = 'blanchedalmond';
+
+  document.getElementById("div4").style.backgroundColor = 'rgb(224, 207, 181)';
 
   document.getElementById("x").style.color = 'rgb(224, 207, 181)';
 

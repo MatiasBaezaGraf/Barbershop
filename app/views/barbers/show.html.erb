@@ -1,19 +1,231 @@
-<p id="notice"><%= notice %></p>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
 
-<p>
-  <strong>First name:</strong>
-  <%= @barber.first_name %>
-</p>
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @barber.last_name %>
-</p>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" textalign="center">
 
-<p>
-  <strong>Description:</strong>
-  <%= @barber.description %>
-</p>
+  <div class = "navbar3">
+        <%= link_to "Atras ⮌", barbers_path, class: "but-back" %>
+  </div>
 
-<%= link_to 'Edit', edit_barber_path(@barber) %> |
-<%= link_to 'Back', barbers_path %>
+  <div class = 'alignment'>
+    <div class = 'body-login'>
+
+    <br>
+
+   
+
+    <!-- A continuación verificamos si alguno de los días que se tienen en cuenta son libres o no -->
+
+    <% todayfree = 0%>
+    <% tomorrowfree = 0%>
+    <% afterfree = 0%>
+
+    <% puts "Poistaa", @free_days.any?%>
+
+    <% if @free_days.any? %>
+      <% @free_days.each do |free| %>
+        <% if free.to_s == Date.today.strftime("%Y-%m-%d")%>
+          <% todayfree = 1%>
+        <% end %>
+        <% if free.to_s == (Date.today + 1.day).strftime("%Y-%m-%d")%>
+          <% tomorrowfree = 1%>
+        <% end %>
+        <% if free.to_s == (Date.today + 2.days).strftime("%Y-%m-%d")%>
+          <% afterfree = 1%>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if Date.today.strftime("%a") == "Sun" || Date.today.strftime("%a") == "Sat" %>
+      <% todayfree = 1%>
+    <% end %>
+    
+    <h2 class = "titles-secondary">Horarios</h2>
+
+    <div class = "schedule">
+
+      <div class = "time">Disponible para reserva</div>
+      <div class = "time-occupied">Turno reservado</div>
+      <div class = "time-free">Día completamente libre</div>
+
+      <br>
+
+      <div class = "schedule-col">
+        <div class = "time-header"> HOY </div>
+        <% ocp_counter = 0 %> <!-- Cuenta la duración del turno en el caso de que exista un turno en el tiempo especificado -->
+        <% @schedule.each do |time| %>
+          <% if todayfree == 0 %>
+            <% ocp_advisor = 0 %> <!-- Avisa si existe o no un turno que comienza en ese horario -->
+            <% ocp_name = "✖"%>
+            <% @occupied_today.each do |oc|%>
+              <% if oc[0] == time%> <!-- Se compara cada horario posible con un vector de turnos para este barbero para esta fecha para ver si se solapan en algún punto, de ser así se pone el flag en 1 -->
+                <% ocp_advisor = 1 %>
+                <% ocp_counter = oc[1]%>
+                <% ocp_name = "" %>
+                <% oc[2].each do |service| %>
+                  <% ocp_name.concat("-", service.name, "-")%>
+                <% end %>
+                <% puts "Helloss", oc[3], ocp_name%>
+              <% end %>
+            <% end %>
+            <% if ocp_counter == 0 %>
+              <% if ocp_advisor == 0%> <!-- Si el flag está en 0, está libre el horario, de lo contrario esta ocupado -->
+                <div class = "time"> <%= time %> </div>
+              <% else %>
+                <div class = "time-occupied"> <%= time %> </div>
+              <% end %>
+            <% else %>
+              <% if ocp_name == "✖"%>
+                <div class = "time-occupied"> -<%= time %>- </div>
+              <% else %>
+                <div class = "time-occupied-head"> <%= ocp_name %> </div>
+              <% end %>
+              <% ocp_counter = ocp_counter - 1%>
+            <% end %>
+          <% else %>
+            <div class = "time-free"> Libre </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class = "schedule-col">
+        <div class = "time-header"> MAÑANA </div>
+        <% ocp_counter = 0 %> <!-- Cuenta la duración del turno en el caso de que exista un turno en el tiempo especificado -->
+        <% @schedule.each do |time| %>
+          <% if tomorrowfree == 0 %>
+            <% ocp_advisor = 0 %> <!-- Avisa si existe o no un turno que comienza en ese horario -->
+            <% ocp_name = "✖"%>
+            <% @occupied_tomorrow.each do |oc|%>
+              <% if oc[0] == time%> <!-- Se compara cada horario posible con un vector de turnos para este barbero para esta fecha para ver si se solapan en algún punto, de ser así se pone el flag en 1 -->
+                <% ocp_advisor = 1 %>
+                <% ocp_counter = oc[1]%>
+                <% ocp_name = ""%>
+                <% oc[2].each do |service| %>
+                  <% ocp_name.concat("-", service.name, "-")%>
+                <% end %>
+                <% puts "Helloss", ocp_name%>
+              <% end %>
+            <% end %>
+            <% if ocp_counter == 0 %>
+              <% if ocp_advisor == 0%> <!-- Si el flag está en 0, está libre el horario, de lo contrario esta ocupado -->
+                <div class = "time"> <%= time %> </div>
+              <% else %>
+                <div class = "time-occupied"> <%= time %> </div>
+              <% end %>
+            <% else %>
+              <% if ocp_name == "✖"%>
+                <div class = "time-occupied"> -<%= time %>- </div>
+              <% else %>
+                <div class = "time-occupied-head"> <%= ocp_name %> </div>
+              <% end %>
+              <% ocp_counter = ocp_counter - 1%>
+            <% end %>
+          <% else %>
+            <div class = "time-free"> Libre </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class = "schedule-col">
+        <div class = "time-header"> PASADO </div>
+        <% ocp_counter = 0 %> <!-- Cuenta la duración del turno en el caso de que exista un turno en el tiempo especificado -->
+        <% @schedule.each do |time| %>
+          <% if afterfree == 0 %>
+            <% ocp_advisor = 0 %> <!-- Avisa si existe o no un turno que comienza en ese horario -->
+            <% ocp_name = "✖"%>
+            <% @occupied_after.each do |oc|%>
+              <% if oc[0] == time%> <!-- Se compara cada horario posible con un vector de turnos para este barbero para esta fecha para ver si se solapan en algún punto, de ser así se pone el flag en 1 -->
+                <% ocp_advisor = 1 %>
+                <% ocp_counter = oc[1]%>
+                <% ocp_name = ""%>
+                <% oc[2].each do |service| %>
+                  <% ocp_name.concat("-", service.name, "-")%>
+                <% end %>
+              <% end %>
+            <% end %>
+            <% if ocp_counter == 0 %>
+              <% if ocp_advisor == 0%> <!-- Si el flag está en 0, está libre el horario, de lo contrario esta ocupado -->
+                <div class = "time"> <%= time %> </div>
+              <% else %>
+                <div class = "time-occupied"> <%= time %> </div>
+              <% end %>
+            <% else %>
+              <% if ocp_name == "✖"%>
+                <div class = "time-occupied"> -<%= time %>- </div>
+              <% else %>
+                <div class = "time-occupied-head"> <%= ocp_name %> </div>
+              <% end %>
+              <% ocp_counter = ocp_counter - 1%>
+            <% end %>
+          <% else %>
+            <div class = "time-free"> Libre </div>
+          <% end %>
+        <% end %>
+      </div>
+    
+      <div class = "fill">Hola</div>
+    <div> 
+
+    <br>
+    <br>
+
+    </div>
+  </div>
+
+</body>
+
+<script>
+
+if(localStorage.getItem('theme') == 'dark'){
+  document.body.style.background = "#212121";
+  var cols = document.getElementsByClassName('navbar3');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black';
+  }
+  var cols = document.getElementsByClassName('input');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.color = 'white';
+    cols[i].style.borderColor = 'blanchedalmond';
+  }
+
+  var cols = document.getElementsByClassName('paragraph-f');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#111111';
+    cols[i].style.color = 'white';
+  }
+  
+  var cols = document.getElementsByClassName('body-login');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.borderColor = "black" 
+    cols[i].style.color = 'white'; 
+  }
+  var cols = document.getElementsByClassName('schedule');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#141414';
+  }
+  var cols = document.getElementsByClassName('fill');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.color = '#141414';
+  }
+  var cols = document.getElementsByClassName('tail-tail');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = 'black'; 
+    cols[i].style.color = 'white'; 
+  }
+  var cols = document.getElementsByClassName('tail-head');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#212121';
+    cols[i].style.color = 'white';  
+  }
+}
+  
+</script>
+
+
+
