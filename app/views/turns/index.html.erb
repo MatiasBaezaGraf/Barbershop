@@ -57,23 +57,27 @@
       <br>
     </div>
     <br>
+      <%= link_to 'Cargar turno', new_turn_path, class: "but-delete-n" %>
+    <br>
+    <br>
+    <br>
   </div>
 
 <div class = "main-body-1">
-  <table class = "index">
+  <table class = "index" >
     <thead>
-      <tr id = "cabecera">
+      <tr id = "cabecera" >
         <th class = "vital">Horario</th>
         <th class = "vital">Cliente</th>
         <th class = "vital-no">Barbero</th>
         <th class = "vital-no">Duracion de turno</th>
-        <th class = "vital-no">Edit</th>
-        <th class = "vital-no">P</th>
         <th colspan="3"></th>
       </tr>
     </thead>
+
+    <% @turns.sort_by(&:time) %>
  
-    <tbody>
+    <tbody style = "text-align: center" >
       <% @turns.reverse_each do |turn| %>
         <tr>
         <% if turn.time %>
@@ -84,8 +88,6 @@
           <td class = "vital"><%= turn.client %></td>
           <td class = "vital-no"><%= turn.barber.first_name %></td>
           <td class = "vital-no"><%= turn.count_hours %> minutos</td>
-          <td class = "vital-no"><%= turn.edit %></td>
-          <td class = "vital-no"><%= turn.p %></td>
           <td class = "dropdown">
             <button class="but-drop">Mas▼</button>
             <div class="dropdown-content">
@@ -93,7 +95,7 @@
               <h5 class = "dropdown-item">Duración: <%= turn.count_hours %> minutos</h5>
               <h5 class = "dropdown-delete"><%= link_to 'Editar turno', edit_turn_path(turn), class: "but-delete-s" %></h5>
               <h5 class = "dropdown-delete"><%= link_to "Eliminar turno", turn, method: :delete, data: { confirm: "Are you sure"}, class: "but-delete-u" %></h5>
-              <h5 class = "dropdown-delete"><%= link_to 'Mostrar', turn, class: "but-delete-b" %></h5>
+              <h5 class = "dropdown-delete"><%= link_to 'Mostrar', turns_path(turn, :ad => 1), class: "but-delete-b" %></h5>
             </div>
           </td>
           <td class = "vital-no"><%= link_to 'Mostrar', turn, class: "but-delete-s" %></td>

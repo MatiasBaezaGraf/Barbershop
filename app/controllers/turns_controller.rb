@@ -6,17 +6,17 @@ class TurnsController < ApplicationController
 
   # GET /turns or /turns.json
   def index
-    # for t in Turn.all
-    #  if t.p != 1
-    #    for i in HasTurn.all
-    #      if i.turn_id == t.id
-    #        i.destroy
-    #      end
-    #   end
+    for t in Turn.all
+     if t.p != 1
+       for i in HasTurn.all
+         if i.turn_id == t.id
+           i.destroy
+         end
+      end
 
-    #   t.destroy
-    #  end
-    # end
+      t.destroy
+     end
+    end
 
     
     if params[:from] && params[:to]
@@ -43,6 +43,7 @@ class TurnsController < ApplicationController
 
   # GET /turns/1 or /turns/1.json
   def show
+    @turn = Turn.find(params[:id])
   end
 
   # GET /turns/new
@@ -62,7 +63,7 @@ class TurnsController < ApplicationController
   # GET /turns/1/edit
   def edit
     @days = Turn.selectable_dates
-    @weekends = Turn.weekends_off
+    @weekends = Turn.weekends_off => #sab 1, dom 2, sab 8, dom 9
     @services = @turn.services
   end
 
@@ -94,11 +95,10 @@ class TurnsController < ApplicationController
   # PATCH/PUT /turns/1 or /turns/1.json
   def update
     respond_to do |format|
-      if @turn.edit == 1
-        @turn.edit = 0
+      if @turn.edit == 0
         @turn.p = 1
         if @turn.update(turn_params)
-          format.html { redirect_to @turn, notice: "Turn was successfully updated." }
+          format.html { redirect_to @turn }
           format.json { render :show, status: :ok, location: @turn }
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -106,7 +106,7 @@ class TurnsController < ApplicationController
         end
       else
         if @turn.update(turn_params)
-          format.html { redirect_to edit2_url(:id => @turn), notice: "Turn was successfully updated." }
+          format.html { redirect_to edit2_url(:id => @turn) }
           format.json { render :show, status: :ok, location: @turn }
         else
           format.html { render :edit, status: :unprocessable_entity }

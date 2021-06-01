@@ -55,20 +55,26 @@ class Turn < ApplicationRecord
 
   def self.posibles(busy, times, day, d)
     libres = times
+    occupied = busy.sort
     toDelete = []
     inicio = []
     final = []
     duration = d/15
     index = 0
-    for i in busy
+    for i in occupied
       if i[0].strftime("%Y-%m-%d") == day.strftime("%Y-%m-%d")
         index = libres.index(i[0])
 
-        puts "LIBRES: #{inicio[0]}, #{i[0]}"
-
-        
-        inicio.push(libres[libres.index(i[0]) + i[1]])
-        
+        if i[0] != libres[0] and inicio.blank?
+          inicio.push(libres[0])
+          inicio.push(libres[libres.index(i[0]) + i[1]])
+          final.push(libres[libres.index(i[0]) -1])
+        elsif i[0] != libres[0]
+          inicio.push(libres[libres.index(i[0]) + i[1]])
+          final.push(libres[libres.index(i[0]) -1])
+        else
+          inicio.push(libres[libres.index(i[0]) + i[1]])
+        end
 
         for t in (1..i[1]).step(1)
           toDelete.push(libres[index])
@@ -77,29 +83,33 @@ class Turn < ApplicationRecord
       end
     end
     final.push(libres[libres.length - 2])
-    puts "INICIOOOOOOOOOOOO: #{inicio}"
-    puts "FiNALLLLLLLLLLLLLLL: #{final}"
-    for i in inicio
-      modules = libres.index(final[inicio.index(i)]) - libres.index(i) + 1
 
-      if modules >= duration
-        ind = libres.index(final[inicio.index(i)]) - duration + 2
-        for m in 1..duration
-          toDelete.push(libres[ind])
-          ind = ind + 1
-        end
+    for i in inicio
+      if i == final[inicio.index(i)]
+        toDelete.push(i)
       else
-        ind = libres.index(i)
-        for m in 1..modules
-          toDelete.push(libres[ind])
-          ind = ind + 1
+        modules = libres.index(final[inicio.index(i)]) - libres.index(i) + 1
+
+        if modules >= duration
+          ind = libres.index(final[inicio.index(i)]) - duration + 2
+          for m in 1..duration
+            toDelete.push(libres[ind])
+            ind = ind + 1
+          end
+        else
+          ind = libres.index(i)
+          for m in 1..modules
+            toDelete.push(libres[ind])
+            ind = ind + 1
+          end
         end
       end
-
-      # for d in toDelete
-      #   libres.delete_if {|element| element == d}
-      # end
     end
+
+    for d in toDelete
+      libres.delete_if {|element| element == d}
+    end
+
   end
 
   def self.find_by_client(client)
@@ -178,6 +188,59 @@ class Turn < ApplicationRecord
     end
 
     count
+
+  end
+
+  def formatDate(d)
+    day = d.strftime("%a")
+    month = d.strftime("%m")
+
+    case day
+    when "Sun"
+      day = "Domingo"
+    when "Mon"
+      day = "Lunes"
+    when "Tue"
+      day = "Martes"
+    when "Wed"
+      day = "Miercoles"
+    when "Thu"
+      day = "Jueves"
+    when "Fri"
+      day = "Viernes"
+    when "Sat"
+      day = "Sabado"
+    end
+
+    case month
+    when "01"
+      month = "Enero"
+    when "02"
+      month = "Febrero"
+    when "03"
+      month = "Marzo"
+    when "04"
+      month = "Abril"
+    when "05"
+      month = "Mayo"
+    when "06"
+      month = "Junio"
+    when "07"
+      month = "Julio"
+    when "08"
+      month = "Agosto"
+    when "09"
+      month = "Septiembre"
+    when "10"
+      month = "Octubre"
+    when "11"
+      month = "Noviembre"
+    when "12"
+      month = "Diciembre"
+    end
+
+
+    return [day, month]
 
   end
 

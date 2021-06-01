@@ -23,12 +23,17 @@
 
     <div>
       <h4 class = "paragraph"> Fecha y Hora </h4>
-      <h5 class = "paragraph-f">➤ <%= @turn.time %> </h5>
+      <h5 class = "paragraph-f">➤ <%= @turn.formatDate(@turn.time)[0]%> <%= @turn.time.strftime("%-d") %> de <%= @turn.formatDate(@turn.time)[1]%> </h5>
     </div>
 
     <div>
       <h4 class = "paragraph"> Barbero </h4>
       <h5 class = "paragraph-f">➤ <%= @turn.barber.first_name %> <%= @turn.barber.last_name %> </h5>
+    </div>
+
+    <div>
+      <h4 class = "paragraph"> Cliente </h4>
+      <h5 class = "paragraph-f">➤ <%= @turn.client %> </h5>
     </div>
 
     <h4 class = "paragraph"> Servicios </h4>
@@ -57,7 +62,7 @@
             <br>
         </div>
 
-        <div class = "tail-head">
+        <div class = "tail-tail">
             <br>
             <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
             <h3 class = "secondary-contact">0343 15-467-5058</h3>

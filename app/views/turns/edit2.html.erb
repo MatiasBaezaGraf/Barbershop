@@ -22,6 +22,8 @@
     <br>
 
     <% @turn = Turn.where(:id => params[:id]).first %>
+    <% @turn.edit = 0 %>
+    <% @turn.save %>
 
     <%= render 'last_form', turn: @turn %>
 

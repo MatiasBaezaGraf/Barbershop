@@ -55,6 +55,7 @@
     <div id = "panel">
         
         <div class = "head">
+          <%= image_tag ("Charme.png"), class:"imagen-logo" %>
           <h1 class = "titles">
             <%if current_user%>
               ¡Bienvenido <%=current_user.first_name%>!
@@ -236,16 +237,6 @@
               Qualifying was billed as an epic showdown between Max Verstappen and Lewis Hamilton over one lap, and with so little to choose between their cars it seemed set to be decided on driver skill.
               But overlook Valtteri Bottas at your peril, the Finn was very quick here last season and yesterday, he was right back to his best form.
             </p>
-          </div>
-
-          <div id = "div4" class = "divisor" style="background-color:rgb(224, 207, 181); float:left; width:100%">
-            <br>
-            <br>
-            <%= link_to "Reservar Turno", new_turn_path, class: "but-reservation" %>
-            <br>
-            <br>
-            <br>
-            <br>
           </div>
 
         </div> 
@@ -438,8 +429,6 @@ function darkMode() {
 
   document.getElementById("div3").style.backgroundColor = '#212121';
 
-  document.getElementById("div4").style.backgroundColor = '#141414';
-
   document.getElementById("x").style.color = '#141414';
 
   document.getElementById("y").style.color = '#212121';
@@ -507,7 +496,7 @@ function lightMode() {
 
   localStorage.setItem('theme', 'light')
 
-  document.getElementById("sidebar").style.backgroundColor = 'rgb(39, 23, 0)';
+  document.getElementById("sidebar").style.backgroundColor = 'rgb(22, 13, 0)';
 
    var cols = document.getElementsByClassName('but-cross');
   for(i = 0; i < cols.length; i++) {
@@ -580,8 +569,6 @@ function lightMode() {
 
   document.getElementById("div3").style.backgroundColor = 'blanchedalmond';
 
-  document.getElementById("div4").style.backgroundColor = 'rgb(224, 207, 181)';
-
   document.getElementById("x").style.color = 'rgb(224, 207, 181)';
 
   document.getElementById("y").style.color = 'blanchedalmond';
@@ -614,7 +601,7 @@ function lightMode() {
 
   var cols = document.getElementsByClassName('dropdown-container');
   for(i = 0; i < cols.length; i++) {
-    cols[i].style.backgroundColor = 'rgb(20, 12, 0)';
+    cols[i].style.backgroundColor = 'rgb(0, 0, 0)';
   }
 
   var cols = document.getElementsByClassName('but-dark-l');

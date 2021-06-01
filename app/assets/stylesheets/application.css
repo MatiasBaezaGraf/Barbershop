@@ -37,7 +37,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: rgb(39, 23, 0);
+    background-color: rgb(22, 13, 0);
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -52,21 +52,25 @@
 
 
  .titles{
-    font-family: 'Lobster', cursive;
+    font-family: 'Spartan', sans-serif;
+    font-variant: small-caps;
     font-size: 330%;
+    letter-spacing: 2px;
  }
  .titles-secondary{
     font-family: 'Josefin Sans', sans-serif;
     font-size: 220%;
  }
  .titles-third{
-    font-family: 'Bebas Neue', cursive;
+    font-family: 'Spartan', sans-serif;
     font-size: 150%;
     letter-spacing: 2px;
+    font-variant: all-small-caps;
  }
  .titles-contact{
-    font-family: 'Satisfy', cursive;
+    font-family: 'Spartan', sans-serif;
     font-size: 200%;
+    font-variant: all-small-caps;
  }
  .paragraph{
     font-family: 'Roboto Mono', monospace;
@@ -119,7 +123,7 @@
     margin: 0;
     padding-top: 100px;
     padding-bottom: 100px;
-    background-color: rgb(20, 12, 0);
+    background-color: rgb(37, 22, 0);
     color: blanchedalmond;
     align-items: center;
     text-align: center;
@@ -295,7 +299,7 @@
 .index th{
 	/*background-color: rgb(34, 20, 0);*/
 	border:none;
-	text-align: left;
+	text-align: center;
 	color: white;
     padding-top: 4%;
     padding-bottom: 4%; 
@@ -338,7 +342,7 @@
 
 .dropdown-container {
     display: none;
-    background-color: rgb(20, 12, 0);
+    background-color: rgb(0, 0, 0);
     color: white;
     padding-left: 8px;
     transition: 0.5s;
@@ -446,7 +450,8 @@
     text-decoration: none;
     border-width: 1000px;
     border-color: white;
-    font-family: 'Bebas Neue', cursive;
+    font-family: 'Spartan', sans-serif;
+    font-variant: all-small-caps;
     font-size: 125%;
   }
 
@@ -643,7 +648,12 @@
     padding-bottom: 10px;
     padding-left: 15px;
     padding-right: 15px;
-    font-size: 150%;
+    font-size: 200%;
+}
+.but-delete:visited{
+    color: red;
+    font-size: 200%;
+    font-variant: small-caps;
 }
 .but-delete:hover{
     background-color: white;
@@ -652,13 +662,14 @@
 }
 
 [class*="but-delete-"]{
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Spartan', sans-serif;
     color: white;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 100%;
+    font-weight: bold;
 }
 .but-delete-u{
     background-color: rgb(139, 0, 0);
@@ -670,29 +681,31 @@
 }
 
 .but-delete-b{
-    background-color: rgb(10, 0, 104);
-    border: 2px solid rgb(10, 0, 104);
+    background-color: blanchedalmond;
+    border: 2px solid blanchedalmond;
+    color: rgb(56, 56, 56);
 }
 .but-delete-b:hover{
-    background-color: white;
-    color: rgb(10, 0, 104);
+    background-color: rgb(56, 56, 56);
+    color: blanchedalmond;
 }
 
 .but-delete-n{
-    background-color: rgb(0, 97, 0);
-    border: 2px solid rgb(0, 97, 0);
+    background-color: rgb(7, 77, 7);
+    border: 2px solid rgb(7, 77, 7);
 }
 .but-delete-n:hover{
     background-color: white;
-    color: rgb(0, 97, 0);
+    color: rgb(7, 77, 7);
 }
 .but-delete-s{
-    background-color: rgb(240, 184, 0);
-    border: 2px solid rgb(240, 184, 0);
+    background-color: rgb(214, 198, 174);
+    border: 2px solid rgb(214, 198, 174);
+    color: rgb(56, 56, 56);
 }
 .but-delete-s:hover{
-    background-color: white;
-    color: rgb(240, 184, 0);
+    background-color: rgb(56, 56, 56);
+    color: rgb(214, 198, 174);
 }
 .dropdown-btn{
     /*margin-right: 70%;*/
@@ -702,7 +715,8 @@
     color: #818181;
     display: block;
     transition: 0.3s;
-    font-family: 'Bebas Neue', cursive;
+    font-family: 'Spartan', sans-serif;
+    font-variant: all-small-caps;
     cursor: pointer;
 }
 .dropdown-btn:hover{
@@ -733,6 +747,9 @@
     padding-top: 4px;
     max-width: 97%;
     max-height: 350px;
+}
+.imagen-logo{
+    max-width: 97.5%;
 }
 .warning{
     width: 20%;
@@ -783,6 +800,7 @@
     .body-login{margin-left: 30%; margin-right: 30%; border-right:15px solid rgb(34, 20, 0); border-left:15px solid rgb(34, 20, 0)}
     .tail-login{padding-top: 5%; padding-bottom: 5%;}
     .image-container{margin-left: 2.2%; background-color: rgb(20, 12, 0);}
+    .imagen-logo{width: 23.5%;}
     .but-menu{display: none;}
     .but-reservation{padding : 10px; margin-right: 1.5%;}
     .but-nav{padding:0; margin-right: 1.5%; display: inline;}
@@ -793,7 +811,7 @@
     .but-scroll{padding-left: 2%; padding-right: 2%; padding-top: 6px; padding-bottom: 6px;}
     .but-dark-l{visibility:visible; display: inline;}
     .but-dark {display: inline; }
-    .index th{padding-top: 15px; padding-bottom: 15px;}
+    .index th{padding-top: 15px; padding-bottom: 15px; text-align: center;}
     .index td{padding-top: 15px; padding-bottom: 15px;}
     .filtros{margin-left: 20%; margin-right: 20%;}
     .filtros-col{max-width:21%; display: inline-flex; height: 200px; margin-bottom: 50px;}
@@ -823,9 +841,16 @@
     .vital-no{
         display: none;
     }
-    .vital-mobile{
+    .vital-mobile{ 
         margin-top: 25%;
         display:block;
     }
+}
+
+@media only screen and (max-width: 334px){
+    .but-resources{font-family: 'Bebas Neue', cursive; font-variant: normal;}
+    .but-resources-selected{font-family: 'Bebas Neue', cursive; font-variant: normal;}
+    .but-back{font-family: 'Bebas Neue', cursive; font-variant: normal;}
+    .but-menu{margin-right: 5%;}
 }
 
