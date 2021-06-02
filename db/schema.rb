@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_29_172440) do
+ActiveRecord::Schema.define(version: 2021_06_01_205639) do
 
   create_table "barbers", force: :cascade do |t|
     t.string "first_name"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 2021_04_29_172440) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["service_id"], name: "index_has_turns_on_service_id"
     t.index ["turn_id"], name: "index_has_turns_on_turn_id"
+  end
+
+  create_table "holidays", force: :cascade do |t|
+    t.date "freeday"
+    t.integer "permanent"
+    t.integer "barber_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["barber_id"], name: "index_holidays_on_barber_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -76,5 +85,6 @@ ActiveRecord::Schema.define(version: 2021_04_29_172440) do
   add_foreign_key "has_barbers", "services"
   add_foreign_key "has_turns", "services"
   add_foreign_key "has_turns", "turns"
+  add_foreign_key "holidays", "barbers"
   add_foreign_key "turns", "barbers"
 end

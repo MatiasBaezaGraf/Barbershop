@@ -1,0 +1,167 @@
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'application','data-turbolinks-track': 'reload' %>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" height="100%" >
+  <div class = "navbar2">
+    <%= link_to "Atras ⮌", home_path, class: "but-back" %>
+    <%= link_to "Barberos", barbers_path, class: "but-resources" %>
+    <button class = "but-resources-selected">Dias libres</button> 
+    <%= link_to "Turnos", turns_path, class: "but-resources" %>
+    <%= link_to "Usuarios", users_index_path, class: "but-resources" %>
+    <%= link_to "Servicios", services_path, class: "but-resources" %>  
+  </div>
+
+  <div class = "secondary-head-1">
+    <br>
+    <% if params[:barber_id]%>
+      <h1 class = "titles">Días libres de <%= Barber.where(:id => params[:barber_id])[0].first_name %></h1>
+    <% else %>
+      <h1 class = "titles">Días libres</h1>
+    <% end %>
+    <div class = "filtros">
+      <div class = "filtros-t">
+        <h4 class = "filtros-texto">Seleccione Barbero</h4>
+      </div>
+      <form action="/holidays" method="GET">  
+      <select class = "input-esp" name="barber_id">  
+        <option disabled selected value> Elegir... </option> 
+          <% Barber.all.each_with_index do | t, index | %>
+          <option value="<%= t.id %>" <% t.id.to_s == @barber_id ? "selected" : "" %>> <%= t.first_name%> </option>
+        <% end -%>
+      </select>
+      <input class = "but-login" type="submit", value="🔍Ver" />
+    </form>
+    </div>
+    <% if params[:barber_id]%>
+      <%= link_to 'Cargar día fijo', new_holiday_path(:barber_id => params[:barber_id], :permanent => 1), class: "but-delete-n" %> 
+      <br>
+      <br>  
+      <%= link_to 'Cargar día libre', new_holiday_path(:barber_id =>  params[:barber_id], :permanent => 0), class: "but-delete-n" %>
+      <br>
+      <br>
+      <br>
+      <br>  
+    <% end %>
+  </div>
+
+  <div class = "main-body-1">
+    <% if @holidays.blank?%>
+      <table style = "display:none">
+        <thead>
+          <tr id = "cabecera">
+            <th class = "vital">Día</th>
+            <th class = "vital">Tipo</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+    <% else %>
+      <table class = "index">
+        <thead>
+          <tr id = "cabecera">
+            <th class = "vital">Día</th>
+            <th class = "vital">Tipo</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @holidays.each do |holiday| %>
+            <tr>
+              <% if holiday.permanent == 1%>
+                <td class = "vital"><%= holiday.formatDate(holiday.freeday)[0] %></td>
+                <td class = "vital"> Permanente </td>
+                <td class = "vital"><%= link_to 'Editar', edit_holiday_path(holiday, :barber_id => params[:barber_id], :permanent => 1), class: "but-delete-b" %></td>
+              <% else %>
+                <td class = "vital"><%= holiday.formatDate(holiday.freeday)[0]%> <%= holiday.freeday.strftime("%d")%> de <%= holiday.formatDate(holiday.freeday)[1]%></td>
+                <td class = "vital"> Único </td>
+                <td class = "vital"><%= link_to 'Editar', edit_holiday_path(holiday, :barber_id => params[:barber_id], :permanent => 0), class: "but-delete-b" %></td>
+              <% end %>
+              <td class = "vital"><%= link_to 'Eliminar', holiday, method: :delete, data: { confirm: 'Are you sure?' }, class: "but-delete-u" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+  
+
+  <div class = "tail">
+            <div class = "tail-head">
+                <br>
+                <br>
+                <br>
+                <% if params[:barber_id]%>
+                  <%= link_to 'Cargar día fijo', new_holiday_path(:barber_id => params[:barber_id], :permanent => 1), class: "but-delete-n" %> 
+                  <br>
+                  <br>  
+                  <%= link_to 'Cargar día libre', new_holiday_path(:barber_id =>  params[:barber_id], :permanent => 0), class: "but-delete-n" %>
+                <% end %>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+
+            <div class = "tail-tail">
+                <br>
+                <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
+                <h3 class = "secondary-contact">0343 15-467-5058</h3>
+                <h3 class = "secondary-contact">ayelenpeter@hotmail.com.ar</h3>
+                <br>
+                <h3 class = "secondary-contact">2021</h3>
+                <br>
+            </div>
+  </div>
+</body>
+
+<script>
+
+  fondo()
+
+  function fondo() {
+    document.body.style.background="rgb(20, 12, 0)"
+    document.getElementById("cabecera").style.backgroundColor = "rgb(34, 20, 0)";
+  }
+
+  if(localStorage.getItem('theme') == 'dark'){
+    document.body.style.background = "black";
+    
+    document.getElementById("cabecera").style.backgroundColor = 'black';
+
+    var cols = document.getElementsByClassName('secondary-head-1');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = '#141414';
+      cols[i].style.color = 'blanchedalmond';
+    }
+    var cols = document.getElementsByClassName('filtros');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = '#242424';
+    }
+    var cols = document.getElementsByClassName('navbar2');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = 'black';  
+    }
+    var cols = document.getElementsByClassName('tail-head');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = 'black';
+      cols[i].style.color = 'white';  
+    }
+    var cols = document.getElementsByClassName('tail-tail');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = 'black'; 
+      cols[i].style.color = 'white'; 
+    }
+  }
+  else
+  {
+    var cols = document.getElementsByClassName('tail-head');
+    for(i = 0; i < cols.length; i++) {
+      cols[i].style.backgroundColor = 'rgb(20, 12, 0)';
+      cols[i].style.color = 'white';  
+    }
+  }
+</script>

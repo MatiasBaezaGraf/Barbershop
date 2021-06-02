@@ -1,4 +1,3 @@
-
 <meta name="viewport" content="width=device-width,initial-scale=1">
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
@@ -6,10 +5,11 @@
         <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" textalign="center">
 
   <div class = "navbar3">
-        <%= link_to "Atras ⮌", home_path, class: "but-back" %>
+        <%= link_to "Atras ⮌", holidays_path(barber_id: @holiday.barber_id), class: "but-back" %>
   </div>
 
   <div class = 'alignment'>
@@ -17,15 +17,9 @@
 
     <br>
     
-    <h2 class = "titles-secondary">Personalizar Turno</h2>
+    <h2 class = "titles-secondary">Editando día libre de <%= @holiday.barber.first_name %></h2>
 
-    <br>
-
-    <% @turn = Turn.where(:id => params[:id]).first %>
-    <% @turn.edit = 2 %>
-    <% @turn.save %>
-
-    <%= render 'last_form', turn: @turn %>
+    <%= render 'form', holiday: @holiday %>
 
     <br>
     <br>
@@ -55,6 +49,12 @@
 
 <script>
 
+fondo()
+
+function fondo() {
+    document.body.style.background="rgb(20, 12, 0)";
+}
+
 if(localStorage.getItem('theme') == 'dark'){
   document.body.style.background = "#212121";
   var cols = document.getElementsByClassName('navbar3');
@@ -66,6 +66,12 @@ if(localStorage.getItem('theme') == 'dark'){
     cols[i].style.backgroundColor = '#212121';
     cols[i].style.color = 'white';
     cols[i].style.borderColor = 'blanchedalmond';
+  }
+
+  var cols = document.getElementsByClassName('admin_select');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#818181';
+    cols[i].style.color = 'black';
   }
 
   var cols = document.getElementsByClassName('paragraph-f');
@@ -92,6 +98,3 @@ if(localStorage.getItem('theme') == 'dark'){
   }
 }
   
-</script>
-
-

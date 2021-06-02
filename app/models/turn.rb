@@ -16,21 +16,51 @@ class Turn < ApplicationRecord
     days
   end
 
-  def self.weekends_off
+  def self.weekends_off(id)
+    barid = []
+
+    Turn.all.each do |tu|
+      if id.to_s == tu.id.to_s
+        barid.push(tu.barber_id)
+      end
+    end
+
+    puts "Holasslaldladlalfalflalfdsfas"
+    puts barid
+          
+          
+
     weekends = []
     today = Date.today
-    tomorrow = Date.new(2021,05,12)
-    weekends.push(tomorrow)
 
     for i in 0..14
       if i != 0
         nextday = today + i.day
-        if (nextday.strftime("%u").to_i == 6 || nextday.strftime("%u").to_i == 7)
-          weekends.push(nextday)
+
+        Holiday.all.each do |f|
+          if barid[0].to_s == f.barber.id.to_s
+            
+            if f.permanent == 1
+              if f.freeday.strftime("%a") == nextday.strftime("%a")
+                weekends.push(nextday)
+              end
+            end
+          end
         end
+        #if (nextday.strftime("%u").to_i == 6 || nextday.strftime("%u").to_i == 7)
+        #  weekends.push(nextday)
+        #end
       end
-    end
+    end   
     
+    Holiday.all.each do |d|
+      if barid[0].to_s == d.barber.id.to_s
+        if d.freeday >= Date.today
+          weekends.push(d.freeday)
+        end
+      end 
+    end
+
     weekends
   end
 
@@ -46,7 +76,7 @@ class Turn < ApplicationRecord
     end
     times = []
     now = chosen.time + 8.hours
-    for i in 0..20
+    for i in 0..48
       nextturn = now + (15*i).minutes
       times.push(nextturn)
     end
@@ -54,21 +84,30 @@ class Turn < ApplicationRecord
   end
 
   def self.posibles(busy, times, day, d)
+    opM = "08:00".to_datetime
+    clM = "13:00".to_datetime
+    opA = "16:00".to_datetime
+    clA = "20:00".to_datetime
     libres = times
+    mañana = []
+    tarde = []
     occupied = busy.sort
     toDelete = []
     inicio = []
     final = []
     duration = d/15
     index = 0
+
+    inicio.push(libres[0])
+
     for i in occupied
       if i[0].strftime("%Y-%m-%d") == day.strftime("%Y-%m-%d")
         index = libres.index(i[0])
 
-        if i[0] != libres[0] and inicio.blank?
-          inicio.push(libres[0])
+        #Crear los intervalos libres entre turno y turno
+        if i[0] == libres[0]
+          inicio.delete_at(0)
           inicio.push(libres[libres.index(i[0]) + i[1]])
-          final.push(libres[libres.index(i[0]) -1])
         elsif i[0] != libres[0]
           inicio.push(libres[libres.index(i[0]) + i[1]])
           final.push(libres[libres.index(i[0]) -1])
@@ -76,14 +115,34 @@ class Turn < ApplicationRecord
           inicio.push(libres[libres.index(i[0]) + i[1]])
         end
 
+        #Añadir a lista de eliminados los modulos pertenecientes al turno
         for t in (1..i[1]).step(1)
           toDelete.push(libres[index])
           index = index + 1
         end
       end
     end
+
+    for i in libres
+      #Añadir a lista de eliminados los modulos fuera de horario
+      if i.strftime("%H:%M").to_datetime >= clM and i.strftime("%H:%M").to_datetime < opA
+        toDelete.push(i)
+      end
+
+      #Creamos la separacion entre horarios de mañana y de tarde
+      if i.strftime("%H:%M").to_datetime >= opM and i.strftime("%H:%M").to_datetime <= clM
+        mañana.push(i)
+      elsif i.strftime("%H:%M").to_datetime >= opA and i.strftime("%H:%M").to_datetime <= clA
+        tarde.push(i)
+      end
+    end
+
     final.push(libres[libres.length - 2])
 
+    puts "Iniciooooooooooooooooooooo: #{inicio}"
+    puts "Finallllllllllllllllllllll: #{final}"
+
+    #Evaluamos que nuestro turno entre en los intervalos libres de la mañana
     for i in inicio
       if i == final[inicio.index(i)]
         toDelete.push(i)
@@ -104,6 +163,11 @@ class Turn < ApplicationRecord
           end
         end
       end
+    end
+
+    #Evaluamos que nuestro turno entre en los intervalos libres de la tarde
+    for i in inicio
+      
     end
 
     for d in toDelete
@@ -168,7 +232,7 @@ class Turn < ApplicationRecord
     modulecounter = 0
 
     for t in Turn.all
-      if t.barber == barber and t.edit == 0
+      if t.barber == barber and t.p == 1
         busy.push([t.time, t.count_hours/15])
       end
     end

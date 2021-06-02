@@ -1,0 +1,59 @@
+<%= form_with(model: holiday) do |form| %>
+  <% if holiday.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(holiday.errors.count, "error") %> prohibited this holiday from being saved:</h2>
+
+      <ul>
+        <% holiday.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% barber = Barber.where(:id => params[:barber_id]) %>
+
+  <% if params[:permanent].to_i == 1 %>
+    <h2>Cargando dia libre permanente para <%= barber[0].first_name %> </h2>
+    <div class="field">
+      <%= form.select(:freeday, @weekdays.collect {|w| [ @holiday.formatDate(w)[0], w ]}, {},{ :class => 'admin_select' }) %>
+    </div>
+
+    <div class="field" style = "display:none">
+      <h3 class = "paragraph">Elija su Barbero</h3>
+      <%= form.select(:barber_id, Barber.where(:id => params[:barber_id]).collect {|p| [ p.first_name, p.id ]}, :selected => p)%>
+    </div>
+
+    <div class="field" style = "display:none">
+      <%= form.number_field :permanent, placeholder: "Permanent", :value => params[:permanent], class: "input" %>
+    </div>
+  <% else %>
+    <% if params[:permanent] %>
+      <h2>Cargando dia libre para <%= barber[0].first_name %> </h2>
+    <% end %>
+    <div class="field">
+      <%= form.date_field(:freeday, class: "input", min: Date.today + 1.day) %>
+    </div>
+
+    <div class="field" style = "display:none">
+      <h3 class = "paragraph">Elija su Barbero</h3>
+      <%= form.select(:barber_id, Barber.where(:id => params[:barber_id]).collect {|p| [ p.first_name, p.id ]}, :selected => p)%>
+    </div>
+
+    <div class="field" style = "display:none">
+      <%= form.number_field :permanent, placeholder: "Permanent", :value => params[:permanent], class: "input" %>
+    </div>
+
+  <% end %>
+
+  <br>
+  <br>
+
+  <br>
+  <br>
+
+  <div class="actions">
+    <%= form.submit "FINALIZAR", class: 'but-login' %>
+  </div>
+
+<% end %>

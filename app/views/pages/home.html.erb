@@ -25,6 +25,8 @@
               <%= link_to "Gestionar servicios", services_path, class: "but-sidebar" %>
               <br>
               <%= link_to "Gestionar turnos", turns_path, class: "but-sidebar" %>
+              <br>
+              <%= link_to "Gestionar dias libres", holidays_path, class: "but-sidebar" %>
             </div>
             <br>
             <%= link_to "Crear Turno", new_turn_path, class: "but-sidebar-r" %>
@@ -67,7 +69,8 @@
           <h3 class = "secondary-contact">TEL. 0343 15-467-5058</h3>
         </div>
 
-        <div class = "navbar">
+        
+        <div id = "navbar">
             <button class="but-menu" onclick="openNav()">≡ &nbsp;Menu</button>
             <button class="but-dark-l" onclick="openNavDesk()">❯ &nbsp;Menu</button>
             <%if current_user%>
@@ -84,7 +87,7 @@
 
         <div id = section1 class = "secondary-head-1">
             <br>
-            <h1 class ="titles"> Nuestros Servicios </h1>
+            <h1 id = "titlepad" class ="titles"> Nuestros Servicios </h1>
             <br>
         </div>
 
@@ -196,7 +199,7 @@
             <div class = col-7>
                 <div class = image-container>
                     <br>
-                    <h2 class = "titles-secondary">Barbero 3</h2>
+                    <h2 class = "titles-secondary">Jero</h2>
                     <br>
                     <%= image_tag ("BARBERO3.jpg"), class:"imagen" %>
                     <p>Descripción y foto</p>
@@ -266,6 +269,28 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
+window.onscroll = function() {myFunction()};
+
+// Get the navbar
+var navbar = document.getElementById("navbar");
+var header = document.getElementById("titlepad");
+
+// Get the offset position of the navbar
+var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+    header.style.padding = "60px 0px 0px 0px";
+  } else {
+    navbar.classList.remove("sticky");
+    header.style.padding = "0px 0px 0px 0px";
+  }
+
+}
+
+
 $(document).ready(function(){
   // Add smooth scrolling to all links
   $("a").on('click', function(event) {
@@ -306,6 +331,9 @@ for (i = 0; i < dropdown.length; i++) {
     }
   });
 }
+
+// When the user scrolls the page, execute myFunction
+
 </script>
 
 
@@ -355,6 +383,8 @@ function darkMode() {
     cols[i].style.backgroundColor = 'black';
   }
   document.getElementById("panel").style.backgroundColor = '#212121';
+
+  document.getElementById("navbar").style.backgroundColor = 'black';
 
   var cols = document.getElementsByClassName('navbar');
   for(i = 0; i < cols.length; i++) {
@@ -504,10 +534,13 @@ function lightMode() {
   }
   document.getElementById("panel").style.backgroundColor = '#blanchedalmond';
 
+  document.getElementById("navbar").style.backgroundColor = 'rgb(70, 42, 0)';
+
   var cols = document.getElementsByClassName('navbar');
   for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = 'rgb(70, 42, 0)';
   }
+
   var cols = document.getElementsByClassName('secondary-head-1');
   for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = 'rgb(224, 207, 181)';

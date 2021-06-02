@@ -1,4 +1,3 @@
-
 <meta name="viewport" content="width=device-width,initial-scale=1">
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
@@ -6,10 +5,11 @@
         <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" textalign="center">
 
   <div class = "navbar3">
-        <%= link_to "Atras ⮌", home_path, class: "but-back" %>
+        <%= link_to "Atras ⮌", holidays_path(barber_id: @holiday.barber_id), class: "but-back" %>
   </div>
 
   <div class = 'alignment'>
@@ -17,15 +17,26 @@
 
     <br>
     
-    <h2 class = "titles-secondary">Personalizar Turno</h2>
+    <h2 class = "titles-secondary">Resumen</h2>
 
-    <br>
+<br>
 
-    <% @turn = Turn.where(:id => params[:id]).first %>
-    <% @turn.edit = 2 %>
-    <% @turn.save %>
+    <% if @holiday.permanent == 1%>
+      <h4 class = "paragraph"> Día libre semanal permanente </h4>
+      <h5 class = "paragraph-f">➤ <%= @holiday.formatDate(@holiday.freeday)[0] %></h5>
+  
+    <% else %>
+      <h4 class = "paragraph"> Día libre único</h4>
+      <h5 class = "paragraph-f">➤<%= @holiday.formatDate(@holiday.freeday)[0]%> <%= @holiday.freeday.strftime("%d")%> de <%= @holiday.formatDate(@holiday.freeday)[1]%></h5>
+    <% end %>
 
-    <%= render 'last_form', turn: @turn %>
+    <div>
+      <h4 class = "paragraph"> Barbero </h4>
+      <h5 class = "paragraph-f">➤ <%= @holiday.barber.first_name %> <%= @holiday.barber.last_name %> </h5>
+    </div>
+
+    <%= link_to 'Editar', edit_holiday_path(@holiday), class: "but-delete-u" %> 
+    <%= link_to "Finalizar", holidays_path(barber_id: @holiday.barber_id), class: "but-delete-s" %>
 
     <br>
     <br>
@@ -43,7 +54,7 @@
             <br>
         </div>
 
-        <div class = "tail-head">
+        <div class = "tail-tail">
             <br>
             <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
             <h3 class = "secondary-contact">0343 15-467-5058</h3>
@@ -73,6 +84,12 @@ if(localStorage.getItem('theme') == 'dark'){
     cols[i].style.backgroundColor = '#111111';
     cols[i].style.color = 'white';
   }
+
+  var cols = document.getElementsByClassName('paragraph-s');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#111111';
+    cols[i].style.color = 'white';
+  }
   
   var cols = document.getElementsByClassName('body-login');
     for(i = 0; i < cols.length; i++) {
@@ -93,5 +110,3 @@ if(localStorage.getItem('theme') == 'dark'){
 }
   
 </script>
-
-

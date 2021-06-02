@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  freeday: 2021-06-01
+  permanent: 1
+  barber: one
+
+two:
+  freeday: 2021-06-01
+  permanent: 1
+  barber: two

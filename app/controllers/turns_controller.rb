@@ -7,8 +7,8 @@ class TurnsController < ApplicationController
   # GET /turns or /turns.json
   def index
     for t in Turn.all
-     if t.p != 1
-       for i in HasTurn.all
+     if t.p != 1 and t.time < Date.today       
+      for i in HasTurn.all
          if i.turn_id == t.id
            i.destroy
          end
@@ -36,8 +36,10 @@ class TurnsController < ApplicationController
     elsif params[:selecteday]
       @turns = Turn.find_by_day(params[:selecteday])
     else
-      @turns = Turn.all
+      @turns = Turn.all.where(:p == 1)
     end
+    @turns = @turns.where(p: 1, edit: 0)
+    @turns = @turns.sort_by(&:time)
       
   end
 
@@ -51,19 +53,19 @@ class TurnsController < ApplicationController
     @turn = Turn.new
     @services = Service.all
     @days = Turn.selectable_dates
-    @weekends = Turn.weekends_off
   end
 
   def edit0
     @days = Turn.selectable_dates
-    @weekends = Turn.weekends_off
+    @turn = Turn.find(params[:id])
+    @weekends = Turn.weekends_off(params[:id])
     @barbers = Barber.all
   end
 
   # GET /turns/1/edit
   def edit
     @days = Turn.selectable_dates
-    @weekends = Turn.weekends_off => #sab 1, dom 2, sab 8, dom 9
+    @weekends = Turn.weekends_off(params[:barber_id])
     @services = @turn.services
   end
 
@@ -95,7 +97,8 @@ class TurnsController < ApplicationController
   # PATCH/PUT /turns/1 or /turns/1.json
   def update
     respond_to do |format|
-      if @turn.edit == 0
+      if @turn.edit == 2
+        @turn.edit = 0
         @turn.p = 1
         if @turn.update(turn_params)
           format.html { redirect_to @turn }

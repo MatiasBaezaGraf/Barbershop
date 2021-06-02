@@ -11,7 +11,7 @@ class BarbersController < ApplicationController
   # GET /barbers/1 or /barbers/1.json
   def show
     @schedule = Barber.schedule
-    @free_days = Turn.weekends_off
+    @free_days = Turn.weekends_off(params[:id])
     @occupied_today = Barber.today_busy(params[:id])
     @occupied_tomorrow = Barber.tomorrow_busy(params[:id])
     @occupied_after = Barber.after_busy(params[:id])
