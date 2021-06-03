@@ -62,10 +62,30 @@ class BarbersController < ApplicationController
 
   # DELETE /barbers/1 or /barbers/1.json
   def destroy
-    @barber.destroy
-    respond_to do |format|
-      format.html { redirect_to barbers_url, notice: "Barber was successfully destroyed." }
-      format.json { head :no_content }
+    exist = @barber.validate_turns(@barber)
+    if exist == 0
+      for i in HasBarber.all
+        if i.barber_id == @barber.id
+          i.destroy
+        end
+      end
+
+      for i in Turn.all
+        if i.barber_id == @barber.id
+          i.destroy
+        end
+      end
+
+      @barber.destroy
+      respond_to do |format|
+        format.html { redirect_to barbers_url, notice: "Barber was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to barbers_url, notice: "El barbero no puede ser destruido debido a que tiene turnos pendientes" }
+        format.json { head :no_content }
+      end
     end
   end
 

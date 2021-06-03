@@ -5,11 +5,10 @@
         <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" textalign="center">
 
   <div class = "navbar3">
-        <%= link_to "Atras ⮌", home_path, class: "but-back" %>
+        <%= link_to "Atras ⮌", freetimes_path, class: "but-back" %>
   </div>
 
   <div class = 'alignment'>
@@ -17,34 +16,11 @@
 
     <br>
     
-    <h2 class = "titles-secondary">Resumen del Turno</h2>
+    <h2 class = "titles-secondary">Agregar horario</h2>
 
     <br>
 
-    <div>
-      <h4 class = "paragraph"> Fecha y Hora </h4>
-      <h5 class = "paragraph-f">➤ <%= @turn.formatDate(@turn.time)[0]%> <%= @turn.time.strftime("%-d") %> de <%= @turn.formatDate(@turn.time)[1]%> </h5>
-    </div>
-
-    <div>
-      <h4 class = "paragraph"> Barbero </h4>
-      <h5 class = "paragraph-f">➤ <%= @turn.barber.first_name %> <%= @turn.barber.last_name %> </h5>
-    </div>
-
-    <div>
-      <h4 class = "paragraph"> Cliente </h4>
-      <h5 class = "paragraph-f">➤ <%= @turn.client %> </h5>
-    </div>
-
-    <h4 class = "paragraph"> Servicios </h4>
-    <div class = paragraph-f>
-      <% @turn.services.each do |service| %>
-        <h5 class = "paragraph-s">➤ <%= service.name %></h5>
-      <% end %>
-    </div>
-
-    <%= link_to 'Editar', edit_turn_path(@turn), class: "but-delete-u" %> 
-    <%= link_to "Finalizar", home_path, class: "but-delete-s" %>
+    <%= render 'form', freetime: @freetime %>
 
     <br>
     <br>
@@ -75,7 +51,7 @@
 <script>
 
 if(localStorage.getItem('theme') == 'dark'){
-  document.body.style.background = "black";
+  document.body.style.background = "#212121";
   var cols = document.getElementsByClassName('navbar3');
     for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = 'black';
@@ -92,12 +68,6 @@ if(localStorage.getItem('theme') == 'dark'){
     cols[i].style.backgroundColor = '#111111';
     cols[i].style.color = 'white';
   }
-
-  var cols = document.getElementsByClassName('paragraph-s');
-    for(i = 0; i < cols.length; i++) {
-    cols[i].style.backgroundColor = '#111111';
-    cols[i].style.color = 'white';
-  }
   
   var cols = document.getElementsByClassName('body-login');
     for(i = 0; i < cols.length; i++) {
@@ -108,12 +78,13 @@ if(localStorage.getItem('theme') == 'dark'){
   var cols = document.getElementsByClassName('tail-tail');
     for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = 'black'; 
-    cols[i].style.color = 'white'; 
+    cols[i].style.color = 'white';
   }
   var cols = document.getElementsByClassName('tail-head');
     for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = '#212121';
-    cols[i].style.color = 'white';  
+    cols[i].style.color = 'white';
+    cols[i].style.borderColor = '#212121';  
   }
 }
 else

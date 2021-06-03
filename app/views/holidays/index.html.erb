@@ -9,7 +9,8 @@
   <div class = "navbar2">
     <%= link_to "Atras ⮌", home_path, class: "but-back" %>
     <%= link_to "Barberos", barbers_path, class: "but-resources" %>
-    <button class = "but-resources-selected">Dias libres</button> 
+    <button class = "but-resources-selected">Dias libres</button>
+    <%= link_to "Horarios libres", freetimes_path, class: "but-resources-free" %> 
     <%= link_to "Turnos", turns_path, class: "but-resources" %>
     <%= link_to "Usuarios", users_index_path, class: "but-resources" %>
     <%= link_to "Servicios", services_path, class: "but-resources" %>  
@@ -122,10 +123,6 @@
 
   fondo()
 
-  function fondo() {
-    document.body.style.background="rgb(20, 12, 0)"
-    document.getElementById("cabecera").style.backgroundColor = "rgb(34, 20, 0)";
-  }
 
   if(localStorage.getItem('theme') == 'dark'){
     document.body.style.background = "black";
@@ -148,20 +145,29 @@
     var cols = document.getElementsByClassName('tail-head');
     for(i = 0; i < cols.length; i++) {
       cols[i].style.backgroundColor = 'black';
-      cols[i].style.color = 'white';  
+      cols[i].style.color = 'white';
+      cols[i].style.borderColor = 'black';
     }
     var cols = document.getElementsByClassName('tail-tail');
     for(i = 0; i < cols.length; i++) {
       cols[i].style.backgroundColor = 'black'; 
       cols[i].style.color = 'white'; 
     }
+    document.getElementById("cabecera").style.backgroundColor = "black";
   }
   else
   {
     var cols = document.getElementsByClassName('tail-head');
     for(i = 0; i < cols.length; i++) {
       cols[i].style.backgroundColor = 'rgb(20, 12, 0)';
-      cols[i].style.color = 'white';  
+      cols[i].style.color = 'white';
+      cols[i].style.borderColor = 'rgb(20, 12, 0)';  
     }
+  }
+  
+
+  function fondo() {
+    document.getElementById("cabecera").style.backgroundColor = "rgb(34, 20, 0)";
+    document.body.style.background = "rgb(20, 12, 0";
   }
 </script>

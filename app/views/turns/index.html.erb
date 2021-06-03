@@ -10,6 +10,7 @@
     <%= link_to "Atras ⮌", home_path, class: "but-back" %>
     <%= link_to "Barberos", barbers_path, class: "but-resources" %>
     <%= link_to "Dias libres", holidays_path, class: "but-resources-free" %>
+    <%= link_to "Horarios libres", freetimes_path, class: "but-resources-free" %>
     <button class = "but-resources-selected">Turnos</button>
     <%= link_to "Usuarios", users_index_path, class: "but-resources" %>
     <%= link_to "Servicios", services_path, class: "but-resources" %>
@@ -82,7 +83,7 @@
       <% @turns.reverse_each do |turn| %>
         <tr>
         <% if turn.time %>
-          <td class = "vital"><%= turn.time.strftime("%a %d/%m %H:%M") %></td>
+          <td class = "vital"><%= turn.formatDate(turn.time)[0] %> <%=turn.time.strftime("%-d") %> de <%= turn.formatDate(turn.time)[1] %>, <%= turn.time.strftime("%H:%M")%>hs</td>
         <% else %>
           <td class = "vital"> Indefinido </td>
         <% end %>

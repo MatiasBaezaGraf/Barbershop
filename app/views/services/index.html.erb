@@ -10,6 +10,7 @@
     <%= link_to "Atras ⮌", home_path, class: "but-back" %>
     <%= link_to "Barberos", barbers_path, class: "but-resources" %>
     <%= link_to "Dias libres", holidays_path, class: "but-resources-free" %>
+    <%= link_to "Horarios libres", freetimes_path, class: "but-resources-free" %>
     <%= link_to "Turnos", turns_path, class: "but-resources" %>
     <%= link_to "Usuarios", users_index_path, class: "but-resources" %>
     <button class = "but-resources-selected">Servicios</button>
@@ -25,8 +26,8 @@
     <table class = "index">
       <thead>
         <tr id = "cabecera">
-          <th class = "vital">Name</th>
-          <th class = "vital">Duration</th>
+          <th class = "vital">Nombre</th>
+          <th class = "vital">Duración</th>
           <th colspan="2"></th>
         </tr>
       </thead>

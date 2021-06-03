@@ -8,7 +8,7 @@
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" textalign="center">
 
   <div class = "navbar3">
-        <%= link_to "Atras ⮌", home_path, class: "but-back" %>
+        <%= link_to "Atras ⮌", barbers_path, class: "but-back" %>
   </div>
 
   <div class = 'alignment'>
@@ -50,6 +50,8 @@
 
 <script>
 
+
+
 if(localStorage.getItem('theme') == 'dark'){
   document.body.style.background = "#212121";
   var cols = document.getElementsByClassName('navbar3');
@@ -86,7 +88,15 @@ if(localStorage.getItem('theme') == 'dark'){
     cols[i].style.color = 'white';  
   }
 }
-  
+else
+{
+  document.body.style.background = "blanchedalmond";
+  var cols = document.getElementsByClassName('tail-head');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.borderColor = 'blanchedalmond';
+  }
+}
+
 </script>
 
 

@@ -1,0 +1,66 @@
+<%= form_with(model: freetime) do |form| %>
+  <% if freetime.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(freetime.errors.count, "error") %> prohibited this freetime from being saved:</h2>
+
+      <ul>
+        <% freetime.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if params[:barber_id].to_i == -1 %>
+    <div class="field" >
+      <h3 class = "titles" style = "font-size:110%">desde</h3>
+      <%= form.time_select(:from, {minute_step: 15},{ :class => 'admin_select' } )%>
+      <br>
+      <br>
+      <h3 class = "titles" style = "font-size:110%">hasta</h3>
+      <%= form.time_select(:to, {minute_step: 15},{ :class => 'admin_select' } )%>
+      <br>
+    </div>
+
+    <div class="field" style="display:none">
+      <%= form.label :permanent %>
+      <%= form.number_field :permanent, :value => params[:permanent] %>
+    </div>
+
+    <div class="field" style="display:none" >
+      <%= form.label :barber_id %>
+      <%= form.text_field :barber_id, :value => params[:barber_id]  %>
+    </div>
+
+  <% else %>
+
+    <div class="field" >
+      <h3 class = "titles" style = "font-size:110%">desde</h3>
+      <%= form.time_select(:from, {minute_step: 15},{ :class => 'admin_select' } )%>
+      <br>
+      <br>
+      <h3 class = "titles" style = "font-size:110%">hasta</h3>
+      <%= form.time_select(:to, {minute_step: 15},{ :class => 'admin_select' } )%>
+      <br>
+    </div>
+
+    <div class="field"  style="display:none">
+      <%= form.label :permanent %>
+      <%= form.number_field :permanent, :value => 1 %>
+    </div>
+    <br>
+    <br>
+    <div class="field">
+      <h3 class = "titles" style = "font-size:110%">Barbero</h3>
+      <%= form.collection_select(:barber_id, Barber.all, :id, :first_name, {}, {:class => 'admin_select'}) %>
+    </div>
+
+  <% end %>
+
+  <br>
+  <br>
+
+  <div class="actions">
+    <%= form.submit "FINALIZAR", class: 'but-login' %>
+  </div>
+<% end %>

@@ -16,6 +16,13 @@
 */ 
 
  @import "../../../node_modules/daterangepicker/daterangepicker.css";
+
+ .gg-dark-mode{
+    display: inline-block;
+ }
+ #mode{
+    display: inline-block;
+ }
  
  .html,body{
     scroll-behavior: smooth;
@@ -129,6 +136,7 @@
     align-items: center;
     text-align: center;
     z-index: -1;
+    height: 50%;
  }
  .dark{
     background-color: rgb(20, 12, 0);;
@@ -244,6 +252,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
     text-align: center;
+    border-bottom: 3px solid rgb(158, 116, 67);
  }
 
   
@@ -253,6 +262,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
     text-align: left;
+    border-bottom: 3px solid rgb(158, 116, 67);
  }
  .navbar3{
     width: 100%;
@@ -268,7 +278,8 @@
  }
  .tail-head{
     background-color: blanchedalmond;
-    color: rgb(20, 12, 0); 
+    color: rgb(20, 12, 0);
+    border-bottom: 3px solid rgb(158, 116, 67); 
  }
  .tail-tail{
     background-color: rgb(20, 12, 0);
@@ -305,7 +316,7 @@
 	padding-left: 20px;
 	background-color: #474747;
 	color: #bfbfbf;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Spartan', sans-serif;
 }
 .index th{
 	/*background-color: rgb(34, 20, 0);*/
@@ -513,6 +524,8 @@
 
 .but-dark-l{
     float: left;
+    border-bottom: 3px solid rgb(158, 116, 67);
+    margin-right: 2vw;
 }
 .but-dark:hover{
     background-color: rgb(34, 34, 34);
@@ -713,7 +726,7 @@
     padding-bottom: 5px;
     padding-left: 10px;
     padding-right: 10px;
-    font-size: 100%;
+    font-size: 125%;
     font-weight: bold;
 }
 .but-delete-u{
@@ -780,10 +793,13 @@
 .admin_select{
     background-color: rgb(43, 26, 0);
     color: white;
-    padding: 2%;
+    padding: 1.5%;
     font-family: 'Roboto Mono', monospace;
     font-weight: bold;
+    font-size: 100%;
 }
+
+
 
 
 .imagen{
@@ -821,15 +837,7 @@
     text-align: center;
 }
 .col-2{
-    background-color: rgb(224, 207, 181);
-    text-align: center;
-}
-.col-3{
-    background-color:  rgb(224, 207, 181);
-    text-align: center;
-}
-.col-4{
-    background-color:rgb(224, 207, 181);
+    background-color: blanchedalmond;
     text-align: center;
 }
 .col-11 {float: left; width: 20%; text-align: right;} 
@@ -842,8 +850,9 @@
     .navbar{position: sticky; position: -webkit-sticky; top: 0;}
     .navbar2{position: sticky; position: -webkit-sticky; top: 0;}
     .navbar3{position: sticky; position: -webkit-sticky; top: 0;}
-    .head{padding-top: 0%; padding-bottom: 5%; height: 78vh;}
-    .main-body-2{background-color:rgb(20, 12, 0);}
+    .head{padding-top: 0%; padding-bottom: 5%; height: auto;}
+    .main-body-1{display: flex; flex-direction: row;}
+    .main-body-2{background-color:rgb(20, 12, 0); display: flex; flex-direction: row;}
     .body-login{margin-left: 30%; margin-right: 30%; border-right:15px solid rgb(34, 20, 0); border-left:15px solid rgb(34, 20, 0)}
     .tail-login{padding-top: 5%; padding-bottom: 5%;}
     .image-container{margin-left: 2.2%; background-color: rgb(20, 12, 0);}
@@ -857,7 +866,7 @@
     .but-resources-free{padding: 10px; margin-right: 0%; display: inline;}
     .but-login{padding-left: 8%; padding-right: 8%; padding-top: 6px; padding-bottom: 6px;}
     .but-scroll{padding-left: 2%; padding-right: 2%; padding-top: 6px; padding-bottom: 6px;}
-    .but-dark-l{visibility:visible; display: inline; margin-right:6vw;}
+    .but-dark-l{visibility:visible; display: inline; margin-right: 4vw;} 
     .but-dark {display: inline; }
     .index th{padding-top: 15px; padding-bottom: 15px; text-align: center;}
     .index td{padding-top: 15px; padding-bottom: 15px; text-align: center;}
@@ -872,13 +881,8 @@
     .not-radio-toolbar label{padding: 0.65vw; font-size: 1.38vw;}
     .disabled{padding: 0.65vw; font-size: 1.38vw;}
     #today{padding: 0.65vw; font-size: 1.38vw;}
-    .col-1 {float: left; width: 25%; background-color:  rgb(224, 207, 181)}
-    .col-2 {float: left; width: 25%; background-color:rgb(224, 207, 181)}
-    .col-3 {float: left; width: 25%; background-color:  rgb(224, 207, 181)}
-    .col-4 {float: left; width: 25%; background-color:rgb(224, 207, 181)}
-    .col-5 {float: left; width: 33.3%; background-color:  blanchedalmond;}
-    .col-6 {float: left; width: 33.3%; background-color:  blanchedalmond;}
-    .col-7 {float: left; width: 33.3%; background-color:  blanchedalmond;}
+    .col-1 {background-color:  rgb(224, 207, 181)}
+    .col-2 {background-color: blanchedalmond}
     .col-8 {float: left; width: 100%; background-color: black;} 
     .col-9 {float: left; width: 25%; background-color: black;}
     .col-10 {float: right; width: 25%; background-color: black;}

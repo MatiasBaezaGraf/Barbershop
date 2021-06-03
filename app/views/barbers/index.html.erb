@@ -10,6 +10,7 @@
     <%= link_to "Atras ⮌", home_path, class: "but-back" %>
     <button class = "but-resources-selected">Barberos</button>
     <%= link_to "Dias libres", holidays_path, class: "but-resources-free" %>
+    <%= link_to "Horarios libres", freetimes_path, class: "but-resources-free" %>
     <%= link_to "Turnos", turns_path, class: "but-resources" %>
     <%= link_to "Usuarios", users_index_path, class: "but-resources" %>
     <%= link_to "Servicios", services_path, class: "but-resources" %>
@@ -18,6 +19,7 @@
   <div class = "secondary-head-1">
     <br>
     <h1 class = "titles">Barberos</h1>
+    <h3 class = "error"><%= flash[:notice] %></h3>
     <br>
   </div>
 

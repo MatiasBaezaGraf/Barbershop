@@ -27,6 +27,8 @@
               <%= link_to "Gestionar turnos", turns_path, class: "but-sidebar" %>
               <br>
               <%= link_to "Gestionar dias libres", holidays_path, class: "but-sidebar" %>
+              <br>
+              <%= link_to "Gestionar horarios", freetimes_path, class: "but-sidebar" %>
             </div>
             <br>
             <%= link_to "Crear Turno", new_turn_path, class: "but-sidebar-r" %>
@@ -48,7 +50,7 @@
         <br>
         <a class ="but-sidebar" href="#div3">Nosotros</a>
         <br>
-        <a id = "mode" class="but-sidebar" onclick="darkMode()">Modo oscuro ☀</a>
+        <a id = "mode" class="but-sidebar" onclick="darkMode()">Modo oscuro </a>
         <br>
         <br>
         <br>
@@ -78,7 +80,7 @@
             <%else%>
               <%= link_to "Iniciar Sesion", new_user_session_path, class: "but-nav" %>
             <%end%>
-            <a class ="but-nav" href="#section2">Barberos</a>
+            <a class ="but-nav" href="#div1">Barberos</a>
             <%= link_to "Reservar Turno", new_turn_path, class: "but-reservation" %>
             <a class ="but-nav" href="#section1">Servicios</a>   
             <a class ="but-nav" href="#div3">Nosotros</a>
@@ -99,25 +101,23 @@
                     <br>
                     <h2 class = "titles-third">Corte de Pelo</h2>     
                     <br>
-                    <%= image_tag ("SERVICIO1.jpeg"), class:"imagen" %>
+                    <%= image_tag ("SERVICIO3.jpeg"), class:"imagen" %>
                 </div>
-                <br>
                 <br>
             </div>
 
-            <div class = col-2>
+            <div class = col-1>
                 <br>
                 <div class = image-container>
                     <br>
                     <h2 class = "titles-third">Corte de Barba</h2>
                     <br>
-                    <%= image_tag ("SERVICIO2.jpeg"), class:"imagen" %>
+                    <%= image_tag ("SERVICIO3.jpeg"), class:"imagen" %>
                 </div>
-                <br>
                 <br>
             </div>
 
-            <div class = col-3>
+            <div class = col-1>
                 <br>
                 <div class = image-container>
                     <br>
@@ -126,18 +126,41 @@
                     <%= image_tag ("SERVICIO3.jpeg"), class:"imagen" %>
                 </div>
                 <br>
-                <br>
             </div>
 
-            <div class = col-4>
+        </div>
+        <div class = "main-body-1">
+        
+            <div class = col-1>
                 <br>
                 <div class = image-container>
                     <br>
                     <h2 class = "titles-third">Servicio4</h2>
                     <br>
-                    <%= image_tag ("SERVICIO4.jpeg"), class:"imagen" %>
+                    <%= image_tag ("SERVICIO3.jpeg"), class:"imagen" %>
                 </div>
                 <br>
+            </div>
+
+            <div class = col-1>
+                <br>
+                <div class = image-container>
+                    <br>
+                    <h2 class = "titles-third">Servicio5</h2>
+                    <br>
+                    <%= image_tag ("SERVICIO3.jpeg"), class:"imagen" %>
+                </div>
+                <br>
+            </div>
+
+            <div class = col-1>
+                <br>
+                <div class = image-container>
+                    <br>
+                    <h2 class = "titles-third">Servicio6</h2>
+                    <br>
+                    <%= image_tag ("SERVICIO3.jpeg"), class:"imagen" %>
+                </div>
                 <br>
             </div>
         </div>
@@ -164,7 +187,7 @@
         </div> 
 
         <div class = "main-body-2">
-            <div class = col-5>
+            <div class = col-2>
                 <div class = image-container>
                     <br>
                     <h2 class = "titles-secondary">Erwin Fritzler</h2>
@@ -180,7 +203,7 @@
                 <br>
             </div>
 
-            <div class = col-6>
+            <div class = col-2>
                 <div class = image-container>
                     <br>
                     <h2 class = "titles-secondary">Kevin Coto</h2>
@@ -196,7 +219,7 @@
                 <br>
             </div>
 
-            <div class = col-7>
+            <div class = col-2>
                 <div class = image-container>
                     <br>
                     <h2 class = "titles-secondary">Jero</h2>
@@ -413,13 +436,17 @@ function darkMode() {
   }
   var cols = document.getElementsByClassName('col-2');
   for(i = 0; i < cols.length; i++) {
-    cols[i].style.backgroundColor = '#141414';
+    cols[i].style.backgroundColor = '#212121';
   }
   var cols = document.getElementsByClassName('col-3');
   for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = '#141414';
   }
   var cols = document.getElementsByClassName('col-4');
+  for(i = 0; i < cols.length; i++) {
+    cols[i].style.backgroundColor = '#141414';
+  }
+  var cols = document.getElementsByClassName('col-4-5');
   for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = '#141414';
   }
@@ -493,17 +520,17 @@ function darkMode() {
   }
 
   var x = document.getElementById("mode");
-  if (x.innerHTML === "Modo oscuro ☀") {
-    x.innerHTML = "Modo claro ☀";
+  if (x.innerHTML === "Modo oscuro") {
+    x.innerHTML = "Modo claro";
   } else {
-    x.innerHTML = "Modo oscuro ☀";
+    x.innerHTML = "Modo oscuro";
   }
 
  var x = document.getElementById("mode-desk");
-  if (x.innerHTML === "Modo oscuro ☀") {
-    x.innerHTML = "Modo claro ☀";
+  if (x.innerHTML === "Modo oscuro") {
+    x.innerHTML = "Modo claro";
   } else {
-    x.innerHTML = "Modo oscuro ☀";
+    x.innerHTML = "Modo oscuro";
   }
   
 
@@ -564,13 +591,13 @@ function lightMode() {
   }
   var cols = document.getElementsByClassName('col-2');
   for(i = 0; i < cols.length; i++) {
-    cols[i].style.backgroundColor = 'rgb(224, 207, 181)';
+    cols[i].style.backgroundColor = 'blanchedalmond';
   }
   var cols = document.getElementsByClassName('col-3');
   for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = 'rgb(224, 207, 181)';
   }
-  var cols = document.getElementsByClassName('col-4');
+  var cols = document.getElementsByClassName('col-4-5');
   for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = 'rgb(224, 207, 181)';
   }
@@ -644,17 +671,17 @@ function lightMode() {
   }
 
   var x = document.getElementById("mode");
-  if (x.innerHTML === "Modo claro ☀") {
-    x.innerHTML = "Modo oscuro ☀";
+  if (x.innerHTML === "Modo claro") {
+    x.innerHTML = "Modo oscuro";
   } else {
-    x.innerHTML = "Modo claro ☀";
+    x.innerHTML = "Modo claro";
   }
   
   var x = document.getElementById("mode-desk");
-  if (x.innerHTML === "Modo claro ☀") {
-    x.innerHTML = "Modo oscuro ☀";
+  if (x.innerHTML === "Modo claro") {
+    x.innerHTML = "Modo oscuro";
   } else {
-    x.innerHTML = "Modo claro ☀";
+    x.innerHTML = "Modo claro";
   }
   
     document.getElementById( "mode" ).setAttribute( "onclick", "javascript: darkMode();" );

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_01_205639) do
+ActiveRecord::Schema.define(version: 2021_06_03_132745) do
 
   create_table "barbers", force: :cascade do |t|
     t.string "first_name"
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 2021_06_01_205639) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "freetimes", force: :cascade do |t|
+    t.datetime "from"
+    t.datetime "to"
+    t.integer "permanent"
+    t.integer "barber_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["barber_id"], name: "index_freetimes_on_barber_id"
   end
 
   create_table "has_barbers", force: :cascade do |t|
@@ -81,6 +91,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_205639) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "freetimes", "barbers"
   add_foreign_key "has_barbers", "barbers"
   add_foreign_key "has_barbers", "services"
   add_foreign_key "has_turns", "services"

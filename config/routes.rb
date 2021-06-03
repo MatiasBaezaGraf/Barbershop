@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :freetimes
   resources :holidays
   get 'users/index'
   match '/users',   to: 'users#index',   via: 'get'

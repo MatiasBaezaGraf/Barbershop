@@ -1,0 +1,2 @@
+module FreetimesHelper
+end

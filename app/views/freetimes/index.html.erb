@@ -10,26 +10,15 @@
     <%= link_to "Atras ⮌", home_path, class: "but-back" %>
     <%= link_to "Barberos", barbers_path, class: "but-resources" %>
     <%= link_to "Dias libres", holidays_path, class: "but-resources-free" %>
-    <%= link_to "Horarios libres", freetimes_path, class: "but-resources-free" %>
+    <button class = "but-resources-selected">Horarios libres</button>
     <%= link_to "Turnos", turns_path, class: "but-resources" %>
-    <button class = "but-resources-selected">Usuarios</button>
+    <%= link_to "Usuarios", users_index_path, class: "but-resources" %>
     <%= link_to "Servicios", services_path, class: "but-resources" %>
   </div>
 
   <div class = "secondary-head-1">
     <br>
-    <h1 class = "titles">Usuarios</h1>
-    <div class = "filtros">
-      <div class = "filtros-t">
-        <h4 class = "filtros-texto">Filtros</h4>
-      </div>
-      <form action="/users" method="GET">
-        <input class = "input" type="text" name="first_name" placeholder="Nombre" />
-        <input class = "input" type="number" name="phone_number" placeholder="Número de teléfono" />
-        <input class = "but-login" type="submit", value="Buscar Usuarios" />
-      </form>
-    </div>
-    <br>
+    <h1 class = "titles">Horarios libres</h1>
     <br>
   </div>
 
@@ -37,59 +26,47 @@
     <table class = "index">
       <thead>
         <tr id = "cabecera">
-          <th class = "vital">ID</th>
-          <th class = "vital">Nombre</th>
-          <th class = "vital">Apellido</th>
-          <th class = "vital-no">Admin</th>
-          <th class = "vital-no">Email</th>
-          <th class = "vital-no">Telefono</th>
-          <th colspan="2"></th>
+          <th class = "vital">Desde</th>
+          <th class = "vital">Hasta</th>
+          <th class = "vital-no">Tipo</th>
+          <th class = "vital-no">Barbero</th>
+          <th colspan="3"></th>
         </tr>
       </thead>
- 
+
       <tbody>
-        <% @users.each do |user| %>
+        <% @freetimes.each do |freetime| %>
           <tr>
-            <td class = "vital"><%= user.id %><br/></td>
-            <td class = "vital"><%= user.first_name %><br/></td>
-            <td class = "vital"><%= user.last_name %><br/></td>
-            <td class = "vital-no"><%= user.crack(user) %><br/></td>
-            <td class = "vital-no"><%= user.email %><br/></td>
-            <td class = "vital-no"><%= user.phone_number %><br/></td>
-            <% if user.id != current_user.id %>
-              <td class = "vital-no"><%= link_to 'Editar', edit_user_path(user), class: "but-delete-b" %></td>
-              <td class = "dropdown">
+            <td class = "vital"><%= freetime.from.strftime("%H:%M") %>hs</td>
+            <td class = "vital"><%= freetime.to.strftime("%H:%M") %>hs</td>
+            <td class = "vital-no"><%= freetime.tipazo(freetime.permanent) %></td>
+            <td class = "vital-no"><%= freetime.barbername(freetime.barber_id, freetime.permanent) %></td>
+            <td class = "dropdown">
                   <button class="but-drop">Mas▼</button>
                   <div class="dropdown-content">
                     <br>
-                    <h4 class = "dropdown-title">Contacto</h4>
-                    <h5 class = "dropdown-item"><%= user.email %></h5>
-                    <h5 class = "dropdown-item"><%= user.phone_number %></h5>
-                    <br>
-                    <h4 class = "dropdown-title">Admin:</h4>
-                    <h5 class = "dropdown-item"><%= user.crack(user) %></h5>
-                    <br>
-                    <h5 class = "dropdown-delete"><%= link_to 'Editar', edit_user_path(user), class: "but-delete-b" %></h5>
-                    <h5 class = "dropdown-delete"><%= link_to "Eliminar usuario", user, method: :delete, data: { confirm: "Are you sure"}, class: "but-delete-u" %></h5>
+                    <h5 class = "dropdown-delete"><%= link_to 'Editar horario', edit_freetime_path(freetime), class: "but-delete-b" %></h5>
+                    <h5 class = "dropdown-delete"><%= link_to "Eliminar horario", freetime, method: :delete, data: { confirm: "Are you sure"}, class: "but-delete-u" %></h5>
                   </div>
               </td>
+            <% if freetime.permanent == 0%>
+              <td class = "vital-no"><%= link_to 'Editar', edit_freetime_path(freetime), class: "but-delete-b" %></td>
             <% end %>
-            <% if user.id != current_user.id %>
-              <td class = "vital-no"><%= link_to "Eliminar", user, method: :delete, data: { confirm: "Are you sure"}, class: "but-delete-u" %></td>
-            <% end %>
+            <td class = "vital-no"><%= link_to 'Eliminar', freetime, method: :delete, data: { confirm: 'Are you sure?' }, class: "but-delete-u" %></td>
+            <td class = "vital"><% Freetime.toArray(freetime.from, freetime.to) %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
- 
-</body>
 
-<div class = "tail">
+  <div class = "tail">
             <div class = "tail-head">
                 <br>
                 <br>
                 <br>
+                <%= link_to 'Cargar horario general', new_freetime_path(:barber_id => -1, :permanent => -1), class: "but-delete-n" %>
+                <%= link_to 'Cargar horario de barbero', new_freetime_path(:permanent => 1), class: "but-delete-n" %>
                 <br>
                 <br>
                 <br>
@@ -105,10 +82,11 @@
                 <h3 class = "secondary-contact">2021</h3>
                 <br>
             </div>
-</div>
+  </div>
+</body>
 
 <script>
-
+ 
   fondo()
 
   function fondo() {
@@ -125,10 +103,6 @@
     for(i = 0; i < cols.length; i++) {
       cols[i].style.backgroundColor = '#141414';
       cols[i].style.color = 'blanchedalmond';
-    }
-    var cols = document.getElementsByClassName('filtros');
-    for(i = 0; i < cols.length; i++) {
-      cols[i].style.backgroundColor = '#242424';
     }
     var cols = document.getElementsByClassName('navbar2');
     for(i = 0; i < cols.length; i++) {

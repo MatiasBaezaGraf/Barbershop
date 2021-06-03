@@ -9,7 +9,7 @@
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" textalign="center">
 
   <div class = "navbar3">
-        <%= link_to "Atras ⮌", home_path, class: "but-back" %>
+        <%= link_to "Atras ⮌", freetimes_path, class: "but-back" %>
   </div>
 
   <div class = 'alignment'>
@@ -17,37 +17,33 @@
 
     <br>
     
-    <h2 class = "titles-secondary">Resumen del Turno</h2>
+    <h2 class = "titles-secondary">Resumen</h2>
 
-    <br>
+<br>
 
     <div>
-      <h4 class = "paragraph"> Fecha y Hora </h4>
-      <h5 class = "paragraph-f">➤ <%= @turn.formatDate(@turn.time)[0]%> <%= @turn.time.strftime("%-d") %> de <%= @turn.formatDate(@turn.time)[1]%> </h5>
+      <h4 class = "paragraph"> Desde </h4>
+      <h5 class = "paragraph-f">➤ <%= @freetime.from.strftime("%H:%M") %> </h5>
     </div>
-
+    <div>
+      <h4 class = "paragraph"> Hasta </h4>
+      <h5 class = "paragraph-f">➤ <%= @freetime.to.strftime("%H:%M") %> </h5>
+    </div>
+    <div>
+      <h4 class = "paragraph"> Tipo </h4>
+      <h5 class = "paragraph-f">➤ <%= @freetime.tipazo(@freetime.permanent) %> </h5>
+    </div>
     <div>
       <h4 class = "paragraph"> Barbero </h4>
-      <h5 class = "paragraph-f">➤ <%= @turn.barber.first_name %> <%= @turn.barber.last_name %> </h5>
+      <h5 class = "paragraph-f">➤ <%= @freetime.barbername(@freetime.barber_id, @freetime.permanent) %> </h5>
     </div>
-
-    <div>
-      <h4 class = "paragraph"> Cliente </h4>
-      <h5 class = "paragraph-f">➤ <%= @turn.client %> </h5>
-    </div>
-
-    <h4 class = "paragraph"> Servicios </h4>
-    <div class = paragraph-f>
-      <% @turn.services.each do |service| %>
-        <h5 class = "paragraph-s">➤ <%= service.name %></h5>
-      <% end %>
-    </div>
-
-    <%= link_to 'Editar', edit_turn_path(@turn), class: "but-delete-u" %> 
-    <%= link_to "Finalizar", home_path, class: "but-delete-s" %>
 
     <br>
     <br>
+
+    <%= link_to 'Editar', edit_freetime_path(@freetime), class: "but-delete-u" %> 
+    <%= link_to "Finalizar", freetimes_path, class: "but-delete-s" %>
+
     <br>
     <br>
 
@@ -114,6 +110,7 @@ if(localStorage.getItem('theme') == 'dark'){
     for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = '#212121';
     cols[i].style.color = 'white';  
+    cols[i].style.borderColor = '#212121';
   }
 }
 else
@@ -126,3 +123,4 @@ else
 }
   
 </script>
+

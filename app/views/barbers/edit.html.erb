@@ -83,7 +83,16 @@ if(localStorage.getItem('theme') == 'dark'){
   var cols = document.getElementsByClassName('tail-head');
     for(i = 0; i < cols.length; i++) {
     cols[i].style.backgroundColor = '#212121';
-    cols[i].style.color = 'white';  
+    cols[i].style.color = 'white';
+    cols[i].style.borderColor = '#212121';  
+  }
+}
+else
+{
+  document.body.style.background = "blanchedalmond";
+  var cols = document.getElementsByClassName('tail-head');
+    for(i = 0; i < cols.length; i++) {
+    cols[i].style.borderColor = 'blanchedalmond';
   }
 }
   

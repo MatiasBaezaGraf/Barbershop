@@ -5,6 +5,18 @@ class Barber < ApplicationRecord
     has_many :has_barbers
     has_many :services, through: :has_barbers
 
+    def validate_turns(barber)
+        exist = 0
+
+        for i in Turn.all
+            if i.barber == barber and i.time > Date.today - 1.day
+                exist = 1
+            end
+        end
+
+        return exist
+    end
+
     def freeConvert(day, barber_id, time)
 
         
