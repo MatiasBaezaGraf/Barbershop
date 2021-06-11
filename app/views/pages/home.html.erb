@@ -6,10 +6,10 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= javascript_pack_tag 'application','data-turbolinks-track': 'reload' %>
 
-<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0"> 
 
     <div id = "sidebar">
-        <button class="but-cross" onclick="closeNav()">X</button>
+        <button class="but-cross" onclick="closeNav()">❮</button>
         <br>
         <%if current_user%>
           <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, class: "but-sidebar-r" %>
@@ -50,7 +50,7 @@
         <br>
         <a class ="but-sidebar" href="#div3">Nosotros</a>
         <br>
-        <a id = "mode" class="but-sidebar" onclick="darkMode()">Modo oscuro </a>
+        <a id = "mode" class="but-sidebar" onclick="darkMode()">Modo oscuro</a>
         <br>
         <br>
         <br>
@@ -68,7 +68,7 @@
             <%end%>
           </h1>
           <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
-          <h3 class = "secondary-contact">TEL. 0343 15-467-5058</h3>
+          <h3 class = "secondary-contact">TEL: 0343 15-467-5058</h3>
         </div>
 
         
@@ -184,7 +184,25 @@
             <br>
             <h1 class = "titles"> Nuestros Barberos </h1>
             <br>
-        </div> 
+        </div>
+        
+        <% erwin = ""%>
+        <% kevin = ""%>
+        <% gero = ""%>
+        <% barcount = 0%>
+        <% Barber.all.each do |b| %>
+          <% barcount = barcount + 1%>
+          <% case barcount
+              when 1%>
+            <% erwin = b.description %>
+          <%  when 2 %>
+            <% kevin = b.description %>
+          <%  when 3 %>
+            <% gero = b.description %>
+          <% end %>
+        <% end %>
+
+        <% puts "LOSNOMBRE DE LOS BARBER", kevin, erwin, gero%> 
 
         <div class = "main-body-2">
             <div class = col-2>
@@ -193,7 +211,8 @@
                     <h2 class = "titles-secondary">Erwin Fritzler</h2>
                     <br>
                     <%= image_tag ("Erwin.jpeg"), class:"imagen" %>
-                    <p>Descripción y foto</p>
+                    <p class = "web"><%= erwin %></p>
+                    <br>
                     <%= link_to "Reservar turno", new_turn_path(:barber_id => 2), class: "but-reservation" %>
                     <br>
                     <br>
@@ -209,7 +228,8 @@
                     <h2 class = "titles-secondary">Kevin Coto</h2>
                     <br>
                     <%= image_tag ("Kevin.jpeg"), class:"imagen" %>
-                    <p>Descripción y foto</p>
+                    <p class = "web"><%= kevin %></p>
+                    <br>
                     <%= link_to "Reservar turno", new_turn_path(:barber_id => 3), class: "but-reservation" %> 
                     <br>
                     <br>
@@ -225,7 +245,8 @@
                     <h2 class = "titles-secondary">Jero</h2>
                     <br>
                     <%= image_tag ("BARBERO3.jpg"), class:"imagen" %>
-                    <p>Descripción y foto</p>
+                    <p class = "web"><%= gero %></p>
+                    <br>
                     <%= link_to "Reservar turno", new_turn_path(:barber_id => 4), class: "but-reservation" %> 
                     <br>
                     <br>
@@ -249,13 +270,13 @@
         </div>
 
         <div class = "main-body-1">
-          <div class = "col-14">
+          <div class = "col-3">
             <div class = image-container>
               <%= image_tag ("NOSOTROS.jpeg"), class:"imagen-we" %>
             </div>
           </div>
 
-          <div class = "col-15">
+          <div class = "col-3">
             <p class = "we">
               Talking of Hamilton, he's set to spend at least another week stuck on 99 career pole positions. He'll have another opportunity to hit the century mark next weekend in Spain, but for now, it is all about championship gains and keeping his nose in front of his arch rival, Max Verstappen.
               He nailed his first lap in Q3 to grab provisional pole by just 0.007s from his team mate, and as the wind picked up, those two couldn't improve on their second runs, meaning P1 belonged to Bottas.
@@ -264,12 +285,14 @@
               But overlook Valtteri Bottas at your peril, the Finn was very quick here last season and yesterday, he was right back to his best form.
             </p>
           </div>
-
         </div> 
+
+        
+            
+
     
         <div class = "tail">
             <div class = "tail-head">
-                <br>
                 <h1 id = "y" style = "color:blanchedalmond"> x </h1>
                 <h2 class = "titles-contact">Informacion de contacto</h2>
                 <br>
@@ -277,11 +300,25 @@
 
             <div class = "tail-tail">
                 <br>
-                <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
-                <h3 class = "secondary-contact">0343 15-467-5058</h3>
-                <h3 class = "secondary-contact">ayelenpeter@hotmail.com.ar</h3>
-                <br>
-                <h3 class = "secondary-contact">2021</h3>
+                <div class = "col-img">
+                  <br>
+                  <%= image_tag ("POLE.gif"), class:"imagen-we-x" %>
+                </div>
+                <div class = "col">
+                  <br>
+                  <br>
+                  <h3 class = "secondary-contact">25 de mayo 1160 Puiggari</h3>
+                  <h3 class = "secondary-contact">Entre Rios, Argentina</h3>
+                  <br>
+                  <h3 class = "secondary-contact">TEL: 0343 15-467-5058</h3>
+                  <h3 class = "secondary-contact">ayelenpeter@hotmail.com.ar</h3>
+                  <br>
+                  <h3 class = "secondary-contact">2021</h3>
+                </div>
+                <div class = "col-img">
+                  <br>
+                  <%= image_tag ("POLE.gif"), class:"imagen-we-x" %>
+                </div>
                 <br>
             </div>
         </div>
@@ -401,10 +438,7 @@ function darkMode() {
 
   document.getElementById("sidebar").style.backgroundColor = 'rgb(12, 12, 12)';
 
-   var cols = document.getElementsByClassName('but-cross');
-  for(i = 0; i < cols.length; i++) {
-    cols[i].style.backgroundColor = 'black';
-  }
+
   document.getElementById("panel").style.backgroundColor = '#212121';
 
   document.getElementById("navbar").style.backgroundColor = 'black';
@@ -555,10 +589,6 @@ function lightMode() {
 
   document.getElementById("sidebar").style.backgroundColor = 'rgb(22, 13, 0)';
 
-   var cols = document.getElementsByClassName('but-cross');
-  for(i = 0; i < cols.length; i++) {
-    cols[i].style.backgroundColor = '#111';
-  }
   document.getElementById("panel").style.backgroundColor = '#blanchedalmond';
 
   document.getElementById("navbar").style.backgroundColor = 'rgb(70, 42, 0)';

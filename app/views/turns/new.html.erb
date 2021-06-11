@@ -23,6 +23,8 @@
     <% if params[:barber_id].blank? %>
       <%= render 'first_form', turn: @turn %>
     <% else %>
+      <% @turn.barber_id = params[:barber_id] %>
+      <% @turn.save %>
       <%= render 'form', turn: @turn %>
     <% end %>
 

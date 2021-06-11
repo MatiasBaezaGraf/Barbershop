@@ -11,10 +11,18 @@ class BarbersController < ApplicationController
   # GET /barbers/1 or /barbers/1.json
   def show
     @schedule = Barber.schedule
-    @free_days = Turn.weekends_off(params[:id])
+    @free_days = Turn.weekends_off_modded(params[:id])
     @occupied_today = Barber.today_busy(params[:id])
     @occupied_tomorrow = Barber.tomorrow_busy(params[:id])
     @occupied_after = Barber.after_busy(params[:id])
+
+    puts "ACA VA HOY FECHA", Time.now.strftime("%H:%M")
+    puts "ACA VA EL ID", params[:id]
+    puts "ACA VA SCHEDULE", @schedule
+    puts "ACA VA FREE", @free_days
+    puts "ACA VA HOY", @occupied_today
+    puts "ACA VA MAÑANA", @occupied_tomorrow
+    puts "ACA VA PASADO", @occupied_after
   end
 
   def free

@@ -11,38 +11,100 @@
       </div>
     <% end %>
 
-    
-   
-    <div class="radio-toolbar">
-      <h3 class = "paragraph">Elija su horario</h3>
-        <% disabledcounter = 0 %>
-        <% Turn.posibles(@occupied, @times, @turn.time, @turn.count_hours) %>
-        <% @times.each do |moment| %>
-          <% busycounter = 0 %>
-          <% @occupied.each do |busy| %>
-            <% if busy[0] == moment%>
-              <% busycounter = 1%>
-              <% disabledcounter = busy[1] %>
+  <h3 class = "paragraph">Elija su horario</h3>
+
+  <% morningcounter = 0%>
+  <% eveningconuter = 0%>
+
+  <% Turn.posibles(@occupied, @times, @turn.time, @turn.count_hours, @turn) %>
+  <% @times.each do |moment| %>
+    <% if moment.hour < 12 %>
+      <% morningcounter = morningcounter + 1%>
+    <% else %>
+      <% eveningconuter = eveningconuter + 1%>
+    <% end %>
+  <% end %>
+
+
+  <div class = "flexin">
+    <% if morningcounter != 0  %>
+      <div class="radio-toolbar">
+          <% disabledcounter = 0 %>
+          <% start = 0 %>
+          <% recorrido = 0%>
+          <% Turn.posibles(@occupied, @times, @turn.time, @turn.count_hours, @turn) %>
+          <% @times.each do |moment| %>
+            <% if start == 0%>
+              <div class = "disabled"> Mañana </div>
+            <% start = 1%> 
+            <% end %>
+            <% if moment.hour < 12 %>
+              <% busycounter = 0 %>
+              <% @occupied.each do |busy| %>
+                <% if busy[0] == moment%>
+                  <% busycounter = 1%>
+                  <% disabledcounter = busy[1] %>
+                <% end %>
+              <% end %>
+              <% if busycounter != 0%>
+                <div class = "disabled"> Hola </div>
+                <% puts disabledcounter%>
+              <% else %>
+                <% if disabledcounter > 1%>
+                  <div class = "disabled"> Hola </div>
+                  <% disabledcounter = disabledcounter - 1%>
+                <%else%>
+                  <%= form.radio_button :time, moment, as: :string %> 
+                  <%= form.label :time, moment.strftime("%H %M"), :value => moment %>
+                <% end%>
+              <% end%>
+              <% recorrido = recorrido + 1%>
             <% end %>
           <% end %>
-          <% if busycounter != 0%>
-            <div class = "disabled"> Hola </div>
-            <% puts disabledcounter%>
-          <% else %>
-            <% if disabledcounter > 1%>
-              <div class = "disabled"> Hola </div>
-              <% disabledcounter = disabledcounter - 1%>
-            <%else%>
-              <%= form.radio_button :time, moment, as: :string %> 
-              <%= form.label :time, moment.strftime("%H %M"), :value => moment %>
-            <% end%>
-          <% end%>
-        <% end %>
-    </div>
+        </div>
+      <% end %>
 
-    <br>
-    <br>
-    <br>
+      <% if eveningconuter != 0%>
+        <div class="radio-toolbar">
+          <% disabledcounter = 0 %>
+          <% start2 = 0 %>
+          <% recorrido2 = 0%>
+          <% @times.each do |moment| %>
+            <% if start2 == 0%>
+              <div class = "disabled"> Tarde </div>
+              <% start2 = 1%> 
+            <% end %>
+            <% if moment.hour >= 12 %>
+              <% busycounter = 0 %>
+              <% @occupied.each do |busy| %>
+                <% if busy[0] == moment%>
+                  <% busycounter = 1%>
+                  <% disabledcounter = busy[1] %>
+                <% end %>
+              <% end %>
+              <% if busycounter != 0%>
+                <div class = "disabled"> Hola </div>
+                <% puts disabledcounter%>
+              <% else %>
+                <% if disabledcounter > 1%>
+                  <div class = "disabled"> Hola </div>
+                  <% disabledcounter = disabledcounter - 1%>
+                <%else%>
+                  <%= form.radio_button :time, moment, as: :string %> 
+                  <%= form.label :time, moment.strftime("%H %M"), :value => moment %>
+                <% end%>
+              <% end%>
+              <% recorrido2 = recorrido2 + 1 %>
+            <% end %>
+          <% end %>
+      </div>
+    <% end %>
+  </div>
+  
+
+  <br>
+  <br>
+  <br>
 
     <div class="actions">
       <%= form.submit "INGRESAR", class: 'but-login' %>

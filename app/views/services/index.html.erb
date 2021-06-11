@@ -6,14 +6,34 @@
 <%= javascript_pack_tag 'application','data-turbolinks-track': 'reload' %>
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" height="100%" >
+
+  <div id = "sidebar">
+        <button class="but-cross" onclick="closeNav()">❮</button>
+        <br>
+        <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, class: "but-sidebar-r" %>
+        <br>
+        <%= link_to "❮ Atras", home_path, method: :get, class: "but-sidebar" %>  
+        <br>
+        <%= link_to "Barberos", barbers_path, class: "but-sidebar" %>
+        <br>
+        <%= link_to "Dias libres", holidays_path, class: "but-sidebar" %>
+        <br>
+        <%= link_to "Horarios libres", freetimes_path, class: "but-sidebar" %>
+        <br>
+        <%= link_to "Turnos", turns_path, class: "but-sidebar" %>
+        <br>
+        <%= link_to "Usuarios", users_index_path, class: "but-sidebar" %>
+        <br>
+        <%= link_to "Servicios", "#", class: "but-sidebar-selected" %>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
   <div class = "navbar2">
-    <%= link_to "Atras ⮌", home_path, class: "but-back" %>
-    <%= link_to "Barberos", barbers_path, class: "but-resources" %>
-    <%= link_to "Dias libres", holidays_path, class: "but-resources-free" %>
-    <%= link_to "Horarios libres", freetimes_path, class: "but-resources-free" %>
-    <%= link_to "Turnos", turns_path, class: "but-resources" %>
-    <%= link_to "Usuarios", users_index_path, class: "but-resources" %>
-    <button class = "but-resources-selected">Servicios</button>
+    <%= link_to "❮ Atras", home_path, class: "but-back" %>
+    <button class="but-resources-mobile" onclick="openNav()">≡ &nbsp;Menu</button>
+    <button class="but-resources" onclick="openNavDesk()">❯ &nbsp;Menu</button>
   </div>
 
   <div class = "secondary-head-1">
@@ -58,13 +78,11 @@
             </div>
 
             <div class = "tail-tail">
-                <br>
-                <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
-                <h3 class = "secondary-contact">0343 15-467-5058</h3>
-                <h3 class = "secondary-contact">ayelenpeter@hotmail.com.ar</h3>
-                <br>
-                <h3 class = "secondary-contact">2021</h3>
-                <br>
+                <div class = "col-img">
+                  <br>
+                  <h3 class = "secondary-contact">Charme Barbershop®</h3>
+                  <br>
+                </div>
             </div>
   </div>
 </body>
@@ -102,5 +120,20 @@
       cols[i].style.backgroundColor = 'black'; 
       cols[i].style.color = 'white'; 
     }
+    document.getElementById("sidebar").style.backgroundColor = 'rgb(12, 12, 12)';
+  
+  }
+
+  function openNav() {
+    document.getElementById("sidebar").style.width = "75%";
+  }
+
+  function openNavDesk() {
+    document.getElementById("sidebar").style.width = "25%";
+  }
+
+  function closeNav() {
+    document.body.style.marginLeft = "0";
+    document.getElementById("sidebar").style.width = "0";
   }
 </script>

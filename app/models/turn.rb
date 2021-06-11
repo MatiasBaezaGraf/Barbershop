@@ -27,8 +27,8 @@ class Turn < ApplicationRecord
 
     puts "Holasslaldladlalfalflalfdsfas"
     puts barid
-          
-          
+
+
 
     weekends = []
     today = Date.today
@@ -39,7 +39,7 @@ class Turn < ApplicationRecord
 
         Holiday.all.each do |f|
           if barid[0].to_s == f.barber.id.to_s
-            
+
             if f.permanent == 1
               if f.freeday.strftime("%a") == nextday.strftime("%a")
                 weekends.push(nextday)
@@ -51,14 +51,14 @@ class Turn < ApplicationRecord
         #  weekends.push(nextday)
         #end
       end
-    end   
-    
+    end
+
     Holiday.all.each do |d|
       if barid[0].to_s == d.barber.id.to_s
         if d.freeday >= Date.today
           weekends.push(d.freeday)
         end
-      end 
+      end
     end
 
     weekends
@@ -75,105 +75,134 @@ class Turn < ApplicationRecord
       end
     end
     times = []
-    now = chosen.time + 8.hours
-    for i in 0..48
+    now = chosen.time
+    for i in 0..96
       nextturn = now + (15*i).minutes
       times.push(nextturn)
     end
     times
   end
 
-  def self.posibles(busy, times, day, d)
-    opM = "08:00".to_datetime
-    clM = "13:00".to_datetime
-    opA = "16:00".to_datetime
-    clA = "20:00".to_datetime
-    libres = times
-    mañana = []
-    tarde = []
+  def self.posibles(busy, times, day, d, turn)
+    free = times
+    freetimes = []
+    unicos = []
+    horarios = []
     occupied = busy.sort
     toDelete = []
-    inicio = []
-    final = []
     duration = d/15
     index = 0
+    u = 0
 
-    inicio.push(libres[0])
-
-    for i in occupied
-      if i[0].strftime("%Y-%m-%d") == day.strftime("%Y-%m-%d")
-        index = libres.index(i[0])
-
-        #Crear los intervalos libres entre turno y turno
-        if i[0] == libres[0]
-          inicio.delete_at(0)
-          inicio.push(libres[libres.index(i[0]) + i[1]])
-        elsif i[0] != libres[0]
-          inicio.push(libres[libres.index(i[0]) + i[1]])
-          final.push(libres[libres.index(i[0]) -1])
-        else
-          inicio.push(libres[libres.index(i[0]) + i[1]])
-        end
-
-        #Añadir a lista de eliminados los modulos pertenecientes al turno
-        for t in (1..i[1]).step(1)
-          toDelete.push(libres[index])
-          index = index + 1
-        end
-      end
-    end
-
-    for i in libres
-      #Añadir a lista de eliminados los modulos fuera de horario
-      if i.strftime("%H:%M").to_datetime >= clM and i.strftime("%H:%M").to_datetime < opA
-        toDelete.push(i)
+    for h in Freetime.all.where(:barber_id => turn.barber.id)
+      if h.permanent.to_i == 0 and h.day.strftime("%d-%m-%Y") == day.strftime("%d-%m-%Y")
+        u = 1
+        unicos.push(h)
       end
 
-      #Creamos la separacion entre horarios de mañana y de tarde
-      if i.strftime("%H:%M").to_datetime >= opM and i.strftime("%H:%M").to_datetime <= clM
-        mañana.push(i)
-      elsif i.strftime("%H:%M").to_datetime >= opA and i.strftime("%H:%M").to_datetime <= clA
-        tarde.push(i)
-      end
-    end
-
-    final.push(libres[libres.length - 2])
-
-    puts "Iniciooooooooooooooooooooo: #{inicio}"
-    puts "Finallllllllllllllllllllll: #{final}"
-
-    #Evaluamos que nuestro turno entre en los intervalos libres de la mañana
-    for i in inicio
-      if i == final[inicio.index(i)]
-        toDelete.push(i)
+      if u == 0
+        freetimes = Freetime.all.where(:barber_id => turn.barber.id)
       else
-        modules = libres.index(final[inicio.index(i)]) - libres.index(i) + 1
+        freetimes = unicos
+      end
+    end
 
-        if modules >= duration
-          ind = libres.index(final[inicio.index(i)]) - duration + 2
-          for m in 1..duration
-            toDelete.push(libres[ind])
-            ind = ind + 1
+    puts "Unicosooooososososoos: #{freetimes}"
+
+    for h in freetimes
+      op = h.from
+      cl = h.to
+      horarios.push([op, cl])
+      libres = []
+      inicio = []
+      final = []
+
+      for f in free
+        if f.strftime("%H:%M") >= op.strftime("%H:%M") and f.strftime("%H:%M") <= cl.strftime("%H:%M")
+          libres.push(f)
+        end
+      end
+
+      inicio.push(libres[0])
+
+      for i in occupied
+        if i[0].strftime("%Y-%m-%d") == day.strftime("%Y-%m-%d") and i[0].strftime("%H:%M") >= op.strftime("%H:%M") and i[0].strftime("%H:%M") <= cl.strftime("%H:%M")
+          index = libres.index(i[0])
+
+          #Crear los intervalos libres entre turno y turno
+          if i[0] == libres[0]
+            inicio.delete_at(0)
+            inicio.push(libres[libres.index(i[0]) + i[1]])
+          elsif i[0] != libres[0]
+            inicio.push(libres[libres.index(i[0]) + i[1]])
+            final.push(libres[libres.index(i[0]) -1])
+          else
+            inicio.push(libres[libres.index(i[0]) + i[1]])
           end
+
+          #Añadir a lista de eliminados los modulos pertenecientes al turno
+          for t in (1..i[1]).step(1)
+            toDelete.push(libres[index])
+            index = index + 1
+          end
+        end
+      end
+
+      final.push(libres[libres.length - 2])
+
+      for i in inicio
+        if i == final[inicio.index(i)]
+          toDelete.push(i)
         else
-          ind = libres.index(i)
-          for m in 1..modules
-            toDelete.push(libres[ind])
-            ind = ind + 1
+          puts "Pruebaaaaaaaaaaaaaa #{inicio}, #{final}"
+          modules = libres.index(final[inicio.index(i)]) - libres.index(i) + 1
+
+          if modules >= duration
+            ind = libres.index(final[inicio.index(i)]) - duration + 2
+            for m in 1..duration
+              toDelete.push(libres[ind])
+              ind = ind + 1
+            end
+          else
+            ind = libres.index(i)
+            for m in 1..modules
+              toDelete.push(libres[ind])
+              ind = ind + 1
+            end
           end
         end
       end
     end
 
-    #Evaluamos que nuestro turno entre en los intervalos libres de la tarde
-    for i in inicio
-      
+    for h in horarios
+      for f in free
+        if horarios.length == 1
+          if f.strftime("%H:%M") < h[0].strftime("%H:%M") or f.strftime("%H:%M") > h[1].strftime("%H:%M")
+            puts "Ifffffffffffffff #{f}, #{h[0]}, #{h[1]}"
+            toDelete.push(f)
+          end
+        elsif f.strftime("%H:%M") < h[0].strftime("%H:%M") and horarios.index(h) == 0 and horarios.length > 1 #Agregamos a la lista de eliminados todos los tiempos anteriores al inicio de trabajo del barbero
+          toDelete.push(f)
+        elsif !horarios[horarios.index(h) + 1].blank?
+          if f.strftime("%H:%M") > h[1].strftime("%H:%M") and f.strftime("%H:%M") < horarios[horarios.index(h) + 1][0].strftime("%H:%M")
+            toDelete.push(f)
+          end
+        elsif f.strftime("%H:%M") > h[1].strftime("%H:%M") and (horarios.index(h)) == (horarios.length - 1)
+          toDelete.push(f)
+        end
+      end
     end
+    puts "Deleteeeeeeeeeee: #{toDelete}"
 
     for d in toDelete
-      libres.delete_if {|element| element == d}
+      free.delete_if {|element| element == d}
     end
 
+    if not freetimes.blank?
+      return free
+    else
+      return []
+    end
   end
 
   def self.find_by_client(client)
@@ -185,13 +214,13 @@ class Turn < ApplicationRecord
         turns.push(t)
       end
     end
-    
+
     turns
   end
-  
+
   def self.find_by_range(from, to)
     turns = []
-    
+
     if false
       turns = Turn.all
     else

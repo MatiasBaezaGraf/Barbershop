@@ -23,6 +23,8 @@
     <% todayfree = 0%>
     <% tomorrowfree = 0%>
     <% afterfree = 0%>
+    <% nowcount = 1%>
+    <% timebefore = Date.new(2000,10,10)%>
 
     <% puts "Poistaa", @free_days.any?%>
 
@@ -59,36 +61,50 @@
         <% ocp_counter = 0 %> <!-- Cuenta la duración del turno en el caso de que exista un turno en el tiempo especificado -->
         <% @schedule.each do |time| %>
           <% if todayfree == 0 %>
-            <% ocp_advisor = 0 %> <!-- Avisa si existe o no un turno que comienza en ese horario -->
-            <% ocp_name = "✖"%>
-            <% @occupied_today.each do |oc|%>
-              <% if oc[0] == time%> <!-- Se compara cada horario posible con un vector de turnos para este barbero para esta fecha para ver si se solapan en algún punto, de ser así se pone el flag en 1 -->
-                <% ocp_advisor = 1 %>
-                <% ocp_counter = oc[1]%>
-                <% ocp_name = "" %>
-                <% oc[2].each do |service| %>
-                  <% ocp_name.concat("-", service.name, "-")%>
+            <% if nowcount == 0 %>
+              <% ocp_advisor = 0 %> <!-- Avisa si existe o no un turno que comienza en ese horario -->
+              <% ocp_name = "✖"%>
+              <% @occupied_today.each do |oc|%>
+                <% if oc[0] == time%> <!-- Se compara cada horario posible con un vector de turnos para este barbero para esta fecha para ver si se solapan en algún punto, de ser así se pone el flag en 1 -->
+                  <% ocp_advisor = 1 %>
+                  <% ocp_counter = oc[1]%>
+                  <% ocp_name = "" %>
+                  <% oc[2].each do |service| %>
+                    <% ocp_name.concat("-", service.name, "-")%>
+                  <% end %>
+                  <% puts "Helloss", oc[3], ocp_name%>
                 <% end %>
-                <% puts "Helloss", oc[3], ocp_name%>
               <% end %>
-            <% end %>
-            <% if ocp_counter == 0 %>
-              <% if ocp_advisor == 0%> <!-- Si el flag está en 0, está libre el horario, de lo contrario esta ocupado -->
-                <div class = "time"> <%= time %> </div>
+              <% if ocp_counter == 0 %>
+                <% if ocp_advisor == 0%> <!-- Si el flag está en 0, está libre el horario, de lo contrario esta ocupado -->
+                  <div class = "time"> <%= time %> </div>
+                <% else %>
+                  <div class = "time-occupied"> <%= time %> </div>
+                <% end %>
               <% else %>
-                <div class = "time-occupied"> <%= time %> </div>
+                <% if ocp_name == "✖"%>
+                  <div class = "time-occupied"> -<%= time %>- </div>
+                <% else %>
+                  <div class = "time-occupied-head"> <%= ocp_name %> </div>
+                <% end %>
+                <% ocp_counter = ocp_counter - 1%>
               <% end %>
             <% else %>
-              <% if ocp_name == "✖"%>
-                <div class = "time-occupied"> -<%= time %>- </div>
+              
+              <% puts "VAMOS A 1", Time.now%>
+              <% puts "VAMOS A 2", timebefore%>
+              <% puts "VAMOS A 3", time%>
+              <% if DateTime.parse(Time.now.strftime("%H:%M")) > timebefore   && DateTime.parse(Time.now.strftime("%H:%M"))   <= time  %>
+                <% nowcount = 0%>
+                <div class = "time-now"> Ahora -<%= Time.now.strftime("%H:%M") %>- </div>
               <% else %>
-                <div class = "time-occupied-head"> <%= ocp_name %> </div>
+                <div class = "time-passed"> -<%= time %>- </div>
               <% end %>
-              <% ocp_counter = ocp_counter - 1%>
             <% end %>
           <% else %>
             <div class = "time-free"> Libre </div>
           <% end %>
+          <% timebefore = time %>
         <% end %>
       </div>
 

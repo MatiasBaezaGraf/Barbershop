@@ -67,6 +67,6 @@ class FreetimesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def freetime_params
-      params.require(:freetime).permit(:from, :to, :permanent, :barber_id)
+      params.require(:freetime).permit(:day, :from, :to, :permanent, :barber_id)
     end
 end

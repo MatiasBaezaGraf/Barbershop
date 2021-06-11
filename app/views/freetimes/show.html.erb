@@ -30,6 +30,10 @@
       <h5 class = "paragraph-f">➤ <%= @freetime.to.strftime("%H:%M") %> </h5>
     </div>
     <div>
+      <h4 class = "paragraph"> Día </h4>
+      <h5 class = "paragraph-f">➤ <%= @freetime.day.strftime("%d-%m-%Y") %> </h5>
+    </div>
+    <div>
       <h4 class = "paragraph"> Tipo </h4>
       <h5 class = "paragraph-f">➤ <%= @freetime.tipazo(@freetime.permanent) %> </h5>
     </div>

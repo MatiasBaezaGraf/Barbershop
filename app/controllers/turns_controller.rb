@@ -58,7 +58,7 @@ class TurnsController < ApplicationController
   def edit0
     @days = Turn.selectable_dates
     @turn = Turn.find(params[:id])
-    @weekends = Turn.weekends_off(params[:id])
+    #@weekends = Turn.weekends_off(params[:id])
     @barbers = Barber.all
   end
 

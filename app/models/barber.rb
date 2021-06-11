@@ -25,10 +25,8 @@ class Barber < ApplicationRecord
     def self.today_busy(id)
         times = [0,0]
         Turn.all.each do |t|
-            if t.edit == 0 && t.time
-                if (t.time.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d")) && (t.barber.id.to_s == id.to_s)
-                    times.push([t.time.strftime("%H:%M"), t.count_hours/15, t.services])
-                end
+            if (t.time.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d")) && (t.barber.id.to_s == id.to_s)
+                times.push([t.time.strftime("%H:%M"), t.count_hours/15, t.services])
             end
         end
         
@@ -40,11 +38,9 @@ class Barber < ApplicationRecord
     def self.tomorrow_busy(id)
         times = [0,0]
         Turn.all.each do |t|
-            if t.edit == 0 && t.time
-                if (t.time.strftime("%Y-%m-%d") == (Date.today + 1.day).strftime("%Y-%m-%d")) && (t.barber.id.to_s == id.to_s)
-                    times.push([t.time.strftime("%H:%M"), t.count_hours/15, t.services])
-                end
-            end
+            if (t.time.strftime("%Y-%m-%d") == (Date.today + 1.day).strftime("%Y-%m-%d")) && (t.barber.id.to_s == id.to_s)
+                times.push([t.time.strftime("%H:%M"), t.count_hours/15, t.services])
+            end 
         end
 
         times
@@ -52,10 +48,8 @@ class Barber < ApplicationRecord
     def self.after_busy(id)
         times = [0,0]
         Turn.all.each do |t|
-            if t.edit == 0 && t.time
-                if (t.time.strftime("%Y-%m-%d") == (Date.today + 2.days).strftime("%Y-%m-%d")) && (t.barber.id.to_s == id.to_s)
-                    times.push([t.time.strftime("%H:%M"), t.count_hours/15, t.services])
-                end
+            if (t.time.strftime("%Y-%m-%d") == (Date.today + 2.days).strftime("%Y-%m-%d")) && (t.barber.id.to_s == id.to_s)
+                times.push([t.time.strftime("%H:%M"), t.count_hours/15, t.services])
             end
         end
 
@@ -66,7 +60,7 @@ class Barber < ApplicationRecord
         times = []
         now = (DateTime.now.beginning_of_day + 8.hours)
 
-        for i in 0..40
+        for i in 0..48
             nextturn = now + (15*i).minutes
             times.push(nextturn.strftime("%H:%M"))
         end

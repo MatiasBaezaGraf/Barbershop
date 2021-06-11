@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
     def home
+      @barbers = Barber.all
     end
 
     def stylists

@@ -13,6 +13,8 @@
 
   <% if params[:barber_id].to_i == -1 %>
     <div class="field" >
+      <h3 class = "titles" style = "display:none"><%= form.date_field(:day, { class: "input", :value => Date.today }) %></h3>
+
       <h3 class = "titles" style = "font-size:110%">desde</h3>
       <%= form.time_select(:from, {minute_step: 15},{ :class => 'admin_select' } )%>
       <br>
@@ -35,18 +37,33 @@
   <% else %>
 
     <div class="field" >
-      <h3 class = "titles" style = "font-size:110%">desde</h3>
-      <%= form.time_select(:from, {minute_step: 15},{ :class => 'admin_select' } )%>
-      <br>
-      <br>
-      <h3 class = "titles" style = "font-size:110%">hasta</h3>
-      <%= form.time_select(:to, {minute_step: 15},{ :class => 'admin_select' } )%>
+      <% if params[:permanent].to_i == 0 %>
+        <h3 class = "titles" style = "font-size:110%">Seleccione el día</h3>
+        <%= form.date_field(:day, { class: "input", min: Date.today + 1.day }) %>
+        <br>
+        <h3 class = "titles" style = "font-size:110%">desde</h3>
+        <%= form.time_select(:from, {minute_step: 15},{ :class => 'admin_select' } )%>
+        <br>
+        <br>
+        <h3 class = "titles" style = "font-size:110%">hasta</h3>
+        <%= form.time_select(:to, {minute_step: 15},{ :class => 'admin_select' } )%>
+      
+      <% else %>
+        <h3 class = "titles" style = "display:none"><%= form.date_field(:day, { class: "input", :value => Date.today }) %></h3>
+
+        <h3 class = "titles" style = "font-size:110%">desde</h3>
+        <%= form.time_select(:from, {minute_step: 15},{ :class => 'admin_select' } )%>
+        <br>
+        <br>
+        <h3 class = "titles" style = "font-size:110%">hasta</h3>
+        <%= form.time_select(:to, {minute_step: 15},{ :class => 'admin_select' } )%>
+      <% end %>
       <br>
     </div>
 
     <div class="field"  style="display:none">
       <%= form.label :permanent %>
-      <%= form.number_field :permanent, :value => 1 %>
+      <%= form.number_field :permanent, :value => params[:permanent].to_i %>
     </div>
     <br>
     <br>

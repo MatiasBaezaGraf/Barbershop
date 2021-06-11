@@ -6,14 +6,33 @@
 <%= javascript_pack_tag 'application','data-turbolinks-track': 'reload' %>
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" height="100%" >
+  <div id = "sidebar">
+        <button class="but-cross" onclick="closeNav()">X</button>
+        <br>
+        <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, class: "but-sidebar-r" %>
+        <br>
+        <%= link_to "❮ Atras", home_path, method: :get, class: "but-sidebar" %>  
+        <br>
+        <%= link_to "Barberos", barbers_path, class: "but-sidebar" %>
+        <br>
+        <%= link_to "Dias libres", holidays_path, class: "but-sidebar" %>
+        <br>
+        <%= link_to "Horarios libres", "#", class: "but-sidebar-selected" %>
+        <br>
+        <%= link_to "Turnos", turns_path, class: "but-sidebar" %>
+        <br>
+        <%= link_to "Usuarios", users_index_path, class: "but-sidebar" %>
+        <br>
+        <%= link_to "Servicios", services_path, class: "but-sidebar" %>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
   <div class = "navbar2">
-    <%= link_to "Atras ⮌", home_path, class: "but-back" %>
-    <%= link_to "Barberos", barbers_path, class: "but-resources" %>
-    <%= link_to "Dias libres", holidays_path, class: "but-resources-free" %>
-    <button class = "but-resources-selected">Horarios libres</button>
-    <%= link_to "Turnos", turns_path, class: "but-resources" %>
-    <%= link_to "Usuarios", users_index_path, class: "but-resources" %>
-    <%= link_to "Servicios", services_path, class: "but-resources" %>
+    <%= link_to "❮ Atras", home_path, class: "but-back" %>
+    <button class="but-resources-mobile" onclick="openNav()">≡ &nbsp;Menu</button>
+    <button class="but-resources" onclick="openNavDesk()">❯ &nbsp;Menu</button>
   </div>
 
   <div class = "secondary-head-1">
@@ -48,10 +67,7 @@
                     <h5 class = "dropdown-delete"><%= link_to 'Editar horario', edit_freetime_path(freetime), class: "but-delete-b" %></h5>
                     <h5 class = "dropdown-delete"><%= link_to "Eliminar horario", freetime, method: :delete, data: { confirm: "Are you sure"}, class: "but-delete-u" %></h5>
                   </div>
-              </td>
-            <% if freetime.permanent == 0%>
-              <td class = "vital-no"><%= link_to 'Editar', edit_freetime_path(freetime), class: "but-delete-b" %></td>
-            <% end %>
+            </td>
             <td class = "vital-no"><%= link_to 'Eliminar', freetime, method: :delete, data: { confirm: 'Are you sure?' }, class: "but-delete-u" %></td>
             <td class = "vital"><% Freetime.toArray(freetime.from, freetime.to) %></td>
           </tr>
@@ -66,7 +82,12 @@
                 <br>
                 <br>
                 <%= link_to 'Cargar horario general', new_freetime_path(:barber_id => -1, :permanent => -1), class: "but-delete-n" %>
-                <%= link_to 'Cargar horario de barbero', new_freetime_path(:permanent => 1), class: "but-delete-n" %>
+                <br>
+                <br>
+                <%= link_to 'Cargar cronograma de barbero', new_freetime_path(:permanent => 1), class: "but-delete-n" %>
+                <br>
+                <br>
+                <%= link_to 'Cargar libre de barbero', new_freetime_path(:permanent => 0), class: "but-delete-n" %>
                 <br>
                 <br>
                 <br>
@@ -74,13 +95,11 @@
             </div>
 
             <div class = "tail-tail">
-                <br>
-                <h3 class = "secondary-contact">25 de mayo 1160 Puiggari, Entre Rios, Argentina</h3>
-                <h3 class = "secondary-contact">0343 15-467-5058</h3>
-                <h3 class = "secondary-contact">ayelenpeter@hotmail.com.ar</h3>
-                <br>
-                <h3 class = "secondary-contact">2021</h3>
-                <br>
+                <div class = "col-img">
+                  <br>
+                  <h3 class = "secondary-contact">Charme Barbershop®</h3>
+                  <br>
+                </div>
             </div>
   </div>
 </body>
@@ -118,5 +137,20 @@
       cols[i].style.backgroundColor = 'black'; 
       cols[i].style.color = 'white'; 
     }
+    document.getElementById("sidebar").style.backgroundColor = 'rgb(12, 12, 12)';
+  
+  }
+
+  function openNav() {
+    document.getElementById("sidebar").style.width = "75%";
+  }
+
+  function openNavDesk() {
+    document.getElementById("sidebar").style.width = "25%";
+  }
+
+  function closeNav() {
+    document.body.style.marginLeft = "0";
+    document.getElementById("sidebar").style.width = "0";
   }
 </script>
