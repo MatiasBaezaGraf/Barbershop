@@ -11,20 +11,20 @@
       </div>
     <% end %>
 
-  <h3 class = "paragraph">Elija su horario</h3>
+  <h3 class = "paragraph"> No eligio fecha o servicios, el turno se descartará </h3>
 
   <% Turn.posibles(@occupied, @times, @turn.time, @turn.count_hours, @turn) %>
-  <div class="field">
-    <%= form.select(:time, @times.map { |t| t.strftime("%H:%M")}, {},{ :class => 'admin_select' })%>
+  <div class="field" style="display: none;">
+    <%= form.select(:time, @times.map { |t| t.strftime("%Y-%d-%m %H:%M")}, {:selected => Date.new(2000,1,1)},{ :class => 'admin_select' })%>
   </div>
 
-
+  <% @turn.time = Date.new(2000,1,1)%>  
 
   <br>
   <br>
   <br>
 
     <div class="actions">
-      <%= form.submit "INGRESAR", class: 'but-login' %>
+      <%= form.submit "FINALIZAR", class: 'but-login' %>
     </div>
 <% end %>

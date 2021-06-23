@@ -21,29 +21,47 @@
 
     <br>
 
-    <div>
-      <h4 class = "paragraph"> Fecha y Hora </h4>
-      <h5 class = "paragraph-f">➤ <%= @turn.formatDate(@turn.time)[0]%> <%= @turn.time.strftime("%-d") %> de <%= @turn.formatDate(@turn.time)[1]%> </h5>
-    </div>
+    <% invalid = 0 %>
 
-    <div>
-      <h4 class = "paragraph"> Barbero </h4>
-      <h5 class = "paragraph-f">➤ <%= @turn.barber.first_name %> <%= @turn.barber.last_name %> </h5>
-    </div>
+    <% if @turn.time && @turn.time.strftime("%Y").to_s == "2000"%>
+      <% invalid = 1%>
+    <% end %>
 
-    <div>
-      <h4 class = "paragraph"> Cliente </h4>
-      <h5 class = "paragraph-f">➤ <%= @turn.client %> </h5>
-    </div>
+    <% if @turn.count_hours == 0%>
+      <% invalid = 1 %>
+    <% end %>
+    <% if invalid == 1%>
+      <div>
+        <h4 class = "paragraph"> Inválido </h4>
+      </div>
+    <% else %>
+      <div>
+        <h4 class = "paragraph"> Fecha y Hora </h4>
+        <h5 class = "paragraph-f">➤ <%= @turn.formatDate(@turn.time)[0]%> <%= @turn.time.strftime("%-d") %> de <%= @turn.formatDate(@turn.time)[1]%> - <%= @turn.time.strftime("%H:%M") %> hs </h5>
+      </div>
 
-    <h4 class = "paragraph"> Servicios </h4>
-    <div class = paragraph-f>
-      <% @turn.services.each do |service| %>
-        <h5 class = "paragraph-s">➤ <%= service.name %></h5>
-      <% end %>
-    </div>
+      <div>
+        <h4 class = "paragraph"> Barbero </h4>
+        <h5 class = "paragraph-f">➤ <%= @turn.barber.first_name %> <%= @turn.barber.last_name %> </h5>
+      </div>
 
-    <%= link_to 'Editar', edit_turn_path(@turn), class: "but-delete-u" %> 
+      <div>
+        <h4 class = "paragraph"> Cliente </h4>
+        <h5 class = "paragraph-f">➤ <%= @turn.client %> </h5>
+      </div>
+
+      <h4 class = "paragraph"> Servicios </h4>
+      <div class = paragraph-f>
+        <% @turn.services.each do |service| %>
+          <h5 class = "paragraph-s">➤ <%= service.name %></h5>
+        <% end %>
+      </div>
+
+      <%= link_to 'Editar', edit_turn_path(@turn), class: "but-delete-u" %> 
+
+    <% end %>
+
+    
     <%= link_to "Finalizar", home_path, class: "but-delete-s" %>
 
     <br>

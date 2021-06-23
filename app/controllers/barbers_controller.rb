@@ -18,7 +18,6 @@ class BarbersController < ApplicationController
 
     puts "ACA VA HOY FECHA", Time.now.strftime("%H:%M")
     puts "ACA VA EL ID", params[:id]
-    puts "ACA VA SCHEDULE", @schedule
     puts "ACA VA FREE", @free_days
     puts "ACA VA HOY", @occupied_today
     puts "ACA VA MAÑANA", @occupied_tomorrow

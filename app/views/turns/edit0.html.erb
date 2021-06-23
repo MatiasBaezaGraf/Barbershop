@@ -1,3 +1,5 @@
+<title> Reservar Turno </title>
+
 <meta name="viewport" content="width=device-width,initial-scale=1">
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
@@ -20,8 +22,12 @@
 
     <br>
 
+    <% default = Date.new(2000,1,1) %>
+
     <% @turn.edit = 1 %>
-    <% @turn.time = Date.today %>
+    <% puts "ESTE ES EL DIA CHEEEE", default %>
+    <% @turn.time = default%>
+    <% puts "ESTE ES EL DIA DEL TURNO", @turn.time %>
     <% @turn.save %>
    
 

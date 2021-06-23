@@ -91,9 +91,7 @@
               <% end %>
             <% else %>
               
-              <% puts "VAMOS A 1", Time.now%>
-              <% puts "VAMOS A 2", timebefore%>
-              <% puts "VAMOS A 3", time%>
+              
               <% if DateTime.parse(Time.now.strftime("%H:%M")) > timebefore   && DateTime.parse(Time.now.strftime("%H:%M"))   <= time  %>
                 <% nowcount = 0%>
                 <div class = "time-now"> Ahora -<%= Time.now.strftime("%H:%M") %>- </div>

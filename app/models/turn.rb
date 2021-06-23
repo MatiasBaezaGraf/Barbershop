@@ -26,6 +26,7 @@ class Turn < ApplicationRecord
     end
 
     puts "Holasslaldladlalfalflalfdsfas"
+    puts id
     puts barid
 
 
@@ -53,8 +54,53 @@ class Turn < ApplicationRecord
       end
     end
 
+    
+
     Holiday.all.each do |d|
       if barid[0].to_s == d.barber.id.to_s
+        if d.freeday >= Date.today
+          weekends.push(d.freeday)
+        end
+      end
+    end
+
+    weekends
+  end
+
+  def self.weekends_off_modded(id)
+
+    puts "Holasslaldladlalfalflalfdsfas"
+    puts id
+
+
+
+    weekends = []
+    today = Date.today
+
+    for i in 0..14
+      if i != 0
+        nextday = today + i.day
+
+        Holiday.all.each do |f|
+          if id.to_s == f.barber.id.to_s
+
+            if f.permanent == 1
+              if f.freeday.strftime("%a") == nextday.strftime("%a")
+                weekends.push(nextday)
+              end
+            end
+          end
+        end
+        #if (nextday.strftime("%u").to_i == 6 || nextday.strftime("%u").to_i == 7)
+        #  weekends.push(nextday)
+        #end
+      end
+    end
+
+    
+
+    Holiday.all.each do |d|
+      if id.to_s == d.barber.id.to_s
         if d.freeday >= Date.today
           weekends.push(d.freeday)
         end

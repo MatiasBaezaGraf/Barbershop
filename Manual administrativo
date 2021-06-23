@@ -1,0 +1,10 @@
+Los usuarios pueden ser clientes normales o administradores, Los
+cuales tienen privilegios especiales para gestionar la pagina.
+
+Los primeros de estos solamente pueden crear turnos. El primer
+tipo de estos solamente pueden reservar turnos. 
+
+Esto se hace presionando en cualquier botón que diga "Reservar
+Turno"   
+
+Los administradores en cambio tienen diferentes
