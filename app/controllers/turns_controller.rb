@@ -7,17 +7,7 @@ class TurnsController < ApplicationController
   # GET /turns or /turns.json
   #Se agrego verificacion de t.time para cargar el index sin errores
   def index
-    for t in Turn.all
-        if t.p != 1 and t.time < Date.today       
-          for i in HasTurn.all
-            if i.turn_id == t.id
-              i.destroy
-            end
-          end
-          t.destroy
-        end
-    end
-
+    Turn.clean()
     
     if params[:from] && params[:to]
       if params[:from].blank? && params[:to].blank?

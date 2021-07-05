@@ -11,7 +11,16 @@
       </div>
     <% end %>
 
-  <h3 class = "paragraph"> No eligio fecha o servicios, el turno se descartará </h3>
+  <h3 class = "paragraph"> Los siguientes campos estan incompletos: </h3>
+  <% if turn.time.year == 2000 %>
+    <h3 class = "paragraph">▸ Fecha</h3>
+  <% end %>
+  <% if turn.client.blank? %>
+    <h3 class = "paragraph">▸ Cliente</h3>
+  <% end %>
+  <% if turn.services.blank? %>
+    <h3 class = "paragraph">▸ Servicios</h3>
+  <% end %>
 
   <% Turn.posibles(@occupied, @times, @turn.time, @turn.count_hours, @turn) %>
   <div class="field" style="display: none;">
@@ -24,7 +33,9 @@
   <br>
   <br>
 
-    <div class="actions">
+  <%= link_to "Volver", edit_turn_path(turn), class: "but-login" %>
+
+    <div class="actions", style="display: none">
       <%= form.submit "FINALIZAR", class: 'but-login' %>
     </div>
 <% end %>

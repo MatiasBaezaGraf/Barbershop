@@ -4,6 +4,19 @@ class Turn < ApplicationRecord
   has_many :has_turn
   has_many :services, through: :has_turn
 
+  def self.clean()
+    for t in Turn.all
+      if t.p != 1 and t.time < Date.today       
+        for i in HasTurn.all
+          if i.turn_id == t.id
+            i.destroy
+          end
+        end
+        t.destroy
+      end
+    end
+  end
+
   def self.selectable_dates
     days = []
     today = Date.today

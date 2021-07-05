@@ -158,7 +158,9 @@
           </table>
         </div>
 
-        <% puts "aca van LOS WIKENDS", @weekends %>
+        
+
+        <% puts "aca van LOS WIKENDS", @ %>
 
         <br>
         <br>
@@ -177,7 +179,7 @@
             <%= form.collection_check_boxes(:service_ids, Service.joins(:barbers).where(:barbers => {:id => @turn.barber_id}), :id, :name, {}, {multiple: true}) do |ds| %>
                     <%= ds.label(class:"container") do %>
                       &nbsp;&nbsp;&nbsp; 
-                      <p><%= ds.check_box %><%= ds.object.name %>: <%= ds.object.duration %> minutos</p>
+                      <p><%= ds.check_box(checked: true) %><%= ds.object.name %>: <%= ds.object.duration %> minutos</p>
                       <span class="chekmark"></span>
                       <br>
                       <br>
