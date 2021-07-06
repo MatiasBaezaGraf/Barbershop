@@ -24,7 +24,6 @@
 
     <% puts "EaSTE ES EL DIA JUSTO ANTES DE ELEGIR HORARIO", @turn.time%>
 
-    <% @turn = Turn.where(:id => params[:id]).first %>
 
     <% invalid = 0%>
 
@@ -44,9 +43,9 @@
     <% if invalid == 1 %>
       <%= render 'last_form_error', turn: @turn %>
     <% else %>
+      <%= render 'last_form', turn: @turn %>
       <% @turn.edit = 2 %>
       <% @turn.save %>
-      <%= render 'last_form', turn: @turn %>
     <% end %>
 
     <br>

@@ -90,6 +90,9 @@ class TurnsController < ApplicationController
       if @turn.edit == 2
         @turn.edit = 0
         @turn.p = 1
+
+        puts "LOS PARAMS PADREEE", turn_params
+
         if @turn.update(turn_params)
           format.html { redirect_to @turn }
           format.json { render :show, status: :ok, location: @turn }

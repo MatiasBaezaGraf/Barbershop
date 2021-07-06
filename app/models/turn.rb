@@ -4,6 +4,10 @@ class Turn < ApplicationRecord
   has_many :has_turn
   has_many :services, through: :has_turn
 
+  def short_time
+    time.strftime("%H:%M")
+  end
+  
   def self.clean()
     for t in Turn.all
       if t.p != 1 and t.time < Date.today       

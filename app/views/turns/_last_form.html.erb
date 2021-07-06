@@ -14,8 +14,12 @@
   <h3 class = "paragraph">Elija su horario</h3>
 
   <% Turn.posibles(@occupied, @times, @turn.time, @turn.count_hours, @turn) %>
+
+  <% puts "ESTOS VALEN", @times%>
+  <% puts "ESTE VIENE YA", @turn.time%>
+
   <div class="field">
-    <%= form.select(:time, @times.map { |t| t.strftime("%H:%M")}, {},{ :class => 'admin_select' })%>
+    <%= form.select(:time, @times.collect { |t| [ t.strftime("%H:%M"), t ] }, {},{ :class => 'admin_select' })%>
   </div>
 
 
